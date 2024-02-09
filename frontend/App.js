@@ -1,12 +1,37 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react'
+import {
+  StyleSheet,
+  StatusBar,
+  Text,
+  View,
+  SafeAreaView,
+  ImageBackground
+} from 'react-native';
+
+function Navigation() {
+  return (
+    <View>
+      <StatusBar bg="#00A3AD" barStyle="light-content" />
+      <Text>
+        teste
+      </Text>
+    </View>
+  )
+}
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView>
+      <ImageBackground
+        source={require('./imgs/fundo.avif')}
+        style={{ width: 400, height: 400 }}
+      />
+      <View style={styles.container}>
+        <Text>Papelaria do Gil !!</Text>
+        <StatusBar style="auto" />
+      </View>
+      <Navigation />
+    </SafeAreaView>
   );
 }
 
