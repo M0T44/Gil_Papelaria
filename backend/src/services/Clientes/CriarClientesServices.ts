@@ -1,0 +1,67 @@
+import prismaClient from "../../prisma";
+
+interface CriarClientes {
+    nome: string
+    telefone: string
+    cpf_cnpj: string
+    cep: string
+    bairro: string
+    nCasa: string
+    cidade: string
+    rua: string
+    estado: string
+    email: string
+    senha: string
+}
+
+class CriarClientesServices {
+    async execute({ nome, telefone, cpf_cnpj, cep, bairro, nCasa, cidade, rua, estado, email, senha }: CriarClientes) {
+        if (!nome || !telefone || !email || !senha) {
+            throw new Error('Campos em Brancos Nao deve ser Permitidos')
+        }
+
+        // const cpfCadastrado = await prismaClient.cliente.findFirst({
+        //     where: {
+        //         OR: [
+        //             { cpf_cnpj: cpf_cnpj },
+        //             { email: email }
+        //         ],
+        //     },
+        // })
+        // if (cpfCadastrado) {
+        //     throw new Error('CPF/CNPJ e ou Email Ja Cadastrados')
+        // }
+
+        const clientes = await prismaClient.cliente.create({
+            data: {
+                nome: nome,
+                telefone: telefone,
+                cpf_cnpj: cpf_cnpj,
+                cep: cep,
+                bairro: bairro,
+                nCasa: nCasa,
+                cidade: cidade,
+                rua: rua,
+                estado: estado,
+                email: email,
+                senha: senha
+            },
+            select: {
+                nome: true,
+                telefone: true,
+                cpf_cnpj: true,
+                cep: true,
+                bairro: true,
+                nCasa: true,
+                cidade: true,
+                rua: true,
+                estado: true,
+                email: true,
+                senha: true
+
+            }
+        })
+        return { dados: clientes }
+    }
+}
+export { CriarClientesServices }
