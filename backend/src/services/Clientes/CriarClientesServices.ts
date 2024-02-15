@@ -1,4 +1,4 @@
-import prismaClient from "../../prisma";
+import prismaClient from '../../prisma'
 
 interface CriarClientes {
     nome: string
@@ -32,7 +32,7 @@ class CriarClientesServices {
         //     throw new Error('CPF/CNPJ e ou Email Ja Cadastrados')
         // }
 
-        const clientes = await prismaClient.cliente.create({
+         await prismaClient.cliente.create({
             data: {
                 nome: nome,
                 telefone: telefone,
@@ -45,23 +45,24 @@ class CriarClientesServices {
                 estado: estado,
                 email: email,
                 senha: senha
-            },
-            select: {
-                nome: true,
-                telefone: true,
-                cpf_cnpj: true,
-                cep: true,
-                bairro: true,
-                nCasa: true,
-                cidade: true,
-                rua: true,
-                estado: true,
-                email: true,
-                senha: true
-
             }
+            // ,
+            // select: {
+            //     nome: true,
+            //     telefone: true,
+            //     cpf_cnpj: true,
+            //     cep: true,
+            //     bairro: true,
+            //     nCasa: true,
+            //     cidade: true,
+            //     rua: true,
+            //     estado: true,
+            //     email: true,
+            //     senha: true
+
+            // }
         })
-        return { dados: clientes }
+        return { dados: 'clientes' }
     }
 }
 export { CriarClientesServices }
