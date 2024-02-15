@@ -27,7 +27,7 @@ export default function App() {
         style={{ width: 400, height: 400 }}
       />
       <View style={styles.container}>
-        <Text>Papelaria do Gil !!</Text>
+        <Text>Papelaria do Gil</Text>
         <StatusBar style="auto" />
       </View>
       <Navigation />
