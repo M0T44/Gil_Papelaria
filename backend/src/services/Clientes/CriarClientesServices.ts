@@ -20,19 +20,19 @@ class CriarClientesServices {
             throw new Error('Campos em Brancos Nao deve ser Permitidos')
         }
 
-        // const cpfCadastrado = await prismaClient.cliente.findFirst({
-        //     where: {
-        //         OR: [
-        //             { cpf_cnpj: cpf_cnpj },
-        //             { email: email }
-        //         ],
-        //     },
-        // })
-        // if (cpfCadastrado) {
-        //     throw new Error('CPF/CNPJ e ou Email Ja Cadastrados')
-        // }
+         const cpfCadastrado = await prismaClient.cliente.findFirst({
+             where: {
+                 OR: [
+                     { cpf_cnpj: cpf_cnpj },
+                    //  { email: email }
+                 ],
+             },
+         })
+         if (cpfCadastrado) {
+             throw new Error('CPF/CNPJ e ou Email Ja Cadastrados')
+         }
 
-         await prismaClient.cliente.create({
+       const clientes=await prismaClient.cliente.create({
             data: {
                 nome: nome,
                 telefone: telefone,
@@ -46,23 +46,24 @@ class CriarClientesServices {
                 email: email,
                 senha: senha
             }
-            // ,
-            // select: {
-            //     nome: true,
-            //     telefone: true,
-            //     cpf_cnpj: true,
-            //     cep: true,
-            //     bairro: true,
-            //     nCasa: true,
-            //     cidade: true,
-            //     rua: true,
-            //     estado: true,
-            //     email: true,
-            //     senha: true
+            ,
+            select: {
+                nome: true,
+                telefone: true,
+                cpf_cnpj: true,
+                cep: true,
+                bairro: true,
+                nCasa: true,
+                cidade: true,
+                rua: true,
+                estado: true,
+                email: true,
+                senha: true
 
-            // }
+            }
         })
-        return { dados: 'clientes' }
+        return { dados: clientes }
+
     }
 }
 export { CriarClientesServices }
