@@ -20,7 +20,7 @@ class CriarClientesController {
             email,
             senha
         })
-        console.log(cliente)
+        //console.log(cliente)
         return res.json(cliente)
     }
 }

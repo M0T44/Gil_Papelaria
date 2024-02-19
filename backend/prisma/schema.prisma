@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Cliente {
+model Cadastro{
   id       String @id @default(uuid())
   nome     String
   telefone String
@@ -27,17 +27,5 @@ model Cliente {
   create_at DateTime? @default(now())
   update_at DateTime? @default(now())
 
-  @@map("clientes")
-}
-
-model Usuario {
-  id    String @id @default(uuid())
-  nome  String
-  email String
-  senha String
-
-  create_at DateTime? @default(now())
-  update_at DateTime? @default(now())
-
-  @@map("usuarios")
+  @@map("cadastro")
 }

@@ -20,19 +20,19 @@ class CriarClientesServices {
             throw new Error('Campos em Brancos Nao deve ser Permitidos')
         }
 
-        // const cpfCadastrado = await prismaClient.cliente.findFirst({
-        //     where: {
-        //         OR: [
-        //             { cpf_cnpj: cpf_cnpj },
-        //             { email: email }
-        //         ],
-        //     },
-        // })
-        // if (cpfCadastrado) {
-        //     throw new Error('CPF/CNPJ e ou Email Ja Cadastrados')
-        // }
+        const cpfCadastrado = await prismaClient.cadastro.findFirst({
+            where: {
+                OR: [
+                    { cpf_cnpj: cpf_cnpj },
+                    { email: email }
+                ],
+            },
+        })
+        if (cpfCadastrado) {
+            throw new Error('CPF/CNPJ e ou Email Ja Cadastrados')
+        }
 
-        const clientes = await prismaClient.cliente.create({
+        const clientes = await prismaClient.cadastro.create({
             data: {
                 nome: nome,
                 telefone: telefone,
@@ -47,6 +47,7 @@ class CriarClientesServices {
                 senha: senha
             },
             select: {
+                id:true,
                 nome: true,
                 telefone: true,
                 cpf_cnpj: true,
