@@ -8,9 +8,9 @@ import {
   SafeAreaView,
   ImageBackground
 } from 'react-native';
-
+ 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-
+ 
 function MultiOpcoes() {
   const [open, setOpen] = React.useState(false);
   return (
@@ -79,9 +79,9 @@ function MultiOpcoes() {
     </SpeedDial>
   )
 }
-
+ 
 function Navigation() {
-
+ 
   return (
     <SafeAreaView>
       <View style={styles.navigation}>
@@ -91,7 +91,7 @@ function Navigation() {
     </SafeAreaView>
   )
 }
-
+ 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
@@ -108,13 +108,13 @@ export default function App() {
     </SafeAreaView>
   );
 }
-
+ 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "space-between"
   },
-
+ 
   navigation: {
     backgroundColor: '#00A3AD',
     height: 65,
