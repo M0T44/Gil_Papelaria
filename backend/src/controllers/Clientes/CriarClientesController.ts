@@ -4,7 +4,7 @@ import { CriarClientesServices } from '../../services/Clientes/CriarClientesServ
 
 class CriarClientesController {
     async handle(req: Request, res: Response) {
-        const { nome,telefone,cpf_cnpj,cep,bairro,nCasa,cidade,rua,estado,email,senha } = req.body
+        const { nome, telefone, cpf_cnpj, cep, bairro, nCasa, cidade, rua, estado, email, senha } = req.body
         // Sconsole.log( nome,telefone,cpf_cnpj,cep,bairro,nCasa,cidade,rua,estado,email,senha )
 
         const criarClientesServices = new CriarClientesServices()
@@ -21,10 +21,6 @@ class CriarClientesController {
             email,
             senha
         })
-<<<<<<< HEAD
-        //console.log(cliente)
-=======
->>>>>>> fb3d8d40a578d227978d64e6f5eb870e5fa58752
         return res.json(cliente)
     }
 }

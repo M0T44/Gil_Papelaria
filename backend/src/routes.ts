@@ -18,6 +18,6 @@ router.post('/CriarClientes', new CriarClientesController().handle)
 router.post('/LoginClientes', new LoginControler().handle)
 
 //Alterar
-router.put('/AlterarCliente',new AlterarClienteController().handle)
+router.put('/AlterarClientes',new AlterarClienteController().handle)
 
 export {router}
