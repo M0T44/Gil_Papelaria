@@ -16,12 +16,12 @@ class LoginServices {
                 email: email
             }
         })
-       
+
         if (!user) {
 
             throw new Error('Usuario/Senha Incorretos')
         }
-
+        console.log(user)
         const token = sign({
             id: user.id,
             email: user.email
