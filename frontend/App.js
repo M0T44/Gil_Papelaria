@@ -100,7 +100,7 @@ export default function App() {
         style={{ width: 450, height: 760 }}
       >
         <View>
-          <Text>Papelaria do Gil</Text>
+          <Text>Papelaria do Gil!!!!!!!!!!!!!!!!!!!!</Text>
           <StatusBar style="auto" />
         </View>
       </ImageBackground>
