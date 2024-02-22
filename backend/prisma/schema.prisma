@@ -29,3 +29,34 @@ model Cadastro{
 
   @@map("cadastro")
 }
+
+model Categoria {
+  id   String @id @default(uuid())
+  nome String
+
+  create_at DateTime? @default(now())
+  update_at DateTime? @default(now())
+
+  produtos Produto[]
+
+  @@map("categorias")
+}
+
+model Produto {
+  id         String  @id @default(uuid())
+  nome       String
+  descricao  String
+  fabricante String
+  quantidade String
+  preco      String
+  banner     String
+  
+  create_at DateTime? @default(now())
+  update_at DateTime? @default(now())
+
+  categorias  Categoria @relation(fields: [categoriaId], references: [id])
+  categoriaId String
+
+  @@map("produtos")
+}
+
