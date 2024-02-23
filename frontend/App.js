@@ -2,92 +2,65 @@ import React, { useState } from 'react'
 import { SpeedDial } from '@rneui/themed';
 import {
   StyleSheet,
+  ScrollView,
   StatusBar,
   Text,
   View,
   SafeAreaView,
-  ImageBackground
+  ImageBackground,
+  Image
 } from 'react-native';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+
+function Header() {
+  return (
+
+    <ScrollView stickyHeaderIndices={[1]}>
+      <StatusBar backgroundColor="white" barStyle="dark-content" />
+      <SafeAreaView style={styleHeader.container}>
+        <View>
+          <View>
+            <Image
+              style={styleHeader.logo}
+              source={require('./imgs/logo.png')}
+            />
+          </View>
+
+          <SpeedDial.Action
+            style={styleHeader.carinho}
+            icon={() => (
+              <MaterialCommunityIcons
+                name="cart"
+                size={20}
+                color="#fff"
+              />
+            )}
+            onPress={() => console.log('Add Something')}
+            buttonStyle={{ backgroundColor: '#FF8616' }}
+          />
+        </View>
+      </SafeAreaView>
+    </ScrollView>
+  )
+}
+
+function Navigation() {
+  return (
+    <SafeAreaView>
+      <View style={styles.container_navigation}>
+        <StatusBar bg="#00A3AD" barStyle="light-content" />
+        <MultiOpcoes />
+      </View>
+    </SafeAreaView>
+  )
+}
 
 function MultiOpcoes() {
   const [open, setOpen] = React.useState(false);
   return (
     <SpeedDial
-      // style={styles.speedDrialEsquerda}
-      style={{ transform: [{ scaleX: -1 }] }}
-      isOpen={open}
-      icon={() => (
-        <MaterialCommunityIcons
-          name="format-align-justify"
-          size={30}
-          color="#fff"
-        />
-      )}
-      openIcon={{ name: 'close', color: '#fff' }}
-      onOpen={() => setOpen(!open)}
-      onClose={() => setOpen(!open)}
-      buttonStyle={{ backgroundColor: '#FF8016' }}
-    >
-      <SpeedDial.Action
-        style={styles.speedDrialEsquerda}
-        icon={() => (
-          <MaterialCommunityIcons
-            name="exit-run"
-            size={20}
-            color="#fff"
-          />
-        )}
-        title="яiɒƧㅤㅤ"
-        onPress={() => console.log('Add Something')}
-        buttonStyle={{ backgroundColor: '#FF8616' }}
-      />
-      <SpeedDial.Action
-        icon={() => (
-          <MaterialCommunityIcons
-            name="account"
-            size={20}
-            color="#fff"
-          />
-        )}
-        title="niϱo⅃ㅤㅤ"
-        onPress={() => console.log('Add Something')}
-        buttonStyle={{ backgroundColor: '#FF8616' }}
-      />
-      <SpeedDial.Action
-        icon={() => (
-          <MaterialCommunityIcons
-            name="account-plus"
-            size={20}
-            color="#fff"
-          />
-        )}
-        title="ɘƨ-ɘяɈƨɒbɒƆㅤㅤ"
-        onPress={() => console.log('Add Something')}
-        buttonStyle={{ backgroundColor: '#FF8616' }}
-      />
-      <SpeedDial.Action
-        icon={() => (
-          <MaterialCommunityIcons
-            name="cog-outline"
-            size={20}
-            color="#fff"
-          />
-        )}
-        title="Configurações"
-        onPress={() => console.log('Delete Something')}
-        buttonStyle={{ backgroundColor: '#FF8616' }}
-      />
-    </SpeedDial>
-  )
-}
-
-function MultiOpcoes2() {
-  const [open, setOpen] = React.useState(false);
-  return (
-    <SpeedDial
-
+      style="multiOpcoes"
       isOpen={open}
       icon={() => (
         <MaterialCommunityIcons
@@ -153,41 +126,10 @@ function MultiOpcoes2() {
   )
 }
 
-function Navigation() {
-  return (
-    <SafeAreaView>
-      <View style={styles.container_navigation}>
-        <StatusBar bg="#00A3AD" barStyle="light-content" />
-        <View style={styles.navigation}>
-          <View style={styles.navigation_botao}>
-            <MultiOpcoes />
-          </View>
-          <View style={styles.navigation_botao}>
-            <Text>
-              AAAAAAAAAAA
-            </Text>
-          </View>
-          <View style={styles.navigation_botao}>
-            <MultiOpcoes2 />
-          </View>
-        </View>
-      </View>
-    </SafeAreaView>
-  )
-}
-
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <ImageBackground
-        source={require('./imgs/fundo.jpg')}
-        style={{ width: 450, height: 655 }}
-      >
-        <View>
-          <Text>Papelaria do Gil!!!!!!!!!!!!!!!!!!!!</Text>
-          <StatusBar style="auto" />
-        </View>
-      </ImageBackground>
+      <Header />
       <Navigation />
     </SafeAreaView>
   );
@@ -201,13 +143,8 @@ const styles = StyleSheet.create({
 
   container_navigation: {
     backgroundColor: '#00A3AD',
-    height: 65,
-  },
-
-  navigation: {
-    flexDirection: 'row',
     justifyContent: 'center',
-    alignContent: 'center'
+    height: 80,
   },
 
   navigation_botao: {
@@ -217,5 +154,28 @@ const styles = StyleSheet.create({
 
   speedDrialEsquerda: {
     transform: [{ scaleX: -1 }],
+  }
+});
+
+const styleHeader = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+  },
+
+  logo: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    width: 150,
+    height: 110,
+  },
+
+  carinho: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center', width: 150,
+    height: 110,
   }
 });
