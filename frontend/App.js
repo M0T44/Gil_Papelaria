@@ -15,6 +15,8 @@ function MultiOpcoes() {
   const [open, setOpen] = React.useState(false);
   return (
     <SpeedDial
+      // style={styles.speedDrialEsquerda}
+      style={{ transform: [{ scaleX: -1 }] }}
       isOpen={open}
       icon={() => (
         <MaterialCommunityIcons
@@ -29,6 +31,7 @@ function MultiOpcoes() {
       buttonStyle={{ backgroundColor: '#FF8016' }}
     >
       <SpeedDial.Action
+        style={styles.speedDrialEsquerda}
         icon={() => (
           <MaterialCommunityIcons
             name="exit-run"
@@ -36,7 +39,7 @@ function MultiOpcoes() {
             color="#fff"
           />
         )}
-        title="Sair"
+        title="яiɒƧㅤㅤ"
         onPress={() => console.log('Add Something')}
         buttonStyle={{ backgroundColor: '#FF8616' }}
       />
@@ -48,7 +51,7 @@ function MultiOpcoes() {
             color="#fff"
           />
         )}
-        title="Login"
+        title="niϱo⅃ㅤㅤ"
         onPress={() => console.log('Add Something')}
         buttonStyle={{ backgroundColor: '#FF8616' }}
       />
@@ -60,7 +63,7 @@ function MultiOpcoes() {
             color="#fff"
           />
         )}
-        title="Cadastre-Se"
+        title="ɘƨ-ɘяɈƨɒbɒƆㅤㅤ"
         onPress={() => console.log('Add Something')}
         buttonStyle={{ backgroundColor: '#FF8616' }}
       />
@@ -84,6 +87,7 @@ function MultiOpcoes2() {
   const [open, setOpen] = React.useState(false);
   return (
     <SpeedDial
+
       isOpen={open}
       icon={() => (
         <MaterialCommunityIcons
@@ -209,5 +213,9 @@ const styles = StyleSheet.create({
   navigation_botao: {
     flex: 1,
     backgroundColor: 'red',
+  },
+
+  speedDrialEsquerda: {
+    transform: [{ scaleX: -1 }],
   }
 });
