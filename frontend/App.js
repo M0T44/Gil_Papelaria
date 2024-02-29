@@ -18,11 +18,11 @@ function Header() {
 
     <ScrollView stickyHeaderIndices={[1]}>
       <StatusBar backgroundColor="white" barStyle="dark-content" />
-      <SafeAreaView style={styleHeader.container}>
-        <View>
-          <View>
+      <SafeAreaView>
+        <View style={styleHeader.container}>
+          <View style={styleHeader.logo}>
             <Image
-              style={styleHeader.logo}
+              style={styleHeader.logoImagem}
               source={require('./imgs/logo.png')}
             />
           </View>
@@ -160,22 +160,29 @@ const styles = StyleSheet.create({
 const styleHeader = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#00A3AD',
     justifyContent: 'space-between',
     flexDirection: 'row',
+    textAlign: 'center',
   },
-
+  
   logo: {
-    flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    width: 150,
-    height: 110,
+    flexWrap: 'wrap',
+    width: 120,
+    height: 60
+  },
+
+  logoImagem: {
+    width: 180,
+    height: 180
   },
 
   carinho: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center', width: 150,
-    height: 110,
+    justifyContent: 'flex-end',
+    alignItems: 'center', 
+    width: 120,
+    height: 60,
   }
 });
