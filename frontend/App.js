@@ -49,7 +49,7 @@ function Navigation() {
   return (
     <SafeAreaView>
       <View style={styles.container_navigation}>
-        <StatusBar bg="#00A3AD" barStyle="light-content" />
+        <StatusBar barStyle="light-content" />
         <MultiOpcoes />
       </View>
     </SafeAreaView>
@@ -142,7 +142,6 @@ const styles = StyleSheet.create({
   },
 
   container_navigation: {
-    backgroundColor: '#00A3AD',
     justifyContent: 'center',
     height: 80,
   },
@@ -160,7 +159,6 @@ const styles = StyleSheet.create({
 const styleHeader = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#00A3AD',
     justifyContent: 'space-between',
     flexDirection: 'row',
     textAlign: 'center',
