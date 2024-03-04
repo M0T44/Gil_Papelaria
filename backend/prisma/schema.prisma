@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Cadastro{
+model Cadastro {
   id       String @id @default(uuid())
   nome     String
   telefone String
@@ -26,6 +26,8 @@ model Cadastro{
 
   create_at DateTime? @default(now())
   update_at DateTime? @default(now())
+
+  pedido Pedido[]
 
   @@map("cadastro")
 }
@@ -43,20 +45,55 @@ model Categoria {
 }
 
 model Produto {
-  id         String  @id @default(uuid())
+  id         String @id @default(uuid())
   nome       String
   descricao  String
   fabricante String
   quantidade String
   preco      String
   banner     String
-  
+
   create_at DateTime? @default(now())
   update_at DateTime? @default(now())
 
   categorias  Categoria @relation(fields: [categoriaId], references: [id])
   categoriaId String
 
+  itens Itens[]
+
   @@map("produtos")
 }
 
+model Pedido {
+  id       String @id @default(uuid())
+  n_pedido String
+  status   String
+
+  create_at DateTime? @default(now())
+  update_at DateTime? @default(now())
+
+  cadastro   Cadastro @relation(fields: [cadastroId], references: [id])
+  cadastroId String   @unique
+
+  itens Itens[]
+
+  @@map("pedidos")
+}
+
+model Itens {
+  id         String @id @default(uuid())
+  quantidade String
+  valorUnico String
+  valorTotal String
+
+  create_at DateTime? @default(now())
+  update_at DateTime? @default(now())
+
+  produtos  Produto @relation(fields: [produtoId], references: [id])
+  produtoId String
+
+  pedido   Pedido @relation(fields: [pedidoId], references: [id])
+  pedidoId String
+
+  @@map("itens")
+}
