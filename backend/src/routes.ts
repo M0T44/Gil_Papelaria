@@ -14,6 +14,7 @@ import { LoginControler } from './controllers/Login/LoginController'
 
 //ALterar
 import { AlterarClienteController } from './controllers/Clientes/AlterarClienteController'
+import { AlterarItensController } from './controllers/Itens/AlterarItensController'
 
 //Deletar
 import { DeletarClientesController } from './controllers/Clientes/DeletarClientesController'
@@ -32,6 +33,7 @@ router.post('/LoginClientes', new LoginControler().handle)
 
 //Alterar
 router.put('/AlterarClientes',new AlterarClienteController().handle)
+router.put('/AlterarPedido', new CriarItensController().handle)
 
 //Deletar
 router.delete('/ApagarClientes/:id', new DeletarClientesController().handle)

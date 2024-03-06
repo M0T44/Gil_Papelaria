@@ -13,7 +13,16 @@ class CriarItensServices {
         if (!quantidade || !valorUnico || !valorTotal || !pedidoId || produtoId) { 
             throw new Error('Existem Campos em Branco')
         }
-        await prismaClient
+        await prismaClient.itens.create({
+            data:{
+                quantidade: quantidade,
+                valorUnico:valorUnico,
+                valorTotal:valorTotal,
+                pedidoId:pedidoId,
+                produtoId:produtoId
+            }
+        })
+        return { dados: 'Cadastro Efetuado Com sucesso'}
     }
 }
 export { CriarItensServices }
