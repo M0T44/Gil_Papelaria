@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { SpeedDial } from '@rneui/themed';
+import Swiper from 'react-native-swiper';
 import {
   StyleSheet,
   ScrollView,
@@ -8,14 +9,17 @@ import {
   View,
   SafeAreaView,
   ImageBackground,
-  Image
+  Image,
+  FlatList
 } from 'react-native';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import caderno from "./imgs/caderno.png"
+
+// Começo Header
 
 function Header() {
   return (
-
     <ScrollView stickyHeaderIndices={[1]}>
       <StatusBar backgroundColor="white" barStyle="dark-content" />
       <SafeAreaView>
@@ -45,10 +49,78 @@ function Header() {
   )
 }
 
+// Fim Header
+
+// Começo Body 
+
+
+
+function Body() {
+
+  const data = [
+    { id: '1', imagemCss: styleBody.imagemBanner, imageUrl: require('./imgs/banner.png') },
+    { id: '2', imagemCss: styleBody.imagemProdutos, imageUrl: require('./imgs/caderno.png') },
+    { id: '3', imagemCss: styleBody.imagemProdutos, imageUrl: require('./imgs/caneta.png')}
+  ]
+
+  return (
+    <ScrollView>
+      <SafeAreaView>
+        <View style={styleBody.container}>
+          <Carousel data={data} />
+          <Card />
+        </View>
+      </SafeAreaView>
+    </ScrollView>
+  )
+}
+
+function Carousel({ data }) {
+  return (
+    <Swiper showsButtons={true} loop={true} style={styleBody.swiper}>
+      {data.map((item) => (
+        <View style={styleBody.container_carousel} key={item.id}>
+          <View style={styleBody.carouselItem}>
+            <Image source={item.imageUrl} style={item.imagemCss} />
+          </View>
+        </View>
+      ))}
+    </Swiper>
+  )
+}
+
+function Card() {
+  return (
+    <View style={styleBody.container_card}>
+      <View style={styleBody.card}>
+        <Image
+          source={require('./imgs/caderno.png')}
+        />
+        <Text>
+          Card
+        </Text>
+      </View>
+
+      <View style={styleBody.card}>
+        <Image
+          source={require('./imgs/caderno.png')}
+        />
+        <Text>
+          Card
+        </Text>
+      </View>
+    </View>
+  )
+}
+
+// Fim Body
+
+// Começo Navigation
+
 function Navigation() {
   return (
     <SafeAreaView>
-      <View style={styles.container_navigation}>
+      <View style={styleNavigation.container_navigation}>
         <StatusBar barStyle="light-content" />
         <MultiOpcoes />
       </View>
@@ -126,33 +198,22 @@ function MultiOpcoes() {
   )
 }
 
+// Fim Navigation
+
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Header />
+      <Body />
       <Navigation />
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "space-between"
-  },
-
-  container_navigation: {
-    justifyContent: 'center',
-    height: 80,
-  },
-
-  navigation_botao: {
-    flex: 1,
-    backgroundColor: 'red',
-  },
-
-  speedDrialEsquerda: {
-    transform: [{ scaleX: -1 }],
+    flexDirection: 'column'
   }
 });
 
@@ -163,7 +224,7 @@ const styleHeader = StyleSheet.create({
     flexDirection: 'row',
     textAlign: 'center',
   },
-  
+
   logo: {
     justifyContent: "center",
     alignItems: "center",
@@ -179,8 +240,70 @@ const styleHeader = StyleSheet.create({
 
   carinho: {
     justifyContent: 'flex-end',
-    alignItems: 'center', 
+    alignItems: 'center',
     width: 120,
     height: 60,
   }
 });
+
+const styleBody = StyleSheet.create({
+  container: {
+    flex: 2,
+  },
+
+  // Começo Carroussel
+  swiper: {
+    height: 260
+  },
+
+  carouselItem: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 400,
+    height: 200,
+    marginVertical: 16
+  },
+
+  imagemBanner: {
+    width: 400,
+    height: 250,
+  },
+
+  imagemProdutos: {
+    width: 200,
+    height: 200
+  },
+
+  // Fim Carroussel
+
+  // Começo Card
+
+  container_card: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+
+  card: {
+    height: 200,
+    marginVertical: 16,
+  }
+  // Fim Card
+})
+
+const styleNavigation = StyleSheet.create({
+  container_navigation: {
+    justifyContent: 'center',
+    height: 80,
+  },
+
+  navigation_botao: {
+    flex: 3,
+    backgroundColor: 'red',
+  },
+
+  speedDrialEsquerda: {
+    transform: [{ scaleX: -1 }],
+  }
+})
