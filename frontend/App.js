@@ -14,10 +14,9 @@ import {
 } from 'react-native';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import caderno from "./imgs/caderno.png"
+// import caderno from "./imgs/caderno.png"
 
 // Começo Header
-
 function Header() {
   return (
     <ScrollView stickyHeaderIndices={[1]}>
@@ -48,17 +47,13 @@ function Header() {
     </ScrollView>
   )
 }
-
 // Fim Header
 
 // Começo Body 
-
-
-
 function Body() {
 
   const data = [
-    { id: '1', imagemCss: styleBody.imagemBanner, imageUrl: require('./imgs/banner.png') },
+    { id: '1', imagemCss: styleBody.imagemBanner, imageUrl: require('./imgs/banner1.png') },
     { id: '2', imagemCss: styleBody.imagemProdutos, imageUrl: require('./imgs/caderno.png') },
     { id: '3', imagemCss: styleBody.imagemProdutos, imageUrl: require('./imgs/caneta.png')}
   ]
@@ -112,11 +107,9 @@ function Card() {
     </View>
   )
 }
-
 // Fim Body
 
 // Começo Navigation
-
 function Navigation() {
   return (
     <SafeAreaView>
@@ -199,7 +192,6 @@ function MultiOpcoes() {
 }
 
 // Fim Navigation
-
 export default function App() {
   return (
     <View style={styles.container}>
@@ -223,14 +215,16 @@ const styleHeader = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     textAlign: 'center',
+    // backgroundColor: 'black'
   },
 
   logo: {
     justifyContent: "center",
     alignItems: "center",
     flexWrap: 'wrap',
-    width: 120,
-    height: 60
+    width: 130,
+    height: 80,
+    margin: 20
   },
 
   logoImagem: {
