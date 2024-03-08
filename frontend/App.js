@@ -54,8 +54,8 @@ function Body() {
 
   const data = [
     { id: '1', imagemCss: styleBody.imagemBanner, imageUrl: require('./imgs/banner1.png') },
-    { id: '2', imagemCss: styleBody.imagemProdutos, imageUrl: require('./imgs/caderno.png') },
-    { id: '3', imagemCss: styleBody.imagemProdutos, imageUrl: require('./imgs/caneta.png')}
+    { id: '2', imagemCss: styleBody.imagemBanner2, imageUrl: require('./imgs/banner2.png') },
+    { id: '3', imagemCss: styleBody.imagemProdutos, imageUrl: require('./imgs/caneta.png') }
   ]
 
   return (
@@ -264,6 +264,11 @@ const styleBody = StyleSheet.create({
     height: 250,
   },
 
+  imagemBanner2: {
+    width: 450,
+    height: 250,
+  },
+
   imagemProdutos: {
     width: 200,
     height: 200
@@ -280,8 +285,17 @@ const styleBody = StyleSheet.create({
   },
 
   card: {
-    height: 200,
-    marginVertical: 16,
+    borderWidth: 2,           // Largura da borda
+    borderColor: '#BDB9B9',     // Cor da borda
+    borderRadius: 10,          // borda arredondada
+    padding: 15,              // espacamento 
+    margin: 6,
+    width: 250,
+    height: 270,
+    // marginVertical: 16,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
   }
   // Fim Card
 })
