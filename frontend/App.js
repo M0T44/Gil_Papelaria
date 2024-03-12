@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import * as React from 'react'
 import { SpeedDial } from '@rneui/themed';
 import Swiper from 'react-native-swiper';
 import {
@@ -10,10 +10,16 @@ import {
   SafeAreaView,
   ImageBackground,
   Image,
-  FlatList
+  FlatList,
+  TouchableOpacity
 } from 'react-native';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+
+import { createDrawerNavigator } from '@react-navigation/drawer'
+import { NavigationContainer } from '@react-navigation/native'
+const Drawer = createDrawerNavigator()
+
 // import caderno from "./imgs/caderno.png"
 
 // Começo Header
@@ -91,18 +97,30 @@ function Card() {
         <Image
           source={require('./imgs/caderno.png')}
         />
-        <Text>
-          Card
-        </Text>
+        <View style={styleBody.card_info}>
+          <Text>
+            Caderno Inteligente
+          </Text>
+          <TouchableOpacity style={styleBody.card_button} onPress={() => console.log('Botão pressionado')}>
+            <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
+            <MaterialCommunityIcons name="cart" size={24} color="white" />
+          </TouchableOpacity>
+        </View>
       </View>
 
       <View style={styleBody.card}>
         <Image
-          source={require('./imgs/caderno.png')}
+          source={require('./imgs/caneta.png')}
         />
-        <Text>
-          Card
-        </Text>
+        <View style={styleBody.card_info}>
+          <Text>
+            Caneta Mágica
+          </Text>
+          <TouchableOpacity style={styleBody.card_button} onPress={() => console.log('Botão pressionado')}>
+            <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
+            <MaterialCommunityIcons name="cart" size={24} color="white" />
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   )
@@ -114,7 +132,7 @@ function Navigation() {
   return (
     <SafeAreaView>
       <View style={styleNavigation.container_navigation}>
-        <StatusBar barStyle="light-content" />
+        <StatusBar />
         <MultiOpcoes />
       </View>
     </SafeAreaView>
@@ -125,7 +143,6 @@ function MultiOpcoes() {
   const [open, setOpen] = React.useState(false);
   return (
     <SpeedDial
-      style="multiOpcoes"
       isOpen={open}
       icon={() => (
         <MaterialCommunityIcons
@@ -139,6 +156,7 @@ function MultiOpcoes() {
       onClose={() => setOpen(!open)}
       buttonStyle={{ backgroundColor: '#FF8016' }}
     >
+
       <SpeedDial.Action
         icon={() => (
           <MaterialCommunityIcons
@@ -151,6 +169,7 @@ function MultiOpcoes() {
         onPress={() => console.log('Add Something')}
         buttonStyle={{ backgroundColor: '#FF8616' }}
       />
+
       <SpeedDial.Action
         icon={() => (
           <MaterialCommunityIcons
@@ -163,6 +182,7 @@ function MultiOpcoes() {
         onPress={() => console.log('Add Something')}
         buttonStyle={{ backgroundColor: '#FF8616' }}
       />
+
       <SpeedDial.Action
         icon={() => (
           <MaterialCommunityIcons
@@ -175,6 +195,7 @@ function MultiOpcoes() {
         onPress={() => console.log('Add Something')}
         buttonStyle={{ backgroundColor: '#FF8616' }}
       />
+
       <SpeedDial.Action
         icon={() => (
           <MaterialCommunityIcons
@@ -187,12 +208,22 @@ function MultiOpcoes() {
         onPress={() => console.log('Delete Something')}
         buttonStyle={{ backgroundColor: '#FF8616' }}
       />
+
     </SpeedDial>
   )
 }
-
 // Fim Navigation
+
 export default function App() {
+
+  <NavigationContainer>
+    <Drawer.Navigator>
+      <Drawer.Screen />
+      <Drawer.Screen />
+      <Drawer.Screen />
+    </Drawer.Navigator>
+  </NavigationContainer>
+
   return (
     <View style={styles.container}>
       <Header />
@@ -281,7 +312,7 @@ const styleBody = StyleSheet.create({
   container_card: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
   },
 
   card: {
@@ -291,18 +322,40 @@ const styleBody = StyleSheet.create({
     padding: 15,              // espacamento 
     margin: 6,
     width: 250,
-    height: 270,
+    height: 300,
     // marginVertical: 16,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
+  },
+
+  card_info: {
+    marginTop: 16,
+    width: 220,
+    height: 70,
+    alignItems: 'center'
+  },
+
+  card_button: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 16,
+    backgroundColor: '#FF8616',
+    padding: 10,
+    borderRadius: 5,
+  },
+
+  buttonText: {
+    color: 'white',
+    marginRight: 10
   }
+
   // Fim Card
 })
 
 const styleNavigation = StyleSheet.create({
   container_navigation: {
-    justifyContent: 'center',
     height: 80,
   },
 
@@ -310,8 +363,4 @@ const styleNavigation = StyleSheet.create({
     flex: 3,
     backgroundColor: 'red',
   },
-
-  speedDrialEsquerda: {
-    transform: [{ scaleX: -1 }],
-  }
 })
