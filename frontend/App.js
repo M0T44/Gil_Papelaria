@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import * as React from 'react'
 import { SpeedDial } from '@rneui/themed';
+import Swiper from 'react-native-swiper';
 import {
   StyleSheet,
   ScrollView,
@@ -8,14 +9,22 @@ import {
   View,
   SafeAreaView,
   ImageBackground,
-  Image
+  Image,
+  FlatList,
+  TouchableOpacity
 } from 'react-native';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
+import { createDrawerNavigator } from '@react-navigation/drawer'
+import { NavigationContainer } from '@react-navigation/native'
+const Drawer = createDrawerNavigator()
+
+// import caderno from "./imgs/caderno.png"
+
+// Começo Header
 function Header() {
   return (
-
     <ScrollView stickyHeaderIndices={[1]}>
       <StatusBar backgroundColor="white" barStyle="dark-content" />
       <SafeAreaView>
@@ -44,12 +53,86 @@ function Header() {
     </ScrollView>
   )
 }
+// Fim Header
 
+// Começo Body 
+function Body() {
+
+  const data = [
+    { id: '1', imagemCss: styleBody.imagemBanner, imageUrl: require('./imgs/banner1.png') },
+    { id: '2', imagemCss: styleBody.imagemBanner2, imageUrl: require('./imgs/banner2.png') },
+    { id: '3', imagemCss: styleBody.imagemProdutos, imageUrl: require('./imgs/caneta.png') }
+  ]
+
+  return (
+    <ScrollView>
+      <SafeAreaView>
+        <View style={styleBody.container}>
+          <Carousel data={data} />
+          <Card />
+        </View>
+      </SafeAreaView>
+    </ScrollView>
+  )
+}
+
+function Carousel({ data }) {
+  return (
+    <Swiper showsButtons={true} loop={true} style={styleBody.swiper}>
+      {data.map((item) => (
+        <View style={styleBody.container_carousel} key={item.id}>
+          <View style={styleBody.carouselItem}>
+            <Image source={item.imageUrl} style={item.imagemCss} />
+          </View>
+        </View>
+      ))}
+    </Swiper>
+  )
+}
+
+function Card() {
+  return (
+    <View style={styleBody.container_card}>
+      <View style={styleBody.card}>
+        <Image
+          source={require('./imgs/caderno.png')}
+        />
+        <View style={styleBody.card_info}>
+          <Text>
+            Caderno Inteligente
+          </Text>
+          <TouchableOpacity style={styleBody.card_button} onPress={() => console.log('Botão pressionado')}>
+            <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
+            <MaterialCommunityIcons name="cart" size={24} color="white" />
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      <View style={styleBody.card}>
+        <Image
+          source={require('./imgs/caneta.png')}
+        />
+        <View style={styleBody.card_info}>
+          <Text>
+            Caneta Mágica
+          </Text>
+          <TouchableOpacity style={styleBody.card_button} onPress={() => console.log('Botão pressionado')}>
+            <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
+            <MaterialCommunityIcons name="cart" size={24} color="white" />
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
+  )
+}
+// Fim Body
+
+// Começo Navigation
 function Navigation() {
   return (
     <SafeAreaView>
-      <View style={styles.container_navigation}>
-        <StatusBar barStyle="light-content" />
+      <View style={styleNavigation.container_navigation}>
+        <StatusBar />
         <MultiOpcoes />
       </View>
     </SafeAreaView>
@@ -60,7 +143,6 @@ function MultiOpcoes() {
   const [open, setOpen] = React.useState(false);
   return (
     <SpeedDial
-      style="multiOpcoes"
       isOpen={open}
       icon={() => (
         <MaterialCommunityIcons
@@ -74,6 +156,7 @@ function MultiOpcoes() {
       onClose={() => setOpen(!open)}
       buttonStyle={{ backgroundColor: '#FF8016' }}
     >
+
       <SpeedDial.Action
         icon={() => (
           <MaterialCommunityIcons
@@ -86,6 +169,7 @@ function MultiOpcoes() {
         onPress={() => console.log('Add Something')}
         buttonStyle={{ backgroundColor: '#FF8616' }}
       />
+
       <SpeedDial.Action
         icon={() => (
           <MaterialCommunityIcons
@@ -98,6 +182,7 @@ function MultiOpcoes() {
         onPress={() => console.log('Add Something')}
         buttonStyle={{ backgroundColor: '#FF8616' }}
       />
+
       <SpeedDial.Action
         icon={() => (
           <MaterialCommunityIcons
@@ -110,6 +195,7 @@ function MultiOpcoes() {
         onPress={() => console.log('Add Something')}
         buttonStyle={{ backgroundColor: '#FF8616' }}
       />
+
       <SpeedDial.Action
         icon={() => (
           <MaterialCommunityIcons
@@ -122,37 +208,35 @@ function MultiOpcoes() {
         onPress={() => console.log('Delete Something')}
         buttonStyle={{ backgroundColor: '#FF8616' }}
       />
+
     </SpeedDial>
   )
 }
+// Fim Navigation
 
 export default function App() {
+
+  <NavigationContainer>
+    <Drawer.Navigator>
+      <Drawer.Screen />
+      <Drawer.Screen />
+      <Drawer.Screen />
+    </Drawer.Navigator>
+  </NavigationContainer>
+
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Header />
+      <Body />
       <Navigation />
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "space-between"
-  },
-
-  container_navigation: {
-    justifyContent: 'center',
-    height: 80,
-  },
-
-  navigation_botao: {
-    flex: 1,
-    backgroundColor: 'red',
-  },
-
-  speedDrialEsquerda: {
-    transform: [{ scaleX: -1 }],
+    flexDirection: 'column'
   }
 });
 
@@ -162,14 +246,16 @@ const styleHeader = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     textAlign: 'center',
+    // backgroundColor: 'black'
   },
-  
+
   logo: {
     justifyContent: "center",
     alignItems: "center",
     flexWrap: 'wrap',
-    width: 120,
-    height: 60
+    width: 130,
+    height: 80,
+    margin: 20
   },
 
   logoImagem: {
@@ -179,8 +265,102 @@ const styleHeader = StyleSheet.create({
 
   carinho: {
     justifyContent: 'flex-end',
-    alignItems: 'center', 
+    alignItems: 'center',
     width: 120,
     height: 60,
   }
 });
+
+const styleBody = StyleSheet.create({
+  container: {
+    flex: 2,
+  },
+
+  // Começo Carroussel
+  swiper: {
+    height: 260
+  },
+
+  carouselItem: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 400,
+    height: 200,
+    marginVertical: 16
+  },
+
+  imagemBanner: {
+    width: 400,
+    height: 250,
+  },
+
+  imagemBanner2: {
+    width: 450,
+    height: 250,
+  },
+
+  imagemProdutos: {
+    width: 200,
+    height: 200
+  },
+
+  // Fim Carroussel
+
+  // Começo Card
+
+  container_card: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+
+  card: {
+    borderWidth: 2,           // Largura da borda
+    borderColor: '#BDB9B9',     // Cor da borda
+    borderRadius: 10,          // borda arredondada
+    padding: 15,              // espacamento 
+    margin: 6,
+    width: 250,
+    height: 300,
+    // marginVertical: 16,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+
+  card_info: {
+    marginTop: 16,
+    width: 220,
+    height: 70,
+    alignItems: 'center'
+  },
+
+  card_button: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 16,
+    backgroundColor: '#FF8616',
+    padding: 10,
+    borderRadius: 5,
+  },
+
+  buttonText: {
+    color: 'white',
+    marginRight: 10
+  }
+
+  // Fim Card
+})
+
+const styleNavigation = StyleSheet.create({
+  container_navigation: {
+    height: 80,
+  },
+
+  navigation_botao: {
+    flex: 3,
+    backgroundColor: 'red',
+  },
+})
