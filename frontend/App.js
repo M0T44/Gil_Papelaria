@@ -8,9 +8,7 @@ import {
   Text,
   View,
   SafeAreaView,
-  ImageBackground,
   Image,
-  FlatList,
   TouchableOpacity
 } from 'react-native';
 
@@ -18,12 +16,17 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import { NavigationContainer } from '@react-navigation/native'
-const Drawer = createDrawerNavigator()
+import { useNavigation } from '@react-navigation/native';
 
-// import caderno from "./imgs/caderno.png"
+import Configuracoes from './pages/Configuracoes';
+import Cadastre_se from './pages/Cadastro';
+import Carrinho from './pages/Carrinho';
+
+const Drawer = createDrawerNavigator()
 
 // Começo Header
 function Header() {
+  const navigation = useNavigation();
   return (
     <ScrollView stickyHeaderIndices={[1]}>
       <StatusBar backgroundColor="white" barStyle="dark-content" />
@@ -33,6 +36,7 @@ function Header() {
             <Image
               style={styleHeader.logoImagem}
               source={require('./imgs/logo.png')}
+              onPress={() => navigation.navigate('Body')}
             />
           </View>
 
@@ -45,7 +49,7 @@ function Header() {
                 color="#fff"
               />
             )}
-            onPress={() => console.log('Add Something')}
+            onPress={() => navigation.navigate('Carrinho')}
             buttonStyle={{ backgroundColor: '#FF8616' }}
           />
         </View>
@@ -140,6 +144,7 @@ function Navigation() {
 }
 
 function MultiOpcoes() {
+  const navigation = useNavigation();
   const [open, setOpen] = React.useState(false);
   return (
     <SpeedDial
@@ -160,13 +165,13 @@ function MultiOpcoes() {
       <SpeedDial.Action
         icon={() => (
           <MaterialCommunityIcons
-            name="exit-run"
+            name="home"
             size={20}
             color="#fff"
           />
         )}
-        title="Sair"
-        onPress={() => console.log('Add Something')}
+        title="Home"
+        onPress={() => navigation.navigate('Body')}
         buttonStyle={{ backgroundColor: '#FF8616' }}
       />
 
@@ -192,7 +197,7 @@ function MultiOpcoes() {
           />
         )}
         title="Cadastre-Se"
-        onPress={() => console.log('Add Something')}
+        onPress={() => navigation.navigate('Cadastre_se')}
         buttonStyle={{ backgroundColor: '#FF8616' }}
       />
 
@@ -205,7 +210,20 @@ function MultiOpcoes() {
           />
         )}
         title="Configurações"
-        onPress={() => console.log('Delete Something')}
+        onPress={() => navigation.navigate('Configuracoes')}
+        buttonStyle={{ backgroundColor: '#FF8616' }}
+      />
+
+      <SpeedDial.Action
+        icon={() => (
+          <MaterialCommunityIcons
+            name="exit-run"
+            size={20}
+            color="#fff"
+          />
+        )}
+        title="Sair"
+        onPress={() => console.log('Add Something')}
         buttonStyle={{ backgroundColor: '#FF8616' }}
       />
 
@@ -216,27 +234,40 @@ function MultiOpcoes() {
 
 export default function App() {
 
-  <NavigationContainer>
-    <Drawer.Navigator>
-      <Drawer.Screen />
-      <Drawer.Screen />
-      <Drawer.Screen />
-    </Drawer.Navigator>
-  </NavigationContainer>
-
   return (
-    <View style={styles.container}>
-      <Header />
-      <Body />
+    <NavigationContainer>
+      <Drawer.Navigator screenOptions={{ header: (props) => <Header {...props} /> }}>
+        <Drawer.Screen name='Body' component={Body} />
+        <Drawer.Screen name='Configuracoes' component={Configuracoes} />
+        <Drawer.Screen name='Cadastre_se' component={Cadastre_se} />
+        <Drawer.Screen name='Carrinho' component={Carrinho} />
+      </Drawer.Navigator>
       <Navigation />
-    </View>
-  );
+    </NavigationContainer>
+  )
+
+  // <NavigationContainer>
+  //   <Drawer.Navigator initialRouteName='Body'>
+  //     <Drawer.Screen name='Body' component={Body}/>
+  //     <Drawer.Screen name='Configurações' component={Configuracoes} />
+  //     <Drawer.Screen />
+  //   </Drawer.Navigator>
+  // </NavigationContainer>
+
+  // return (
+  //   <View style={styles.container}>
+  //     <Header />
+  //     <Body />
+  //     <Navigation />
+  //   </View>
+  // );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundColor: 'red'
   }
 });
 
@@ -246,34 +277,36 @@ const styleHeader = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     textAlign: 'center',
-    // backgroundColor: 'black'
+    backgroundColor: '#fff',
   },
 
   logo: {
     justifyContent: "center",
     alignItems: "center",
     flexWrap: 'wrap',
-    width: 130,
-    height: 80,
-    margin: 20
+    width: 140,
+    height: 40,
+    margin: 20,
   },
 
   logoImagem: {
-    width: 180,
-    height: 180
+    width: 140,
+    height: 140,
   },
 
   carinho: {
     justifyContent: 'flex-end',
     alignItems: 'center',
-    width: 120,
-    height: 60,
+    width: 40,
+    height: 40,
+    marginTop: 15,
   }
 });
 
 const styleBody = StyleSheet.create({
   container: {
     flex: 2,
+    backgroundColor: '#fff'
   },
 
   // Começo Carroussel
