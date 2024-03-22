@@ -245,22 +245,6 @@ export default function App() {
       <Navigation />
     </NavigationContainer>
   )
-
-  // <NavigationContainer>
-  //   <Drawer.Navigator initialRouteName='Body'>
-  //     <Drawer.Screen name='Body' component={Body}/>
-  //     <Drawer.Screen name='Configurações' component={Configuracoes} />
-  //     <Drawer.Screen />
-  //   </Drawer.Navigator>
-  // </NavigationContainer>
-
-  // return (
-  //   <View style={styles.container}>
-  //     <Header />
-  //     <Body />
-  //     <Navigation />
-  //   </View>
-  // );
 }
 
 const styles = StyleSheet.create({
