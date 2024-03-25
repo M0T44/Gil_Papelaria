@@ -134,16 +134,16 @@ function Card() {
 // Fim Body
 
 // Começo Navigation
-function Navigation() {
-  return (
-    <SafeAreaView>
-      <View style={styleNavigation.container_navigation}>
-        <StatusBar />
-        {/* <MultiOpcoes /> */}
-      </View>
-    </SafeAreaView>
-  )
-}
+// function Navigation() {
+//   return (
+//     <SafeAreaView>
+//       <View style={styleNavigation.container_navigation}>
+//         <StatusBar />
+//         {/* <MultiOpcoes /> */}
+//       </View>
+//     </SafeAreaView>
+//   )
+// }
 
 function MultiOpcoes() {
   const navigation = useNavigation();
