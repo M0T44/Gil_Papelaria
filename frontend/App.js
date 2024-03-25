@@ -240,7 +240,6 @@ function MultiOpcoes() {
 // Fim Navigation
 
 export default function App() {
-
   return (
     <NavigationContainer>
       <Drawer.Navigator screenOptions={{ header: (props) => <Header {...props} /> }}>

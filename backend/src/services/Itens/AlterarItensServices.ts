@@ -2,12 +2,12 @@ import prismaClient from '../../prisma'
 
 interface AlterarItens {
     id: string
-    alteraQuantidade: string
+    alteraQuantidade: number
 }
 
 class AlterarItensServices {
     async execute({ id, alteraQuantidade}: AlterarItens) {
-        await prismaClient.itens.update({
+        await prismaClient.itemPedido.update({
             where:{
                 id:id
             },

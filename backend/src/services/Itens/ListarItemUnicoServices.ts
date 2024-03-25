@@ -6,13 +6,13 @@ interface ListarItem {
 
 class ListarItemUnicoServices {
     async execute({ id }: ListarItem) {
-        const resposta = await prismaClient.itens.findMany({
+        const resposta = await prismaClient.itemPedido.findMany({
             where: {
-                pedidoId:id
+                id_pedido:id
             },
             include: {
                 produtos: true,
-                pedido: true
+                pedidos: true
             }
         })
         return resposta

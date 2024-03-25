@@ -34,6 +34,7 @@ router.post('/LoginClientes', new LoginControler().handle)
 //Alterar
 router.put('/AlterarClientes',new AlterarClienteController().handle)
 router.put('/AlterarPedido', new CriarItensController().handle)
+router.put('/AlterarItem', new AlterarItensController().handle)
 
 //Deletar
 router.delete('/ApagarClientes/:id', new DeletarClientesController().handle)

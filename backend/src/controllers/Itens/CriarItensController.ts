@@ -3,15 +3,14 @@ import { CriarItensServices } from '../../services/Itens/CriarItensServices'
 
 class CriarItensController {
     async handle(req: Request, res: Response) {
-       const { quantidade, valorUnico, valorTotal, pedidoId, produtoId } = req.body
+       const { quantidade, valor, id_pedido, id_produto } = req.body
 
        const criarItensServices = new CriarItensServices()
        const resposta = await criarItensServices.execute({
         quantidade,
-        valorUnico,
-        valorTotal,
-        pedidoId,
-        produtoId
+        valor,
+        id_pedido,
+        id_produto
        })
        return res.json(resposta)
     }

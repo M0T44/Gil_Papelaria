@@ -1,25 +1,24 @@
+import { Decimal } from '@prisma/client/runtime/library'
 import prismaClient from '../../prisma'
 
 interface CriarItens {
-    quantidade: string
-    valorUnico: string
-    valorTotal: string
-    pedidoId: string
-    produtoId: string
+    quantidade: number
+    valor: Decimal
+    id_pedido: string
+    id_produto: string
 }
 
 class CriarItensServices {
-    async execute({ quantidade, valorUnico, valorTotal, pedidoId, produtoId }: CriarItens) {
-        if (!quantidade || !valorUnico || !valorTotal || !pedidoId || produtoId) { 
+    async execute({ quantidade, valor, id_pedido, id_produto }: CriarItens) {
+        if (!quantidade || !valor  || !id_pedido || id_produto) { 
             throw new Error('Existem Campos em Branco')
         }
-        await prismaClient.itens.create({
+        await prismaClient.itemPedido.create({
             data:{
                 quantidade: quantidade,
-                valorUnico:valorUnico,
-                valorTotal:valorTotal,
-                pedidoId:pedidoId,
-                produtoId:produtoId
+                valor:valor,
+                id_pedido:id_pedido,
+                id_produto:id_produto
             }
         })
         return { dados: 'Cadastro Efetuado Com sucesso'}
