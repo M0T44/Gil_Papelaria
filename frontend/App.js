@@ -160,6 +160,7 @@ function MultiOpcoes() {
       onOpen={() => setOpen(!open)}
       onClose={() => setOpen(!open)}
       buttonStyle={{ backgroundColor: '#FF8016' }}
+
     >
 
       <SpeedDial.Action
@@ -373,10 +374,10 @@ const styleBody = StyleSheet.create({
 const styleNavigation = StyleSheet.create({
   container_navigation: {
     height: 80,
+    backgroundColor: 'red'
   },
 
   navigation_botao: {
     flex: 3,
-    backgroundColor: 'red',
   },
 })

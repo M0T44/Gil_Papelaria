@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import multer from 'multer'
+// import multer from 'multer'
 import uploadConfig from './config/multer'
 
 
@@ -20,11 +20,11 @@ import { AlterarItensController } from './controllers/Itens/AlterarItensControll
 import { DeletarClientesController } from './controllers/Clientes/DeletarClientesController'
 
 const router = Router()
-const upload = multer(uploadConfig.upload('./tmp'))
+// const upload = multer(uploadConfig.upload('./tmp'))
 
 //Criar
 router.post('/CriarClientes', new CriarClientesController().handle)
-router.post('/CriarProdutos', upload.single('file'), new CriarProdutosController().handle)
+// router.post('/CriarProdutos', upload.single('file'), new CriarProdutosController().handle)
 router.post('/CriarCategorias', new CriarCategoriasController().handle)
 router.post('/CriarItens', new CriarItensController().handle)
 
