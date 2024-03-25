@@ -74,6 +74,7 @@ function Body() {
         <View style={styleBody.container}>
           <Carousel data={data} />
           <Card />
+          <MultiOpcoes />
         </View>
       </SafeAreaView>
     </ScrollView>
@@ -126,6 +127,7 @@ function Card() {
           </TouchableOpacity>
         </View>
       </View>
+     
     </View>
   )
 }
@@ -137,7 +139,7 @@ function Navigation() {
     <SafeAreaView>
       <View style={styleNavigation.container_navigation}>
         <StatusBar />
-        <MultiOpcoes />
+        {/* <MultiOpcoes /> */}
       </View>
     </SafeAreaView>
   )
@@ -161,7 +163,11 @@ function MultiOpcoes() {
       onClose={() => setOpen(!open)}
       buttonStyle={{ backgroundColor: '#FF8016' }}
 
-    >
+      FabProps={{
+        sx: {
+          bgcolor: '#456',
+        }
+      }}  >
 
       <SpeedDial.Action
         icon={() => (
@@ -242,7 +248,7 @@ export default function App() {
         <Drawer.Screen name='Cadastre_se' component={Cadastre_se} />
         <Drawer.Screen name='Carrinho' component={Carrinho} />
       </Drawer.Navigator>
-      <Navigation />
+      {/* <Navigation /> */}
     </NavigationContainer>
   )
 }
@@ -379,5 +385,10 @@ const styleNavigation = StyleSheet.create({
 
   navigation_botao: {
     flex: 3,
+    backgroundColor: 'transparent',
+  },
+
+  navigation_botao: {
+    backgroundColor: 'transparent',
   },
 })

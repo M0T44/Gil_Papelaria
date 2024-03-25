@@ -200,7 +200,6 @@ const style = StyleSheet.create({
         justifyContent: 'center',
         textAlign: 'center',
         height: 665,
-        backgroundColor: 'red'
     },
 
     input: {
