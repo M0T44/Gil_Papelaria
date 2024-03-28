@@ -22,6 +22,8 @@ import Configuracoes from './pages/Configuracoes';
 import Cadastre_se from './pages/Cadastro';
 import Carrinho from './pages/Carrinho';
 
+import { FloatingAction } from "react-native-floating-action";
+
 const Drawer = createDrawerNavigator()
 
 // Começo Header
@@ -74,7 +76,7 @@ function Body() {
         <View style={styleBody.container}>
           <Carousel data={data} />
           <Card />
-          <MultiOpcoes />
+          {/* <MultiOpcoes /> */}
         </View>
       </SafeAreaView>
     </ScrollView>
@@ -127,116 +129,150 @@ function Card() {
           </TouchableOpacity>
         </View>
       </View>
-     
+
     </View>
   )
 }
 // Fim Body
 
-// Começo Navigation
-function Navigation() {
-  return (
-    <SafeAreaView>
-      <View style={styleNavigation.container_navigation}>
-        <StatusBar />
-        {/* <MultiOpcoes /> */}
-      </View>
-    </SafeAreaView>
-  )
-}
-
 function MultiOpcoes() {
   const navigation = useNavigation();
-  const [open, setOpen] = React.useState(false);
+  const actions = [
+    {
+      text: "Home",
+      name: "bt_accessibility",
+      position: 1,
+      color: '#FF8016'
+    },
+    {
+      text: "Login",
+      name: "bt_language",
+      position: 3,
+      color: '#FF8016'
+    },
+    {
+      text: "Sair",
+      name: "bt_room",
+      position: 4,
+      color: '#FF8016',
+    },
+    {
+      text: "Cadastro",
+      name: "bt_videocam",
+      position: 2,
+      color: '#FF8016',
+    }
+  ];
+
   return (
-    <SpeedDial
-      isOpen={open}
-      icon={() => (
-        <MaterialCommunityIcons
-          name="format-align-justify"
-          size={30}
-          color="#fff"
-        />
-      )}
-      openIcon={{ name: 'close', color: '#fff' }}
-      onOpen={() => setOpen(!open)}
-      onClose={() => setOpen(!open)}
-      buttonStyle={{ backgroundColor: '#FF8016' }}
-
-      FabProps={{
-        sx: {
-          bgcolor: '#456',
-        }
-      }}  >
-
-      <SpeedDial.Action
-        icon={() => (
-          <MaterialCommunityIcons
-            name="home"
-            size={20}
-            color="#fff"
-          />
-        )}
-        title="Home"
-        onPress={() => navigation.navigate('Body')}
-        buttonStyle={{ backgroundColor: '#FF8616' }}
+    <View style={style.container}>
+      <FloatingAction
+        color='#FF8016'
+        distanceToEdge={vertical= 15}
+        position='right'
+        actions={actions}
+        onPressItem={() => navigation.navigate('Cadastre_se')}
       />
-
-      <SpeedDial.Action
-        icon={() => (
-          <MaterialCommunityIcons
-            name="account"
-            size={20}
-            color="#fff"
-          />
-        )}
-        title="Login"
-        onPress={() => console.log('Add Something')}
-        buttonStyle={{ backgroundColor: '#FF8616' }}
-      />
-
-      <SpeedDial.Action
-        icon={() => (
-          <MaterialCommunityIcons
-            name="account-plus"
-            size={20}
-            color="#fff"
-          />
-        )}
-        title="Cadastre-Se"
-        onPress={() => navigation.navigate('Cadastre_se')}
-        buttonStyle={{ backgroundColor: '#FF8616' }}
-      />
-
-      <SpeedDial.Action
-        icon={() => (
-          <MaterialCommunityIcons
-            name="cog-outline"
-            size={20}
-            color="#fff"
-          />
-        )}
-        title="Configurações"
-        onPress={() => navigation.navigate('Configuracoes')}
-        buttonStyle={{ backgroundColor: '#FF8616' }}
-      />
-
-      <SpeedDial.Action
-        icon={() => (
-          <MaterialCommunityIcons
-            name="exit-run"
-            size={20}
-            color="#fff"
-          />
-        )}
-        title="Sair"
-        onPress={() => console.log('Add Something')}
-        buttonStyle={{ backgroundColor: '#FF8616' }}
-      />
-
-    </SpeedDial>
+    </View>
   )
 }
+
+// function MultiOpcoes() {
+//   const navigation = useNavigation();
+//   const [open, setOpen] = React.useState(false);
+//   return (
+//     <SpeedDial
+//       style={styleBody.multiOpcoes}
+//       isOpen={open}
+//       icon={() => (
+//         <MaterialCommunityIcons
+//           name="format-align-justify"
+//           size={30}
+//           color="#fff"
+//         />
+//       )}
+//       openIcon={{ name: 'close', color: '#fff' }}
+//       onOpen={() => setOpen(!open)}
+//       onClose={() => setOpen(!open)}
+//       buttonStyle={{ backgroundColor: '#FF8016' }}
+
+//       FabProps={{
+//         sx: {
+//           bgcolor: '#456',
+//         }
+//       }}  >
+
+//       <SpeedDial.Action
+//         icon={() => (
+//           <MaterialCommunityIcons
+//             name="home"
+//             size={20}
+//             color="#fff"
+//           />
+//         )}
+//         title="Home"
+//         onPress={() => navigation.navigate('Body')}
+//         buttonStyle={{ backgroundColor: '#FF8616' }}
+//       />
+
+//       <SpeedDial.Action
+//         icon={() => (
+//           <MaterialCommunityIcons
+//             name="account"
+//             size={20}
+//             color="#fff"
+//           />
+//         )}
+//         title="Login"
+//         onPress={() => console.log('Add Something')}
+//         buttonStyle={{ backgroundColor: '#FF8616' }}
+//       />
+
+//       <SpeedDial.Action
+//         icon={() => (
+//           <MaterialCommunityIcons
+//             name="account-plus"
+//             size={20}
+//             color="#fff"
+//           />
+//         )}
+//         title="Cadastre-Se"
+//         onPress={() => navigation.navigate('Cadastre_se')}
+//         buttonStyle={{ backgroundColor: '#FF8616' }}
+//       />
+
+//       <SpeedDial.Action
+//         icon={() => (
+//           <MaterialCommunityIcons
+//             name="cog-outline"
+//             size={20}
+//             color="#fff"
+//           />
+//         )}
+//         title="Configurações"
+//         onPress={() => navigation.navigate('Configuracoes')}
+//         buttonStyle={{ backgroundColor: '#FF8616' }}
+//       />
+
+//       <SpeedDial.Action
+//         icon={() => (
+//           <MaterialCommunityIcons
+//             name="exit-run"
+//             size={20}
+//             color="#fff"
+//           />
+//         )}
+//         title="Sair"
+//         onPress={() => console.log('Add Something')}
+//         buttonStyle={{ backgroundColor: '#FF8616' }}
+//       />
+
+//     </SpeedDial>
+//   )
+// }
+
+
+
 // Fim Navigation
 
 export default function App() {
@@ -248,16 +284,13 @@ export default function App() {
         <Drawer.Screen name='Cadastre_se' component={Cadastre_se} />
         <Drawer.Screen name='Carrinho' component={Carrinho} />
       </Drawer.Navigator>
-      {/* <Navigation /> */}
+      <MultiOpcoes />
     </NavigationContainer>
   )
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: 'red'
   }
 });
 
@@ -372,9 +405,20 @@ const styleBody = StyleSheet.create({
   buttonText: {
     color: 'white',
     marginRight: 10
-  }
+  },
 
   // Fim Card
+
+  // Começo MultiOpções
+
+  multiOpcoes: {
+    borderWidth: 2,
+    borderColor: '#BDB9B9',
+    width: 'auto',
+    height: 'auto',
+  }
+
+  // Fim MultiOpções
 })
 
 const styleNavigation = StyleSheet.create({

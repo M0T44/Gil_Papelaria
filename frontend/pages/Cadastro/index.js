@@ -174,6 +174,9 @@ export default function Cadastre_se() {
                             onChangeText={setConfSenha}
                             secureTextEntry={true}
                         />
+                        
+                        
+
 
                         <TouchableOpacity onPress={handleCadastro} style={style.buttonEnviar}>
                             <Text style={style.buttonEnviarText}>Enviar</Text>
