@@ -47,6 +47,7 @@ export default function Cadastre_se() {
                 senha
             })
             return (resposta.data)
+            // alert(resposta.data)
         } catch (error) {
             alert('error')
         }
@@ -174,8 +175,8 @@ export default function Cadastre_se() {
                             onChangeText={setConfSenha}
                             secureTextEntry={true}
                         />
-                        
-                        
+
+
 
 
                         <TouchableOpacity onPress={handleCadastro} style={style.buttonEnviar}>
