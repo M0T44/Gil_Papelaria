@@ -18,9 +18,12 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import { NavigationContainer } from '@react-navigation/native'
 import { useNavigation } from '@react-navigation/native';
 
-import Configuracoes from './pages/Configuracoes';
+import Home from './pages/Home';
+import Login from './pages/Login'
+// import Configuracoes from './pages/Configuracoes';
 import Cadastre_se from './pages/Cadastro';
 import Carrinho from './pages/Carrinho';
+import Sair from './pages/Sair';
 
 import { FloatingAction } from "react-native-floating-action";
 
@@ -136,31 +139,35 @@ function Card() {
 // Fim Body
 
 function MultiOpcoes() {
-  const navigation = useNavigation();
+  const navegacao = useNavigation();
   const actions = [
     {
       text: "Home",
       name: "bt_accessibility",
       position: 1,
-      color: '#FF8016'
+      color: '#FF8016',
+      path: 'Body'
     },
     {
       text: "Login",
       name: "bt_language",
       position: 3,
-      color: '#FF8016'
+      color: '#FF8016',
+      path: 'Login'
     },
     {
       text: "Sair",
       name: "bt_room",
       position: 4,
       color: '#FF8016',
+      path: 'Sair'
     },
     {
       text: "Cadastro",
       name: "bt_videocam",
       position: 2,
       color: '#FF8016',
+      path: 'Cadastro'
     }
   ];
 
@@ -168,10 +175,14 @@ function MultiOpcoes() {
     <View style={style.container}>
       <FloatingAction
         color='#FF8016'
-        distanceToEdge={vertical= 15}
+        distanceToEdge={vertical = 15}
         position='right'
         actions={actions}
-        onPressItem={() => navigation.navigate('Cadastre_se')}
+        // onPressItem={() => navigation.navigate('Cadastro')}
+        onPressItem={(name, index) => {
+          const action = actions.find(action => action.name === name);
+          navegacao.navigate(action.path);
+        }}
       />
     </View>
   )
@@ -280,9 +291,13 @@ export default function App() {
     <NavigationContainer>
       <Drawer.Navigator screenOptions={{ header: (props) => <Header {...props} /> }}>
         <Drawer.Screen name='Body' component={Body} />
-        <Drawer.Screen name='Configuracoes' component={Configuracoes} />
-        <Drawer.Screen name='Cadastre_se' component={Cadastre_se} />
+        {/* <Drawer.Screen name='Configuracoes' component={Configuracoes} /> */}
+        <Drawer.Screen name='Cadastro' component={Cadastre_se} />
         <Drawer.Screen name='Carrinho' component={Carrinho} />
+        <Drawer.Screen name='Home' component={Home} />
+        <Drawer.Screen name='Login' component={Login} />
+        <Drawer.Screen name='Sair' component={Sair} />
+        
       </Drawer.Navigator>
       <MultiOpcoes />
     </NavigationContainer>
