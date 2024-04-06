@@ -9,6 +9,7 @@ import {
     Text,
     Image,
     TouchableOpacity,
+    TextInput,
 } from 'react-native'
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -26,6 +27,9 @@ function Body() {
             <SafeAreaView>
                 <View style={styleBody.container}>
                     <Carousel data={data} />
+                    <Pesquisa />
+                    <Text style={styleBody.text_categorias}>Categorias</Text>
+                    <Categorias />
                     <Text style={styleBody.text_maisVendidos}>Produtos mais vendidos</Text>
                     <Card />
                 </View>
@@ -43,6 +47,42 @@ function Carousel({ data }) {
                 </View>
             ))}
         </Swiper>
+    )
+}
+
+function Pesquisa() {
+    return (
+        <View style={styleBody.container_pesquisa}>
+            <TextInput
+                placeholder='Pesquisar'
+                style={styleBody.input_pesquisa}
+            />
+            <MaterialCommunityIcons style={styleBody.icon_pesquisa} name="magnify" size={24} color="white" />
+        </View>
+    )
+}
+
+function Categorias() {
+    return (
+        <ScrollView horizontal={true}>
+            <View style={styleBody.container_categorias}>
+                <TouchableOpacity style={styleBody.button_categorias} onPress={() => console.log('Botão pressionado')}>
+                    <Text style={styleBody.buttonText_categorias}>Mochila</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styleBody.button_categorias} onPress={() => console.log('Botão pressionado')}>
+                    <Text style={styleBody.buttonText_categorias}>Material Escolar</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styleBody.button_categorias} onPress={() => console.log('Botão pressionado')}>
+                    <Text style={styleBody.buttonText_categorias}>Mochila</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styleBody.button_categorias} onPress={() => console.log('Botão pressionado')}>
+                    <Text style={styleBody.buttonText_categorias}>Mochila</Text>
+                </TouchableOpacity>
+            </View>
+        </ScrollView>
     )
 }
 
@@ -145,7 +185,7 @@ const styleBody = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
     },
 
     // Começo Carroussel
@@ -176,10 +216,67 @@ const styleBody = StyleSheet.create({
 
     // Fim Carroussel
 
+    // Começo Campo pesquisa
+
+    container_pesquisa: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+
+    input_pesquisa: {
+        borderRadius: 22,
+        borderWidth: 2,
+        width: 320,
+        height: 50,
+        paddingLeft: 15,
+        marginRight: 16
+    },
+
+    icon_pesquisa: {
+        backgroundColor: '#FF8616',
+        padding: 12,
+        borderRadius: 100
+    },
+
+    // Fim Campo pesquisa
+
+    // Começo Categoria
+
+    container_categorias: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginLeft: 26,
+        paddingVertical: 12,
+    },
+
+    button_categorias: {
+        textAlign: 'center',
+        marginTop: 16,
+        backgroundColor: '#00A4AD',
+        borderRadius: 22,
+        paddingHorizontal: 16,
+        paddingVertical: 10,
+        marginHorizontal: 10,
+    },
+
+    buttonText_categorias: {
+        fontSize: 16,
+        color: '#fff'
+    },
+
+    text_categorias: {
+        fontSize: 28,
+        marginTop: 12,
+    },
+
+    // Fim Categoria
+
     // Começo Card
 
     container_card: {
-        display: 'flex',
+        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
     },
@@ -217,6 +314,7 @@ const styleBody = StyleSheet.create({
 
     buttonText: {
         color: 'white',
+        fontSize: 16,
         marginRight: 10
     },
 
@@ -226,8 +324,7 @@ const styleBody = StyleSheet.create({
 
     text_maisVendidos: {
         fontSize: 28,
-        marginTop: 12,
-        marginBottom: 12
+        marginTop: 16,
     },
 
     // Fim Texto

@@ -26,7 +26,6 @@ export default function Login() {
                     </Text>
 
                     <View style={style.form}>
-
                         <TextInput
                             placeholder='Digite seu Email'
                             style={style.input}
@@ -38,17 +37,11 @@ export default function Login() {
                             secureTextEntry={true}
                         />
 
-                        <TextInput
-                            placeholder='Confirme a Senha'
-                            style={style.input}
-                            secureTextEntry={true}
-                        />
-
                         <TouchableOpacity style={style.buttonEnviar}>
                             <Text style={style.buttonEnviarText}>Enviar</Text>
                         </TouchableOpacity>
 
-                        <Text>Não tem cadastro ?</Text>
+                        <Text style={style.text}>Não tem cadastro ?</Text>
                         <TouchableOpacity onPress={() => navigation.navigate('Cadastro')} style={style.buttonCriar}>
                             <Text style={style.buttonEnviarText}>Cadastrar-se</Text>
                         </TouchableOpacity>
@@ -76,6 +69,11 @@ const style = StyleSheet.create({
         marginTop: 12
     },
 
+    text: {
+        fontSize: 22,
+        marginBottom: 12
+    },
+
     form: {
         display: 'flex',
         justifyContent: 'center',
@@ -87,14 +85,15 @@ const style = StyleSheet.create({
         height: 40,
         borderWidth: 2,
         borderRadius: 8,
-        marginVertical: 6
+        marginVertical: 6,
+        paddingLeft: 10
     },
     buttonEnviar: {
         marginTop: 15,
         marginBottom: 20,
         backgroundColor: '#FF8016',
         height: 45,
-        width: '95%',
+        width: 350,
         borderRadius: 8,
     },
     buttonEnviarText: {
@@ -105,9 +104,9 @@ const style = StyleSheet.create({
         color: '#FFFFFF'
     },
     buttonCriar: {
-        backgroundColor: '#FF8016',
+        backgroundColor: '#00A4AD',
         height: 45,
-        width: '95%',
+        width: 350,
         borderRadius: 8,
     },
 })

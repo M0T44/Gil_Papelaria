@@ -13,7 +13,11 @@ import {
 import apiViaCep from '../../API/viaCep/apiViaCep'
 import apiLocal from '../../API/apiLocal/apiLocal'
 
+import { useNavigation } from '@react-navigation/native';
+
 export default function Cadastre_se() {
+
+    const navigation = useNavigation();
 
     const [nome, setNome] = useState('')
     const [cpf_cnpj, setCpf_cnpj] = useState('')
@@ -181,7 +185,7 @@ export default function Cadastre_se() {
                         </TouchableOpacity>
 
                         <Text style={style.text}>Já tem cadastro ?</Text>
-                        <TouchableOpacity onPress={() => navigation.navigate('Cadastro')} style={style.buttonCriar}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Login')} style={style.buttonCriar}>
                             <Text style={style.buttonEnviarText}>Logar</Text>
                         </TouchableOpacity>
 
@@ -217,14 +221,16 @@ const style = StyleSheet.create({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        width: 450
     },
 
     input: {
-        width: 320,
+        width: 350,
         height: 40,
         borderWidth: 2,
         borderRadius: 8,
-        marginVertical: 6
+        marginVertical: 6,
+        paddingLeft: 10
     },
 
     buttonEnviar: {
@@ -232,7 +238,7 @@ const style = StyleSheet.create({
         marginBottom: 20,
         backgroundColor: '#FF8016',
         height: 45,
-        width: '95%',
+        width: 350,
         borderRadius: 8,
     },
 
@@ -243,11 +249,11 @@ const style = StyleSheet.create({
         fontWeight: 'bold',
         color: '#FFFFFF'
     },
-    
+
     buttonCriar: {
         backgroundColor: '#00A4AD',
         height: 45,
-        width: '95%',
+        width: 350,
         borderRadius: 8,
     },
 })
