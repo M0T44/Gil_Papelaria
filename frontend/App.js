@@ -78,8 +78,8 @@ function Body() {
       <SafeAreaView>
         <View style={styleBody.container}>
           <Carousel data={data} />
+          <Text style={styleBody.text_maisVendidos}>Produtos mais vendidos</Text>
           <Card />
-          {/* <MultiOpcoes /> */}
         </View>
       </SafeAreaView>
     </ScrollView>
@@ -91,9 +91,7 @@ function Carousel({ data }) {
     <Swiper showsButtons={true} loop={true} style={styleBody.swiper}>
       {data.map((item) => (
         <View style={styleBody.container_carousel} key={item.id}>
-          <View style={styleBody.carouselItem}>
-            <Image source={item.imageUrl} style={item.imagemCss} />
-          </View>
+          <Image source={item.imageUrl} style={item.imagemCss} />
         </View>
       ))}
     </Swiper>
@@ -102,46 +100,85 @@ function Carousel({ data }) {
 
 function Card() {
   return (
-    <View style={styleBody.container_card}>
-      <View style={styleBody.card}>
-        <Image
-          source={require('./imgs/caderno.png')}
-        />
-        <View style={styleBody.card_info}>
-          <Text>
-            Caderno Inteligente
-          </Text>
-          <Text>
-            Breve descrição do produto
-          </Text>
-          <TouchableOpacity style={styleBody.card_button} onPress={() => console.log('Botão pressionado')}>
-            <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
-            <MaterialCommunityIcons name="cart" size={24} color="white" />
-          </TouchableOpacity>
+    <ScrollView horizontal={true}>
+      <View style={styleBody.container_card}>
+
+        <View style={styleBody.card}>
+          <Image
+            source={require('./imgs/caderno.png')}
+          />
+          <View style={styleBody.card_info}>
+            <Text>
+              Caderno Inteligente
+            </Text>
+            <Text>
+              Breve descrição do produto
+            </Text>
+            <TouchableOpacity style={styleBody.card_button} onPress={() => console.log('Botão pressionado')}>
+              <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
+              <MaterialCommunityIcons name="cart" size={24} color="white" />
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        <View style={styleBody.card}>
+          <Image
+            source={require('./imgs/caneta.png')}
+          />
+          <View style={styleBody.card_info}>
+            <Text>
+              Caneta Mágica
+            </Text>
+            <Text>
+              Breve descrição do produto
+            </Text>
+            <TouchableOpacity style={styleBody.card_button} onPress={() => console.log('Botão pressionado')}>
+              <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
+              <MaterialCommunityIcons name="cart" size={24} color="white" />
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        <View style={styleBody.card}>
+          <Image
+            source={require('./imgs/caderno.png')}
+          />
+          <View style={styleBody.card_info}>
+            <Text>
+              Caderno Inteligente
+            </Text>
+            <Text>
+              Breve descrição do produto
+            </Text>
+            <TouchableOpacity style={styleBody.card_button} onPress={() => console.log('Botão pressionado')}>
+              <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
+              <MaterialCommunityIcons name="cart" size={24} color="white" />
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        <View style={styleBody.card}>
+          <Image
+            source={require('./imgs/caneta.png')}
+          />
+          <View style={styleBody.card_info}>
+            <Text>
+              Caneta Mágica
+            </Text>
+            <Text>
+              Breve descrição do produto
+            </Text>
+            <TouchableOpacity style={styleBody.card_button} onPress={() => console.log('Botão pressionado')}>
+              <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
+              <MaterialCommunityIcons name="cart" size={24} color="white" />
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-
-      <View style={styleBody.card}>
-        <Image
-          source={require('./imgs/caneta.png')}
-        />
-        <View style={styleBody.card_info}>
-          <Text>
-            Caneta Mágica
-          </Text>
-          <Text>
-            Breve descrição do produto
-          </Text>
-          <TouchableOpacity style={styleBody.card_button} onPress={() => console.log('Botão pressionado')}>
-            <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
-            <MaterialCommunityIcons name="cart" size={24} color="white" />
-          </TouchableOpacity>
-        </View>
-      </View>
-
-    </View>
+    </ScrollView>
   )
 }
+
 // Fim Body
 
 function MultiOpcoes() {
@@ -323,6 +360,7 @@ const styleHeader = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between',
+    alignItems: 'center',
     flexDirection: 'row',
     textAlign: 'center',
     backgroundColor: '#fff',
@@ -353,22 +391,21 @@ const styleHeader = StyleSheet.create({
 
 const styleBody = StyleSheet.create({
   container: {
-    flex: 2,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: '#fff'
   },
 
   // Começo Carroussel
   swiper: {
-    height: 260
+    height: 250,
   },
 
-  carouselItem: {
-    flexDirection: 'column',
-    alignItems: 'center',
+  container_carousel: {
+    flex: 1,
     justifyContent: 'center',
-    width: 400,
-    height: 200,
-    marginVertical: 16
+    alignItems: 'center',
   },
 
   imagemBanner: {
@@ -377,12 +414,12 @@ const styleBody = StyleSheet.create({
   },
 
   imagemBanner2: {
-    width: 450,
+    width: 400,
     height: 250,
   },
 
   imagemProdutos: {
-    width: 200,
+    width: 380,
     height: 200
   },
 
@@ -392,7 +429,7 @@ const styleBody = StyleSheet.create({
 
   container_card: {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
     alignItems: 'center',
   },
 
@@ -433,6 +470,17 @@ const styleBody = StyleSheet.create({
   },
 
   // Fim Card
+
+  // Começo Texto
+
+  text_maisVendidos: {
+    fontSize: 28,
+    backgroundColor: 'red',
+    marginTop: 12,
+    marginBottom: 12
+  },
+
+  // Fim Texto
 
   // Começo MultiOpções
 

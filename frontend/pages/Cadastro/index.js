@@ -180,7 +180,7 @@ export default function Cadastre_se() {
                             <Text style={style.buttonEnviarText}>Enviar</Text>
                         </TouchableOpacity>
 
-                        <Text>Já tem cadastro ?</Text>
+                        <Text style={style.text}>Já tem cadastro ?</Text>
                         <TouchableOpacity onPress={() => navigation.navigate('Cadastro')} style={style.buttonCriar}>
                             <Text style={style.buttonEnviarText}>Logar</Text>
                         </TouchableOpacity>
@@ -208,6 +208,11 @@ const style = StyleSheet.create({
         marginTop: 12
     },
 
+    text: {
+        fontSize: 22,
+        marginBottom: 12
+    },
+
     form: {
         display: 'flex',
         justifyContent: 'center',
@@ -221,6 +226,7 @@ const style = StyleSheet.create({
         borderRadius: 8,
         marginVertical: 6
     },
+
     buttonEnviar: {
         marginTop: 15,
         marginBottom: 20,
@@ -229,6 +235,7 @@ const style = StyleSheet.create({
         width: '95%',
         borderRadius: 8,
     },
+
     buttonEnviarText: {
         textAlign: 'center',
         padding: 5,
@@ -236,8 +243,9 @@ const style = StyleSheet.create({
         fontWeight: 'bold',
         color: '#FFFFFF'
     },
+    
     buttonCriar: {
-        backgroundColor: '#FF8016',
+        backgroundColor: '#00A4AD',
         height: 45,
         width: '95%',
         borderRadius: 8,
