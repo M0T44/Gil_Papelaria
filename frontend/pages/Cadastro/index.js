@@ -73,11 +73,11 @@ export default function Cadastre_se() {
     }, [handleBuscaCep])
 
     return (
-        <SafeAreaView>
+        <SafeAreaView style={style.container}>
             <ScrollView>
                 <StatusBar backgroundColor="white" barStyle="dark-content" />
-                <View style={style.container}>
-                    <Text>
+                <View>
+                    <Text style={style.textTitulo}>
                         Cadastre-se
                     </Text>
 
@@ -176,11 +176,13 @@ export default function Cadastre_se() {
                             secureTextEntry={true}
                         />
 
-
-
-
                         <TouchableOpacity onPress={handleCadastro} style={style.buttonEnviar}>
                             <Text style={style.buttonEnviarText}>Enviar</Text>
+                        </TouchableOpacity>
+
+                        <Text>Já tem cadastro ?</Text>
+                        <TouchableOpacity onPress={() => navigation.navigate('Cadastro')} style={style.buttonCriar}>
+                            <Text style={style.buttonEnviarText}>Logar</Text>
                         </TouchableOpacity>
 
                     </View>
@@ -194,28 +196,35 @@ export default function Cadastre_se() {
 const style = StyleSheet.create({
     container: {
         flex: 1,
-        alignContent: 'center',
-        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: '#fff',
+    },
+
+    textTitulo: {
+        fontSize: 36,
+        textAlign: 'center',
+        marginBottom: 12,
+        marginTop: 12
     },
 
     form: {
         display: 'flex',
         justifyContent: 'center',
-        textAlign: 'center',
-        height: 665,
+        alignItems: 'center',
     },
 
     input: {
-        width: 300,
+        width: 320,
         height: 40,
-        backgroundColor: '#bbb',
+        borderWidth: 2,
         borderRadius: 8,
         marginVertical: 6
     },
     buttonEnviar: {
-        marginTop: 30,
-        backgroundColor: '#E64F07',
+        marginTop: 15,
+        marginBottom: 20,
+        backgroundColor: '#FF8016',
         height: 45,
         width: '95%',
         borderRadius: 8,
@@ -226,5 +235,11 @@ const style = StyleSheet.create({
         fontSize: 25,
         fontWeight: 'bold',
         color: '#FFFFFF'
+    },
+    buttonCriar: {
+        backgroundColor: '#FF8016',
+        height: 45,
+        width: '95%',
+        borderRadius: 8,
     },
 })

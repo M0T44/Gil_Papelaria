@@ -1,23 +1,113 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
 import {
     SafeAreaView,
+    StyleSheet,
     ScrollView,
     StatusBar,
     View,
-    Text
+    Text,
+    TextInput,
+    TouchableOpacity
 } from 'react-native'
 
+import { useNavigation } from '@react-navigation/native';
+
 export default function Login() {
+
+    const navigation = useNavigation();
+
     return (
-        <SafeAreaView>
+        <SafeAreaView style={style.container}>
             <ScrollView>
                 <StatusBar backgroundColor="white" barStyle="dark-content" />
                 <View>
-                    <Text>
-                        Loginaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                    <Text style={style.textTitulo}>
+                        Login
                     </Text>
+
+                    <View style={style.form}>
+
+                        <TextInput
+                            placeholder='Digite seu Email'
+                            style={style.input}
+                        />
+
+                        <TextInput
+                            placeholder='Digite sua Senha'
+                            style={style.input}
+                            secureTextEntry={true}
+                        />
+
+                        <TextInput
+                            placeholder='Confirme a Senha'
+                            style={style.input}
+                            secureTextEntry={true}
+                        />
+
+                        <TouchableOpacity style={style.buttonEnviar}>
+                            <Text style={style.buttonEnviarText}>Enviar</Text>
+                        </TouchableOpacity>
+
+                        <Text>Não tem cadastro ?</Text>
+                        <TouchableOpacity onPress={() => navigation.navigate('Cadastro')} style={style.buttonCriar}>
+                            <Text style={style.buttonEnviarText}>Cadastrar-se</Text>
+                        </TouchableOpacity>
+
+                    </View>
+
                 </View>
             </ScrollView>
         </SafeAreaView>
     )
 }
+
+const style = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+    },
+
+    textTitulo: {
+        fontSize: 36,
+        textAlign: 'center',
+        marginBottom: 12,
+        marginTop: 12
+    },
+
+    form: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    input: {
+        width: 350,
+        height: 40,
+        borderWidth: 2,
+        borderRadius: 8,
+        marginVertical: 6
+    },
+    buttonEnviar: {
+        marginTop: 15,
+        marginBottom: 20,
+        backgroundColor: '#FF8016',
+        height: 45,
+        width: '95%',
+        borderRadius: 8,
+    },
+    buttonEnviarText: {
+        textAlign: 'center',
+        padding: 5,
+        fontSize: 25,
+        fontWeight: 'bold',
+        color: '#FFFFFF'
+    },
+    buttonCriar: {
+        backgroundColor: '#FF8016',
+        height: 45,
+        width: '95%',
+        borderRadius: 8,
+    },
+})

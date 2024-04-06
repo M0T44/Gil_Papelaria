@@ -111,6 +111,9 @@ function Card() {
           <Text>
             Caderno Inteligente
           </Text>
+          <Text>
+            Breve descrição do produto
+          </Text>
           <TouchableOpacity style={styleBody.card_button} onPress={() => console.log('Botão pressionado')}>
             <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
             <MaterialCommunityIcons name="cart" size={24} color="white" />
@@ -125,6 +128,9 @@ function Card() {
         <View style={styleBody.card_info}>
           <Text>
             Caneta Mágica
+          </Text>
+          <Text>
+            Breve descrição do produto
           </Text>
           <TouchableOpacity style={styleBody.card_button} onPress={() => console.log('Botão pressionado')}>
             <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
@@ -143,6 +149,7 @@ function MultiOpcoes() {
   const actions = [
     {
       text: "Home",
+      icon: <MaterialCommunityIcons name="home" size={20} color="#FFF" />,
       name: "bt_accessibility",
       position: 1,
       color: '#FF8016',
@@ -150,6 +157,7 @@ function MultiOpcoes() {
     },
     {
       text: "Login",
+      icon: <MaterialCommunityIcons name="login" size={20} color="#FFF" />,
       name: "bt_language",
       position: 3,
       color: '#FF8016',
@@ -157,6 +165,7 @@ function MultiOpcoes() {
     },
     {
       text: "Sair",
+      icon: <MaterialCommunityIcons name="logout" size={20} color="#FFF" />,
       name: "bt_room",
       position: 4,
       color: '#FF8016',
@@ -164,6 +173,7 @@ function MultiOpcoes() {
     },
     {
       text: "Cadastro",
+      icon: <MaterialCommunityIcons name="account-plus" size={20} color="#FFF" />,
       name: "bt_videocam",
       position: 2,
       color: '#FF8016',
@@ -178,7 +188,6 @@ function MultiOpcoes() {
         distanceToEdge={vertical = 15}
         position='right'
         actions={actions}
-        // onPressItem={() => navigation.navigate('Cadastro')}
         onPressItem={(name, index) => {
           const action = actions.find(action => action.name === name);
           navegacao.navigate(action.path);
@@ -297,7 +306,7 @@ export default function App() {
         <Drawer.Screen name='Home' component={Home} />
         <Drawer.Screen name='Login' component={Login} />
         <Drawer.Screen name='Sair' component={Sair} />
-        
+
       </Drawer.Navigator>
       <MultiOpcoes />
     </NavigationContainer>
@@ -306,6 +315,7 @@ export default function App() {
 
 const style = StyleSheet.create({
   container: {
+    marginLeft: 10
   }
 });
 
@@ -393,7 +403,7 @@ const styleBody = StyleSheet.create({
     padding: 15,              // espacamento 
     margin: 6,
     width: 250,
-    height: 300,
+    height: 325,
     // marginVertical: 16,
     display: 'flex',
     flexDirection: 'column',
