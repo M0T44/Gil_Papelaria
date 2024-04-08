@@ -20,6 +20,12 @@ class LoginServices {
         if (!user) {
             throw new Error('Usuario/Senha Incorretos')
         }
+
+        const autenticado = await compare(password, user.senha)
+        if (!autenticado) {
+            throw new Error('Usuario/Senha Incorretos')
+        }
+
         // console.log(user)
         const token = sign({
             id: user.id,
@@ -28,14 +34,14 @@ class LoginServices {
             process.env.JWT_SEGREDO,
             {
                 subject: user.id,
-                expiresIn:10000
+                expiresIn: 10000
             })
-            return {
-                id: user.id,
-                email: user.email,
-                nome: user.nome,
-                token: token
-            }
+        return {
+            id: user.id,
+            email: user.email,
+            nome: user.nome,
+            token: token
+        }
     }
 }
 
