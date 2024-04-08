@@ -12,10 +12,12 @@ import { FloatingAction } from "react-native-floating-action";
 export default function MultiOpcoes() {
     const { handleClearAsync } = useContext(Context)
 
+
     async function sairClear() {
         await handleClearAsync()
 
     }
+
     const navegacao = useNavigation()
     const actions = [
         {
@@ -42,6 +44,7 @@ export default function MultiOpcoes() {
             position: 4,
             color: '#00A4AD',
             path: 'Sair',
+
             // function: <sairClear />
         },
         {
@@ -67,7 +70,6 @@ export default function MultiOpcoes() {
 
 
                 }}
-
             />
         </View>
     )

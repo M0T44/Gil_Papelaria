@@ -51,10 +51,10 @@ export default function Cadastre_se() {
                 email,
                 senha
             })
-            return (resposta.data)
-            // alert(resposta.data)
+            // return (resposta.data)
+            alert(resposta.data)
         } catch (error) {
-            alert('error')
+            alert(error)
         }
     }
 
@@ -223,9 +223,7 @@ const style = StyleSheet.create({
     form: {
         display: 'flex',
         justifyContent: 'center',
-        textAlign: 'center',
         alignItems: 'center',
-        width: 450
     },
 
     input: {
@@ -236,7 +234,6 @@ const style = StyleSheet.create({
         marginVertical: 6,
         paddingLeft: 10
     },
-
     buttonEnviar: {
         marginTop: 15,
         marginBottom: 20,

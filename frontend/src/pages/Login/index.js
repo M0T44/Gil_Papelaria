@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { Toast } from 'toastify-react-native'
 import {
     SafeAreaView,
     StyleSheet,
@@ -25,10 +26,10 @@ export default function Login() {
 
     async function handleLogar() {
         try {
-         await handleLogin(email, password)
+            await handleLogin(email, password)
 
         } catch (error) {
-            alert(error)
+           alert(error)
 
         }
 
