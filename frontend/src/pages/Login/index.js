@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { Toast } from 'toastify-react-native'
+// import { Toast } from 'toastify-react-native'
 import {
     SafeAreaView,
     StyleSheet,
@@ -12,8 +12,6 @@ import {
     TouchableOpacity
 } from 'react-native'
 
-
-
 import { useNavigation } from '@react-navigation/native';
 
 export default function Login() {
@@ -24,7 +22,7 @@ export default function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-  
+
 
     return (
         <SafeAreaView style={style.container}>
