@@ -48,7 +48,7 @@ class CriarClientesServices {
             }
             ,
             select: {
-                id:true,
+                id: true,
                 nome: true,
                 telefone: true,
                 cpf_cnpj: true,
@@ -63,8 +63,7 @@ class CriarClientesServices {
 
             }
         })
-        return { dados: clientes }
-
+        return { clientes: 'Cadastro Efetuado com Sucesso' }
     }
 }
 export { CriarClientesServices }

@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import apiLocal from '../../API/apiLocal/apiLocal'
 import Swiper from 'react-native-swiper';
 import {
     StyleSheet,
@@ -27,6 +28,7 @@ function Body() {
     return (
         <ScrollView>
             <SafeAreaView>
+                <Header />
                 <View style={styleBody.container}>
                     <Carousel data={data} />
                     <Pesquisa />
@@ -68,24 +70,35 @@ function Pesquisa() {
 }
 
 function Categorias() {
+
+    const [categorias, setCategorias] = useState([''])
+    const [categoriaId, setCategoriaId] = useState('')
+
+
+    useEffect(() => {
+        try {
+            async function lerCategorias() {
+                const resposta = await apiLocal.get('/ListarCategorias')
+                setCategorias(resposta.data)
+            }
+            lerCategorias()
+        } catch (error) {
+            alert(error)
+        }
+    }, [categorias])
+
     return (
         <ScrollView horizontal={true}>
             <View style={styleBody.container_categorias}>
-                <TouchableOpacity style={styleBody.button_categorias} onPress={() => console.log('Botão pressionado')}>
-                    <Text style={styleBody.buttonText_categorias}>Mochila</Text>
-                </TouchableOpacity>
 
-                <TouchableOpacity style={styleBody.button_categorias} onPress={() => console.log('Botão pressionado')}>
-                    <Text style={styleBody.buttonText_categorias}>Material Escolar</Text>
-                </TouchableOpacity>
+                {categorias.map((item) => {
+                    return (
+                        <TouchableOpacity style={styleBody.button_categorias} onPress={() => console.log('Botão pressionado')}>
+                            <Text style={styleBody.buttonText_categorias} value={item.id}>{item.nome}</Text>
+                        </TouchableOpacity>
+                    )
+                })}
 
-                <TouchableOpacity style={styleBody.button_categorias} onPress={() => console.log('Botão pressionado')}>
-                    <Text style={styleBody.buttonText_categorias}>Mochila</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styleBody.button_categorias} onPress={() => console.log('Botão pressionado')}>
-                    <Text style={styleBody.buttonText_categorias}>Mochila</Text>
-                </TouchableOpacity>
             </View>
         </ScrollView>
     )
@@ -95,7 +108,6 @@ function Card() {
     return (
         <ScrollView horizontal={true}>
 
-            <Header />
             <View style={styleBody.container_card}>
 
                 <View style={styleBody.card}>

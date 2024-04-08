@@ -32,7 +32,7 @@ export default function Login() {
             await AsyncStorage.setItem('@token', JSON.stringify(resposta.data.token))
             await AsyncStorage.setItem('@id', JSON.stringify(resposta.data.id))
 
-            alert(resposta)
+           
         } catch (error) {
             alert(error)
 

@@ -9,18 +9,15 @@ import {
 
 export const Context = createContext()
 
-export default function AuthContext() {
+export default function AuthContext({ children }) {
+
+    const [token, setToken] = useState(false)
+    const autenticado = !!token  //nega duas vezes para ser verdadeiro
+
 
     return (
-        <SafeAreaView>
-            <ScrollView>
-                <StatusBar backgroundColor="white" barStyle="dark-content" />
-                <View>
-                    <Text>
-                        Carrinho
-                    </Text>
-                </View>
-            </ScrollView>
-        </SafeAreaView>
+        <Context.Provider value={{ autenticado }}>
+            {children}
+        </Context.Provider>
     )
 }
