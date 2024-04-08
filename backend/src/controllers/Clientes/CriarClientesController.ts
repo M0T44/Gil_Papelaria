@@ -4,8 +4,8 @@ import { CriarClientesServices } from '../../services/Clientes/CriarClientesServ
 
 class CriarClientesController {
     async handle(req: Request, res: Response) {
-        const { nome, telefone, cpf_cnpj, cep, bairro, nCasa, cidade, rua, estado, email, senha } = req.body
-        // Sconsole.log( nome,telefone,cpf_cnpj,cep,bairro,nCasa,cidade,rua,estado,email,senha )
+        const { nome, telefone, cpf_cnpj, cep, bairro, nCasa, cidade, rua, estado, email, password } = req.body
+        // Sconsole.log( nome,telefone,cpf_cnpj,cep,bairro,nCasa,cidade,rua,estado,email,password )
 
         const criarClientesServices = new CriarClientesServices()
         const cliente = await criarClientesServices.execute({
@@ -19,7 +19,7 @@ class CriarClientesController {
             rua,
             estado,
             email,
-            senha
+            password
         })
         return res.json(cliente)
     }

@@ -5,7 +5,7 @@ import AuthRoutes from './auth.routes'
 import NoAuthRoutes from './noAuth.routes'
 
 export default function Rotas() {
-    const  autenticado = useState(true)
+    const { autenticado } = useContext(Context)
 
     return (
         autenticado === true ? <AuthRoutes /> : <NoAuthRoutes />

@@ -1,18 +1,21 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
+import Home from '../pages/Home'
 import Login from '../pages/Login'
 import Cadastro from '../pages/Cadastro'
-import MultiOpcoes from '../components/MultiOpcoes';
-
 import Carrinho from '../pages/Carrinho'
-import Home from '../pages/Home'
 
 const Stack = createNativeStackNavigator()
 
 export default function NoAuthRoutes() {
     return (
         <Stack.Navigator>
+            <Stack.Screen
+                name='Home'
+                component={Home}
+                options={{ headerShown: false }}
+            />
 
             <Stack.Screen
                 name='Login'
@@ -26,17 +29,7 @@ export default function NoAuthRoutes() {
                 options={{ headerShown: false }}
             />
 
-            <Stack.Screen                           //stack.screen = tela inicial 
-                name='MultiOpcoes'
-                component={MultiOpcoes}
-                options={{ headerShown: false }}   //hearderShown: false= tira o header fixo de cima
-            />
 
-            <Stack.Screen
-                name='Home'
-                component={Home}
-                options={{ headerShown: false }}
-            />
 
             <Stack.Screen                           //stack.screen = tela inicial 
                 name='Carrinho'

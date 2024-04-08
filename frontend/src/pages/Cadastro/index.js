@@ -11,6 +11,7 @@ import {
 } from 'react-native'
 
 import apiViaCep from '../../API/viaCep/apiViaCep'
+import apiLocal from '../../API/apiLocal/apiLocal'
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -28,8 +29,8 @@ export default function Cadastre_se() {
     const [cidade, setCidade] = useState('')
     const [estado, setEstado] = useState('')
     const [email, setEmail] = useState('')
-    const [senha, setSenha] = useState('')
-    const [confSenha, setConfSenha] = useState('')
+    const [password, setPassword] = useState('')
+    const [confpassword, setConfPassword] = useState('')
 
     const [buscaCep, setBuscaCep] = useState('')
 
@@ -52,12 +53,31 @@ export default function Cadastre_se() {
         addBuscaCep();
     }, [handleBuscaCep])
 
+    async function newCadastro() {
+        try {
+            const resposta = await apiLocal.post('/CriarClientes', {
+                nome,
+                telefone,
+                cpf_cnpj,
+                cep,
+                bairro,
+                nCasa,
+                cidade,
+                rua,
+                estado,
+                email,
+                password
+            })
+        } catch (error) {
+            alert(error)
+        }
+    }
+
     return (
         <SafeAreaView style={style.container}>
             <ScrollView>
                 <StatusBar backgroundColor="white" barStyle="dark-content" />
 
-                <MultiOpcoes />
                 <View>
                     <Text style={style.textTitulo}>
                         Cadastre-se
@@ -143,22 +163,22 @@ export default function Cadastre_se() {
                         />
 
                         <TextInput
-                            placeholder='Digite sua Senha'
+                            placeholder='Digite sua password'
                             style={style.input}
-                            value={senha}
-                            onChangeText={setSenha}
+                            value={password}
+                            onChangeText={setPassword}
                             secureTextEntry={true}
                         />
 
                         <TextInput
-                            placeholder='Confirme a Senha'
+                            placeholder='Confirme a password'
                             style={style.input}
-                            value={confSenha}
-                            onChangeText={setConfSenha}
+                            value={confpassword}
+                            onChangeText={setConfPassword}
                             secureTextEntry={true}
                         />
 
-                        <TouchableOpacity onPress={handleCadastro} style={style.buttonEnviar}>
+                        <TouchableOpacity onPress={newCadastro} style={style.buttonEnviar}>
                             <Text style={style.buttonEnviarText}>Enviar</Text>
                         </TouchableOpacity>
 

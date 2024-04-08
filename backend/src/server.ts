@@ -24,4 +24,4 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
         message: 'Erro interno no servidor'
     })
 })
-app.listen(4444, () => console.log('Servidor Rodando na porta 4444'))
+app.listen(3334, () => console.log('Servidor Rodando na porta 3334'))

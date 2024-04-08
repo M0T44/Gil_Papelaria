@@ -11,12 +11,12 @@ interface CriarClientes {
     rua: string
     estado: string
     email: string
-    senha: string
+    password: string
 }
 
 class CriarClientesServices {
-    async execute({ nome, telefone, cpf_cnpj, cep, bairro, nCasa, cidade, rua, estado, email, senha }: CriarClientes) {
-        if (!nome || !telefone || !email || !senha) {
+    async execute({ nome, telefone, cpf_cnpj, cep, bairro, nCasa, cidade, rua, estado, email, password }: CriarClientes) {
+        if (!nome || !telefone || !email || !password) {
             throw new Error('Campos em Brancos Nao deve ser Permitidos')
         }
 
@@ -44,7 +44,7 @@ class CriarClientesServices {
                 rua: rua,
                 estado: estado,
                 email: email,
-                senha: senha
+                senha: password
             }
             ,
             select: {
