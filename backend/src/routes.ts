@@ -19,6 +19,9 @@ import { AlterarItensController } from './controllers/Itens/AlterarItensControll
 //Deletar
 import { DeletarClientesController } from './controllers/Clientes/DeletarClientesController'
 
+//Listar
+import { ListarCategoriasController } from './controllers/Categorias/ListarCategoriasController'
+
 const router = Router()
 // const upload = multer(uploadConfig.upload('./tmp'))
 
@@ -32,12 +35,14 @@ router.post('/CriarItens', new CriarItensController().handle)
 router.post('/LoginClientes', new LoginControler().handle)
 
 //Alterar
-router.put('/AlterarClientes',new AlterarClienteController().handle)
+router.put('/AlterarClientes', new AlterarClienteController().handle)
 router.put('/AlterarPedido', new CriarItensController().handle)
 router.put('/AlterarItem', new AlterarItensController().handle)
 
 //Deletar
 router.delete('/ApagarClientes/:id', new DeletarClientesController().handle)
 
+//Listar
+router.get('/ListarCategorias', new ListarCategoriasController().handle)
 
-export {router}
+export { router }
