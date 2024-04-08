@@ -14,12 +14,14 @@ import {
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
+import Header from '../../components/header';
+
 function Body() {
 
     const data = [
-        { id: '1', imagemCss: styleBody.imagemBanner, imageUrl: require('../../imgs/banner1.png') },
-        { id: '2', imagemCss: styleBody.imagemBanner2, imageUrl: require('../../imgs/banner2.png') },
-        { id: '3', imagemCss: styleBody.imagemProdutos, imageUrl: require('../../imgs/caneta.png') }
+        { id: '1', imagemCss: styleBody.imagemBanner, imageUrl: require('../../../imgs/banner1.png') },
+        { id: '2', imagemCss: styleBody.imagemBanner2, imageUrl: require('../../../imgs/banner2.png') },
+        { id: '3', imagemCss: styleBody.imagemProdutos, imageUrl: require('../../../imgs/caneta.png') }
     ]
 
     return (
@@ -57,7 +59,10 @@ function Pesquisa() {
                 placeholder='Pesquisar'
                 style={styleBody.input_pesquisa}
             />
-            <MaterialCommunityIcons style={styleBody.icon_pesquisa} name="magnify" size={24} color="white" />
+            <MaterialCommunityIcons
+                style={styleBody.icon_pesquisa}
+                name="magnify" size={24}
+                color="white" />
         </View>
     )
 }
@@ -89,11 +94,13 @@ function Categorias() {
 function Card() {
     return (
         <ScrollView horizontal={true}>
+
+            <Header />
             <View style={styleBody.container_card}>
 
                 <View style={styleBody.card}>
                     <Image
-                        source={require('../../imgs/caderno.png')}
+                        source={require('../../../imgs/caderno.png')}
                     />
                     <View style={styleBody.card_info}>
                         <Text>
@@ -111,7 +118,7 @@ function Card() {
 
                 <View style={styleBody.card}>
                     <Image
-                        source={require('../../imgs/caneta.png')}
+                        source={require('../../../imgs/caneta.png')}
                     />
                     <View style={styleBody.card_info}>
                         <Text>
@@ -129,7 +136,7 @@ function Card() {
 
                 <View style={styleBody.card}>
                     <Image
-                        source={require('../../imgs/caderno.png')}
+                        source={require('../../../imgs/caderno.png')}
                     />
                     <View style={styleBody.card_info}>
                         <Text>
@@ -147,7 +154,7 @@ function Card() {
 
                 <View style={styleBody.card}>
                     <Image
-                        source={require('../../imgs/caneta.png')}
+                        source={require('../../../imgs/caneta.png')}
                     />
                     <View style={styleBody.card_info}>
                         <Text>

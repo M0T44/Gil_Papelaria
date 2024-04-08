@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import apiLocal from '../../API/apiLocal/apiLocal';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import {
     SafeAreaView,
     StyleSheet,
@@ -14,12 +16,35 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function Login() {
 
-    const navigation = useNavigation();
+    const navigation = useNavigation()
+
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    async function handleLogin() {
+        try {
+
+            const resposta = await apiLocal.post('/LoginClientes', {
+                email, password
+            })
+
+            await AsyncStorage.setItem('@nome', JSON.stringify(resposta.data.nome))
+            await AsyncStorage.setItem('@token', JSON.stringify(resposta.data.token))
+            await AsyncStorage.setItem('@id', JSON.stringify(resposta.data.id))
+
+            alert(resposta)
+        } catch (error) {
+            alert(error)
+
+        }
+
+    }
 
     return (
         <SafeAreaView style={style.container}>
             <ScrollView>
                 <StatusBar backgroundColor="white" barStyle="dark-content" />
+
                 <View>
                     <Text style={style.textTitulo}>
                         Login
@@ -27,21 +52,25 @@ export default function Login() {
 
                     <View style={style.form}>
                         <TextInput
-                            placeholder='Digite seu Email'
                             style={style.input}
+                            placeholder='Digite seu Email'
+                            value={email}
+                            onChangeText={setEmail}
                         />
 
                         <TextInput
-                            placeholder='Digite sua Senha'
                             style={style.input}
+                            placeholder='Digite sua Senha'
                             secureTextEntry={true}
+                            value={password}
+                            onChangeText={setPassword}
                         />
 
-                        <TouchableOpacity style={style.buttonEnviar}>
+                        <TouchableOpacity onPress={handleLogin} style={style.buttonEnviar}>
                             <Text style={style.buttonEnviarText}>Enviar</Text>
                         </TouchableOpacity>
 
-                        <Text style={style.text}>Não tem cadastro ?</Text>
+                        <Text style={style.text}>Já tem cadastro ?</Text>
                         <TouchableOpacity onPress={() => navigation.navigate('Cadastro')} style={style.buttonCriar}>
                             <Text style={style.buttonEnviarText}>Cadastrar-se</Text>
                         </TouchableOpacity>

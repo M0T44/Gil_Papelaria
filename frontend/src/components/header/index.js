@@ -29,7 +29,7 @@ export default function Header() {
                     <View style={styleHeader.logo}>
                         <Image
                             style={styleHeader.logoImagem}
-                            source={require('../../imgs/logo.png')}
+                            source={require('../../../imgs/logo.png')}
                             onPress={() => navigation.navigate('Body')}
                         />
                     </View>
