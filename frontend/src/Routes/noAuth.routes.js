@@ -2,19 +2,14 @@ import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import Login from '../pages/Login'
-import Home from '../pages/Home'
 import Cadastro from '../pages/Cadastro'
+import MultiOpcoes from '../components/MultiOpcoes';
 
 const Stack = createNativeStackNavigator()
 
 export default function NoAuthRoutes() {
     return (
         <Stack.Navigator>
-            <Stack.Screen
-                name='Home'
-                component={Home}
-                options={{ headerShown: false }}
-            />
 
             <Stack.Screen
                 name='Login'
@@ -26,6 +21,12 @@ export default function NoAuthRoutes() {
                 name='Cadastro'
                 component={Cadastro}
                 options={{ headerShown: false }}
+            />
+
+            <Stack.Screen                           //stack.screen = tela inicial 
+                name='MultiOpcoes'
+                component={MultiOpcoes}
+                options={{ headerShown: false }}   //hearderShown: false= tira o header fixo de cima
             />
         </Stack.Navigator>
     )

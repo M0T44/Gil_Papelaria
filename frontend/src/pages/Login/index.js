@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react'
-import apiLocal from '../../API/apiLocal/apiLocal';
+import { useContext, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import {
     SafeAreaView,
@@ -12,27 +11,22 @@ import {
     TouchableOpacity
 } from 'react-native'
 
+import { Context } from '../Contexts/contexto';
+
 import { useNavigation } from '@react-navigation/native';
 
 export default function Login() {
 
     const navigation = useNavigation()
+    const { handleLogin } = useContext(Context)
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    async function handleLogin() {
+    async function handleLogar() {
         try {
+         await handleLogin(email, password)
 
-            const resposta = await apiLocal.post('/LoginClientes', {
-                email, password
-            })
-
-            await AsyncStorage.setItem('@nome', JSON.stringify(resposta.data.nome))
-            await AsyncStorage.setItem('@token', JSON.stringify(resposta.data.token))
-            await AsyncStorage.setItem('@id', JSON.stringify(resposta.data.id))
-
-           
         } catch (error) {
             alert(error)
 
@@ -66,7 +60,7 @@ export default function Login() {
                             onChangeText={setPassword}
                         />
 
-                        <TouchableOpacity onPress={handleLogin} style={style.buttonEnviar}>
+                        <TouchableOpacity onPress={handleLogar} style={style.buttonEnviar}>
                             <Text style={style.buttonEnviarText}>Enviar</Text>
                         </TouchableOpacity>
 

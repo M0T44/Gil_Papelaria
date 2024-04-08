@@ -13,6 +13,7 @@ import {
 import apiViaCep from '../../API/viaCep/apiViaCep'
 import apiLocal from '../../API/apiLocal/apiLocal'
 
+import MultiOpcoes from '../../components/MultiOpcoes';
 import { useNavigation } from '@react-navigation/native';
 
 export default function Cadastre_se() {
@@ -80,6 +81,8 @@ export default function Cadastre_se() {
         <SafeAreaView style={style.container}>
             <ScrollView>
                 <StatusBar backgroundColor="white" barStyle="dark-content" />
+
+                <MultiOpcoes />
                 <View>
                     <Text style={style.textTitulo}>
                         Cadastre-se

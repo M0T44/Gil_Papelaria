@@ -1,4 +1,5 @@
-import * as React from 'react'
+import React, { useContext } from 'react'
+import { Context } from '../../pages/Contexts/contexto'
 import {
     StyleSheet,
     View,
@@ -6,11 +7,16 @@ import {
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-
 import { FloatingAction } from "react-native-floating-action";
 
 export default function MultiOpcoes() {
-    const navegacao = useNavigation();
+    const { handleClearAsync } = useContext(Context)
+
+    async function sairClear() {
+        await handleClearAsync()
+
+    }
+    const navegacao = useNavigation()
     const actions = [
         {
             text: "Home",
@@ -19,6 +25,7 @@ export default function MultiOpcoes() {
             position: 1,
             color: '#00A4AD',
             path: 'Home'
+
         },
         {
             text: "Login",
@@ -34,7 +41,8 @@ export default function MultiOpcoes() {
             name: "bt_room",
             position: 4,
             color: '#00A4AD',
-            path: 'Sair'
+            path: 'Sair',
+            // function: <sairClear />
         },
         {
             text: "Cadastro",
@@ -44,7 +52,7 @@ export default function MultiOpcoes() {
             color: '#00A4AD',
             path: 'Cadastro'
         }
-    ];
+    ]
 
     return (
         <View style={styleMultiOpcoes.container}>
@@ -56,7 +64,10 @@ export default function MultiOpcoes() {
                 onPressItem={(name, index) => {
                     const action = actions.find(action => action.name === name);
                     navegacao.navigate(action.path);
+
+
                 }}
+
             />
         </View>
     )

@@ -35,8 +35,10 @@ function Body() {
                     <Text style={styleBody.text_categorias}>Categorias</Text>
                     <Categorias />
                     <Text style={styleBody.text_maisVendidos}>Produtos mais vendidos</Text>
+                
                     <Card />
                 </View>
+
             </SafeAreaView>
         </ScrollView>
     )
@@ -72,7 +74,6 @@ function Pesquisa() {
 function Categorias() {
 
     const [categorias, setCategorias] = useState([''])
-    const [categoriaId, setCategoriaId] = useState('')
 
 
     useEffect(() => {
