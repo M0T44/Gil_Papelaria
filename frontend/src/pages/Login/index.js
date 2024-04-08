@@ -1,4 +1,6 @@
 import { useContext, useState } from 'react'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { Toast } from 'toastify-react-native'
 import {
     SafeAreaView,
     StyleSheet,
@@ -10,7 +12,6 @@ import {
     TouchableOpacity
 } from 'react-native'
 
-import apiLocal from '../../API/apiLocal/apiLocal';
 
 
 import { useNavigation } from '@react-navigation/native';
@@ -22,16 +23,8 @@ export default function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    async function handleLogar(email, password) {
-        try {
-            const resposta = await apiLocal.post('/LoginClientes', {
-                email, password
-            })
-            alert(resposta)
-        } catch (error) {
-            alert(error)
-        }
-    }
+  
+
     return (
         <SafeAreaView style={style.container}>
             <ScrollView>
