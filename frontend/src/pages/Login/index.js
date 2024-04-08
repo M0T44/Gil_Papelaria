@@ -12,28 +12,19 @@ import {
     TouchableOpacity
 } from 'react-native'
 
-import { Context } from '../Contexts/contexto';
+
 
 import { useNavigation } from '@react-navigation/native';
 
 export default function Login() {
 
     const navigation = useNavigation()
-    const { handleLogin } = useContext(Context)
+
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    async function handleLogar() {
-        try {
-            await handleLogin(email, password)
-
-        } catch (error) {
-           alert(error)
-
-        }
-
-    }
+  
 
     return (
         <SafeAreaView style={style.container}>
@@ -61,7 +52,7 @@ export default function Login() {
                             onChangeText={setPassword}
                         />
 
-                        <TouchableOpacity onPress={handleLogar} style={style.buttonEnviar}>
+                        <TouchableOpacity style={style.buttonEnviar}>
                             <Text style={style.buttonEnviarText}>Enviar</Text>
                         </TouchableOpacity>
 

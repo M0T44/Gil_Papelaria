@@ -11,9 +11,7 @@ import {
 } from 'react-native'
 
 import apiViaCep from '../../API/viaCep/apiViaCep'
-import apiLocal from '../../API/apiLocal/apiLocal'
 
-import MultiOpcoes from '../../components/MultiOpcoes';
 import { useNavigation } from '@react-navigation/native';
 
 export default function Cadastre_se() {
@@ -34,29 +32,6 @@ export default function Cadastre_se() {
     const [confSenha, setConfSenha] = useState('')
 
     const [buscaCep, setBuscaCep] = useState('')
-
-    async function handleCadastro(e) {
-        try {
-            e.preventDefault
-            const resposta = await apiLocal.post('/CriarClientes', {
-                nome,
-                telefone,
-                cpf_cnpj,
-                cep,
-                bairro,
-                nCasa,
-                cidade,
-                rua,
-                estado,
-                email,
-                senha
-            })
-            // return (resposta.data)
-            alert(resposta.data)
-        } catch (error) {
-            alert(error)
-        }
-    }
 
     async function handleBuscaCep() {
         if (cep.length > 8 || cep.length < 8) {
