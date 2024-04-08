@@ -203,7 +203,7 @@ const style = StyleSheet.create({
         display: 'flex',
         justifyContent: 'center',
         textAlign: 'center',
-        height: 665,
+        // height: 665,
     },
 
     input: {
