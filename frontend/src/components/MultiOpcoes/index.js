@@ -10,14 +10,7 @@ import { useNavigation } from '@react-navigation/native';
 import { FloatingAction } from "react-native-floating-action";
 
 export default function MultiOpcoes() {
-    const { handleClearAsync } = useContext(Context)
-
-
-    async function sairClear() {
-        await handleClearAsync()
-
-    }
-
+   
     const navegacao = useNavigation()
     const actions = [
         {
@@ -43,9 +36,7 @@ export default function MultiOpcoes() {
             name: "bt_room",
             position: 4,
             color: '#00A4AD',
-            path: 'Sair',
-
-            // function: <sairClear />
+            path: 'Sair'
         },
         {
             text: "Cadastro",

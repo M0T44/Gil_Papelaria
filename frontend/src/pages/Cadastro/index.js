@@ -55,7 +55,7 @@ export default function Cadastre_se() {
 
     async function newCadastro() {
         try {
-            const resposta = await apiLocal.post('/CriarClientes', {
+           await apiLocal.post('/CriarClientes', {
                 nome,
                 telefone,
                 cpf_cnpj,
@@ -68,6 +68,7 @@ export default function Cadastre_se() {
                 email,
                 password
             })
+            alert('Cadastrado com Sucesso')
         } catch (error) {
             alert(error)
         }

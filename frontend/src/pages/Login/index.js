@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-// import { Toast } from 'toastify-react-native'
+import { Context } from '../Contexts/contexto';
+
 import {
     SafeAreaView,
     StyleSheet,
@@ -13,18 +13,19 @@ import {
 } from 'react-native'
 
 
-
 import { useNavigation } from '@react-navigation/native';
 
 export default function Login() {
 
     const navigation = useNavigation()
+    const { handleLogar } = useContext(Context)
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-  
-
+    async function IniLogin() {
+        await handleLogar(email, password)
+    }
     return (
         <SafeAreaView style={style.container}>
             <ScrollView>
@@ -51,7 +52,7 @@ export default function Login() {
                             onChangeText={setPassword}
                         />
 
-                        <TouchableOpacity onPress={handleLogar} style={style.buttonEnviar}>
+                        <TouchableOpacity onPress={IniLogin} style={style.buttonEnviar}>
                             <Text style={style.buttonEnviarText}>Enviar</Text>
                         </TouchableOpacity>
 
