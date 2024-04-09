@@ -1,5 +1,5 @@
 import { Router } from 'express'
-// import multer from 'multer'
+import multer from 'multer'
 import uploadConfig from './config/multer'
 
 
@@ -21,14 +21,14 @@ import { DeletarClientesController } from './controllers/Clientes/DeletarCliente
 
 //Listar
 import { ListarCategoriasController } from './controllers/Categorias/ListarCategoriasController'
-import { ListarCategoriaUnicaController } from './controllers/Categorias/ListarCategoriaUnicaController'
+import { ListarProdutosCategoriaController } from './controllers/Categorias/ListarProdutosCategoriaController'
 
 const router = Router()
-// const upload = multer(uploadConfig.upload('./tmp'))
+ const upload = multer(uploadConfig.upload('./tmp'))
 
 //Criar
 router.post('/CriarClientes', new CriarClientesController().handle)
-// router.post('/CriarProdutos', upload.single('file'), new CriarProdutosController().handle)
+router.post('/CriarProdutos', upload.single('file'), new CriarProdutosController().handle)
 router.post('/CriarCategorias', new CriarCategoriasController().handle)
 router.post('/CriarItens', new CriarItensController().handle)
 
@@ -45,5 +45,5 @@ router.delete('/ApagarClientes/:id', new DeletarClientesController().handle)
 
 //Listar
 router.get('/ListarCategorias', new ListarCategoriasController().handle)
-router.get('/ListarUmaCategoria/:id', new ListarCategoriaUnicaController().handle)
+router.get('/ListarProdutosCategoria/:id', new ListarProdutosCategoriaController().handle)
 export { router }

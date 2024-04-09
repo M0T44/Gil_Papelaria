@@ -16,7 +16,7 @@ class CriarProdutosServices {
             throw new Error('Existem campos em branco')
         }
     
-        await prismaClient.produto.create({
+    const resposta = await prismaClient.produto.create({
             data:{
                 nome:nome,
                 descricao:descricao,
@@ -27,7 +27,7 @@ class CriarProdutosServices {
                 categoriaId:categoriaId
             }
         })
-        return{ dados: 'Produto Cadastrado'}
+        return{ dados: resposta}
     }
 }
 
