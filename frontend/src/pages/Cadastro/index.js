@@ -70,7 +70,7 @@ export default function Cadastre_se() {
             })
             alert('Cadastrado com Sucesso')
         } catch (error) {
-            alert(error)
+           
         }
     }
 

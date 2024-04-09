@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Carrinho from '../pages/Carrinho'
 import Home from '../pages/Home'
 import Sair from '../pages/Sair'
+import Produtos from '../pages/Produtos'
 
 const Stack = createNativeStackNavigator()
 
@@ -25,6 +26,12 @@ export default function AuthRoutes() {
             <Stack.Screen
                 name='Sair'
                 component={Sair}
+                options={{ headerShown: false }}
+            />
+
+            <Stack.Screen
+                name='Produtos'
+                component={Produtos}
                 options={{ headerShown: false }}
             />
 

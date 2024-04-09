@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useParams } from 'react'
 import apiLocal from '../../API/apiLocal/apiLocal'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Swiper from 'react-native-swiper';
+import { useNavigation } from '@react-navigation/native'
 import {
     StyleSheet,
     SafeAreaView,
@@ -56,6 +58,7 @@ function Carousel({ data }) {
 
 function Categorias() {
 
+    const navigation = useNavigation()
     const [categorias, setCategorias] = useState([''])
     useEffect(() => {
         try {
@@ -68,12 +71,22 @@ function Categorias() {
             alert(error)
         }
     }, [categorias])
+
+
+    function handleCategoriaProduto() {
+        navigation.navigate('Produtos', {
+            categoriaId: categorias.id
+        })
+    }
+
     return (
         <ScrollView horizontal={true}>
             <View style={styleBody.container_categorias}>
                 {categorias.map((item) => {
                     return (
-                        <TouchableOpacity style={styleBody.button_categorias} onPress={() => console.log('Botão pressionado')}>
+                        <TouchableOpacity
+                            style={styleBody.button_categorias} onPress={handleCategoriaProduto}>
+
                             <Text style={styleBody.buttonText_categorias} value={item.id}>{item.nome}</Text>
                         </TouchableOpacity>
                     )
@@ -82,6 +95,7 @@ function Categorias() {
         </ScrollView>
     )
 }
+
 
 function Card() {
     return (
@@ -178,7 +192,7 @@ const styleBody = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#fff',
     },
-    
+
     // Começo Carroussel
     swiper: {
         height: 250,
