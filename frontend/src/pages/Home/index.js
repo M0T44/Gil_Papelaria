@@ -30,14 +30,13 @@ function Body() {
                 <Header />
                 <View style={styleBody.container}>
                     <Carousel data={data} />
-                    <Pesquisa />
                     <Text style={styleBody.text_categorias}>Categorias</Text>
                     <Categorias />
                     <Text style={styleBody.text_maisVendidos}>Produtos mais vendidos</Text>
-
+                    <Card />
+                    <Text style={styleBody.text_maisVendidos}>Produtos em destaque</Text>
                     <Card />
                 </View>
-
             </SafeAreaView>
         </ScrollView>
     )
@@ -52,21 +51,6 @@ function Carousel({ data }) {
                 </View>
             ))}
         </Swiper>
-    )
-}
-
-function Pesquisa() {
-    return (
-        <View style={styleBody.container_pesquisa}>
-            <TextInput
-                placeholder='Pesquisar'
-                style={styleBody.input_pesquisa}
-            />
-            <MaterialCommunityIcons
-                style={styleBody.icon_pesquisa}
-                name="magnify" size={24}
-                color="white" />
-        </View>
     )
 }
 
@@ -194,6 +178,7 @@ const styleBody = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#fff',
     },
+    
     // Começo Carroussel
     swiper: {
         height: 250,
@@ -216,26 +201,7 @@ const styleBody = StyleSheet.create({
         height: 200
     },
     // Fim Carroussel
-    // Começo Campo pesquisa
-    container_pesquisa: {
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    input_pesquisa: {
-        borderRadius: 22,
-        borderWidth: 2,
-        width: 320,
-        height: 50,
-        paddingLeft: 15,
-        marginRight: 16
-    },
-    icon_pesquisa: {
-        backgroundColor: '#FF8616',
-        padding: 12,
-        borderRadius: 100
-    },
-    // Fim Campo pesquisa
+
     // Começo Categoria
     container_categorias: {
         display: 'flex',
@@ -262,6 +228,7 @@ const styleBody = StyleSheet.create({
         marginTop: 12,
     },
     // Fim Categoria
+
     // Começo Card
     container_card: {
         flex: 1,
@@ -302,6 +269,7 @@ const styleBody = StyleSheet.create({
         marginRight: 10
     },
     // Fim Card
+
     // Começo Texto
     text_maisVendidos: {
         fontSize: 28,
