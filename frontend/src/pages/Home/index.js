@@ -31,14 +31,11 @@ function Body() {
                 <Header />
                 <View style={styleBody.container}>
                     <Carousel data={data} />
-                    <Pesquisa />
                     <Text style={styleBody.text_categorias}>Categorias</Text>
                     <Categorias />
                     <Text style={styleBody.text_maisVendidos}>Produtos mais vendidos</Text>
-                
                     <Card />
                 </View>
-
             </SafeAreaView>
         </ScrollView>
     )
@@ -53,21 +50,6 @@ function Carousel({ data }) {
                 </View>
             ))}
         </Swiper>
-    )
-}
-
-function Pesquisa() {
-    return (
-        <View style={styleBody.container_pesquisa}>
-            <TextInput
-                placeholder='Pesquisar'
-                style={styleBody.input_pesquisa}
-            />
-            <MaterialCommunityIcons
-                style={styleBody.icon_pesquisa}
-                name="magnify" size={24}
-                color="white" />
-        </View>
     )
 }
 

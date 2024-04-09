@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useState } from 'react'
 import { SpeedDial } from '@rneui/themed';
 import {
     StyleSheet,
@@ -7,6 +7,10 @@ import {
     View,
     SafeAreaView,
     Image,
+    Modal,
+    Pressable,
+    Text,
+    TextInput
 } from 'react-native';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -15,9 +19,70 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import { NavigationContainer } from '@react-navigation/native'
 import { useNavigation } from '@react-navigation/native';
 
-import Carrinho from '../../pages/Carrinho';
+function ModalPesquisa() {
+    const [modalVisible, setModalVisible] = useState(false);
 
-const Drawer = createDrawerNavigator()
+    return (
+        <View style={stylesModal.containerModal}>
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                    Alert.alert('Modal has been closed.');
+                    setModalVisible(!modalVisible);
+                }}>
+                <View style={stylesModal.centeredView}>
+                    <View style={stylesModal.modalView}>
+                        <Pesquisa />
+                        <Pressable
+                            style={[stylesModal.button, stylesModal.buttonClose]}
+                            onPress={() => setModalVisible(!modalVisible)}>
+                            <Text style={stylesModal.textStyle}>Fechar Pesquisa</Text>
+                        </Pressable>
+                    </View>
+                </View>
+            </Modal>
+            <Pressable
+                onPress={() => setModalVisible(true)}>
+                <MaterialCommunityIcons
+                    style={styleBody.icon_pesquisa}
+                    name="magnify" size={24}
+                    color="white" />
+            </Pressable>
+        </View>
+    )
+}
+
+function Pesquisa() {
+    return (
+        <View style={styleBody.container_pesquisa}>
+            <TextInput
+                placeholder='Pesquisar'
+                style={styleBody.input_pesquisa}
+            />
+            <MaterialCommunityIcons
+                style={styleBody.icon_pesquisa}
+                name="magnify" size={24}
+                color="white" />
+        </View>
+    )
+}
+
+function Carrinho() {
+    const navigation = useNavigation();
+    return (
+        <View style={styleBody.container_pesquisa}>
+            <MaterialCommunityIcons
+                style={styleBody.icon_pesquisa}
+                name="cart"
+                size={20}
+                color="#fff"
+                onPress={() => navigation.navigate('Carrinho')}
+            />
+        </View>
+    )
+}
 
 export default function Header() {
     const navigation = useNavigation();
@@ -34,18 +99,12 @@ export default function Header() {
                         />
                     </View>
 
-                    <SpeedDial.Action
-                        style={styleHeader.carinho}
-                        icon={() => (
-                            <MaterialCommunityIcons
-                                name="cart"
-                                size={20}
-                                color="#fff"
-                            />
-                        )}
-                        onPress={() => navigation.navigate('Carrinho')}
-                        buttonStyle={{ backgroundColor: '#FF8616' }}
-                    />
+                    <View style={styleHeader.funcionalidades}>
+                        <ModalPesquisa />
+
+                        <Carrinho />
+                    </View>
+
                 </View>
             </SafeAreaView>
         </ScrollView>
@@ -80,7 +139,88 @@ const styleHeader = StyleSheet.create({
     carinho: {
         justifyContent: 'flex-end',
         alignItems: 'center',
-        width: 40,
-        height: 40,
+    },
+
+    funcionalidades: {
+        position: 'absolute',
+        flexDirection: 'row',
+        alignItems: 'center',
+        right: 0,
     }
 });
+
+const stylesModal = StyleSheet.create({
+    centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 22,
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        padding: 35,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+        height: 200,
+        width: 380
+    },
+    button: {
+        borderRadius: 10,
+        padding: 10,
+        elevation: 2,
+    },
+    buttonOpen: {
+        backgroundColor: '#FF9933',
+    },
+    buttonClose: {
+        backgroundColor: '#2196F3',
+    },
+    textStyle: {
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: 'center',
+    },
+});
+
+const styleBody = StyleSheet.create({
+
+    // Começo Campo pesquisa
+
+    container_pesquisa: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+
+    input_pesquisa: {
+        borderRadius: 100,
+        borderWidth: 2,
+        width: 280,
+        height: 50,
+        paddingLeft: 15,
+        marginRight: 16
+    },
+
+    icon_pesquisa: {
+        backgroundColor: '#FF8616',
+        padding: 12,
+        marginRight: 20,
+        borderRadius: 100
+    },
+
+    // Fim Campo pesquisa
+
+})
