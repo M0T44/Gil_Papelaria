@@ -11,7 +11,7 @@ export default function AuthContext({ children }) {
 
     async function handleLogar(email, password) {
         try {
-            const resposta = await apiLocal.post('/LoginClientes', {
+           await apiLocal.post('/LoginClientes', {
                 email, password
             })
             setToken(true)
