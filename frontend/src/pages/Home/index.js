@@ -18,7 +18,6 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Header from '../../components/header';
 
 function Body() {
-
     const data = [
         { id: '1', imagemCss: styleBody.imagemBanner, imageUrl: require('../../../imgs/banner1.png') },
         { id: '2', imagemCss: styleBody.imagemBanner2, imageUrl: require('../../../imgs/banner2.png') },
@@ -31,11 +30,14 @@ function Body() {
                 <Header />
                 <View style={styleBody.container}>
                     <Carousel data={data} />
+                    <Pesquisa />
                     <Text style={styleBody.text_categorias}>Categorias</Text>
                     <Categorias />
                     <Text style={styleBody.text_maisVendidos}>Produtos mais vendidos</Text>
+
                     <Card />
                 </View>
+
             </SafeAreaView>
         </ScrollView>
     )
@@ -53,11 +55,24 @@ function Carousel({ data }) {
     )
 }
 
+function Pesquisa() {
+    return (
+        <View style={styleBody.container_pesquisa}>
+            <TextInput
+                placeholder='Pesquisar'
+                style={styleBody.input_pesquisa}
+            />
+            <MaterialCommunityIcons
+                style={styleBody.icon_pesquisa}
+                name="magnify" size={24}
+                color="white" />
+        </View>
+    )
+}
+
 function Categorias() {
 
     const [categorias, setCategorias] = useState([''])
-
-
     useEffect(() => {
         try {
             async function lerCategorias() {
@@ -69,11 +84,9 @@ function Categorias() {
             alert(error)
         }
     }, [categorias])
-
     return (
         <ScrollView horizontal={true}>
             <View style={styleBody.container_categorias}>
-
                 {categorias.map((item) => {
                     return (
                         <TouchableOpacity style={styleBody.button_categorias} onPress={() => console.log('Botão pressionado')}>
@@ -81,7 +94,6 @@ function Categorias() {
                         </TouchableOpacity>
                     )
                 })}
-
             </View>
         </ScrollView>
     )
@@ -90,9 +102,7 @@ function Categorias() {
 function Card() {
     return (
         <ScrollView horizontal={true}>
-
             <View style={styleBody.container_card}>
-
                 <View style={styleBody.card}>
                     <Image
                         source={require('../../../imgs/caderno.png')}
@@ -110,7 +120,6 @@ function Card() {
                         </TouchableOpacity>
                     </View>
                 </View>
-
                 <View style={styleBody.card}>
                     <Image
                         source={require('../../../imgs/caneta.png')}
@@ -128,7 +137,6 @@ function Card() {
                         </TouchableOpacity>
                     </View>
                 </View>
-
                 <View style={styleBody.card}>
                     <Image
                         source={require('../../../imgs/caderno.png')}
@@ -146,7 +154,6 @@ function Card() {
                         </TouchableOpacity>
                     </View>
                 </View>
-
                 <View style={styleBody.card}>
                     <Image
                         source={require('../../../imgs/caneta.png')}
@@ -169,9 +176,7 @@ function Card() {
     )
 }
 
-
 export default function Home() {
-
     return (
         <SafeAreaView>
             <ScrollView>
@@ -189,43 +194,34 @@ const styleBody = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#fff',
     },
-
     // Começo Carroussel
     swiper: {
         height: 250,
     },
-
     container_carousel: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
     },
-
     imagemBanner: {
         width: 400,
         height: 250,
     },
-
     imagemBanner2: {
         width: 400,
         height: 250,
     },
-
     imagemProdutos: {
         width: 380,
         height: 200
     },
-
     // Fim Carroussel
-
     // Começo Campo pesquisa
-
     container_pesquisa: {
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
     },
-
     input_pesquisa: {
         borderRadius: 22,
         borderWidth: 2,
@@ -234,17 +230,13 @@ const styleBody = StyleSheet.create({
         paddingLeft: 15,
         marginRight: 16
     },
-
     icon_pesquisa: {
         backgroundColor: '#FF8616',
         padding: 12,
         borderRadius: 100
     },
-
     // Fim Campo pesquisa
-
     // Começo Categoria
-
     container_categorias: {
         display: 'flex',
         flexDirection: 'row',
@@ -252,7 +244,6 @@ const styleBody = StyleSheet.create({
         marginLeft: 26,
         paddingVertical: 12,
     },
-
     button_categorias: {
         textAlign: 'center',
         marginTop: 16,
@@ -262,27 +253,21 @@ const styleBody = StyleSheet.create({
         paddingVertical: 10,
         marginHorizontal: 10,
     },
-
     buttonText_categorias: {
         fontSize: 16,
         color: '#fff'
     },
-
     text_categorias: {
         fontSize: 28,
         marginTop: 12,
     },
-
     // Fim Categoria
-
     // Começo Card
-
     container_card: {
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
     },
-
     card: {
         borderWidth: 2,           // Largura da borda
         borderColor: '#BDB9B9',     // Cor da borda
@@ -296,14 +281,12 @@ const styleBody = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center'
     },
-
     card_info: {
         marginTop: 16,
         width: 220,
         height: 70,
         alignItems: 'center'
     },
-
     card_button: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -313,21 +296,16 @@ const styleBody = StyleSheet.create({
         padding: 10,
         borderRadius: 5,
     },
-
     buttonText: {
         color: 'white',
         fontSize: 16,
         marginRight: 10
     },
-
     // Fim Card
-
     // Começo Texto
-
     text_maisVendidos: {
         fontSize: 28,
         marginTop: 16,
     },
-
     // Fim Texto
 })
