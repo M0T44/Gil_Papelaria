@@ -32,16 +32,31 @@ export default function Produtos({ route }) {
     }, [categoriasProdutos])
 
 
-
     return (
         <SafeAreaView>
+
             <ScrollView>
                 <StatusBar backgroundColor="white" barStyle="dark-content" />
                 <View >
                     <Text>Caderno</Text>
                 </View>
-
-
+                <View>
+                    {categoriasProdutos.map((item) => {
+                        return (
+                            <View key={item.id} value={item.id} style={styleBody.card}>
+                                {/* <Image value={item.id}>  {item.file}</Image> */}
+                                <View style={styleBody.card_info} value={item.id}>
+                                    <Text> {item.nome}</Text>
+                                    <Text>{item.descricao}</Text>
+                                    <TouchableOpacity style={styleBody.card_button} onPress={() => console.log('Botão pressionado')}>
+                                        <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
+                                        {/* <MaterialCommunityIcons name="cart" size={24} color="white" /> */}
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        )
+                    })}
+                </View>
             </ScrollView >
         </SafeAreaView>
     )

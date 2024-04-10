@@ -65,8 +65,8 @@ function Categorias() {
         try {
             async function lerCategorias() {
                 const resposta = await apiLocal.get('/ListarCategorias')
-                setCategorias(resposta.data)
-                // alert(resposta.id)
+               setCategorias(resposta.data)
+           // console.log(resposta)
             }
             lerCategorias()
         } catch (error) {
@@ -75,11 +75,11 @@ function Categorias() {
     }, [categorias])
 
 
-    function handleCategoriaProduto() {
-        alert(categorias)
-        // navigation.navigate('Produtos', {
-        //     categoriaId: categorias.id
-        // })
+    function handleCategoriaProduto(id) {
+        // alert(id)
+        navigation.navigate('Produtos', {
+            categoriaId: id
+        })
     }
 
     return (
@@ -88,7 +88,7 @@ function Categorias() {
                 {categorias.map((item) => {
                     return (
                         <TouchableOpacity
-                            style={styleBody.button_categorias} onPress={handleCategoriaProduto}>
+                            style={styleBody.button_categorias} onPress={() => handleCategoriaProduto(item.id)}>
 
                             <Text style={styleBody.buttonText_categorias} key={item.id} value={item.id}>{item.nome}</Text>
                         </TouchableOpacity>
