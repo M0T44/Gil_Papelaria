@@ -89,7 +89,6 @@ function Categorias() {
                     return (
                         <TouchableOpacity
                             style={styleBody.button_categorias} onPress={() => handleCategoriaProduto(item.id)}>
-
                             <Text style={styleBody.buttonText_categorias} key={item.id} value={item.id}>{item.nome}</Text>
                         </TouchableOpacity>
                     )
