@@ -36,7 +36,7 @@ class LoginServices {
                 subject: user.id,
                 expiresIn: 10000
             })
-        console.log({
+        return ({
             id: user.id,
             email: user.email,
             nome: user.nome,

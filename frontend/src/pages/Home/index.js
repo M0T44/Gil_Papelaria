@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useParams } from 'react'
 import apiLocal from '../../API/apiLocal/apiLocal'
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import Swiper from 'react-native-swiper';
 import { useNavigation } from '@react-navigation/native'
 import {
@@ -11,8 +11,7 @@ import {
     View,
     Text,
     Image,
-    TouchableOpacity,
-    TextInput,
+    TouchableOpacity
 } from 'react-native'
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -37,7 +36,7 @@ function Body() {
                     <Text style={styleBody.text_maisVendidos}>Produtos mais vendidos</Text>
                     <Card />
                     <Text style={styleBody.text_maisVendidos}>Produtos em destaque</Text>
-                    <Card />
+                    <CardDestaque />
                 </View>
             </SafeAreaView>
         </ScrollView>
@@ -65,8 +64,8 @@ function Categorias() {
         try {
             async function lerCategorias() {
                 const resposta = await apiLocal.get('/ListarCategorias')
-               setCategorias(resposta.data)
-           // console.log(resposta)
+                setCategorias(resposta.data)
+                // console.log(resposta)
             }
             lerCategorias()
         } catch (error) {
@@ -99,84 +98,134 @@ function Categorias() {
     )
 }
 
+
 function Card() {
+    const navigation = useNavigation()
+
+    const [categoriasProdutos, setCategoriasProdutos] = useState([''])
+
+
+    useEffect(() => {
+        try {
+            async function lerCategoriasProdutos() {
+                const resposta = await apiLocal.get(`/ListarProdutosCategoria/385184bd-27e6-421f-b5d9-02f1e261029f`)
+                setCategoriasProdutos(resposta.data)
+            }
+            lerCategoriasProdutos()
+        } catch (error) {
+            alert(error)
+        }
+    }, [categoriasProdutos])
+
+    async function handleRealizarPedido() {
+        try {
+            const iId = await AsyncStorage.getItem('id')
+            const id = JSON.parse(iId)
+            const id_cliente = (id)
+
+            await apiLocal.post('/CriarPedidos', {
+                id_cliente
+            })
+
+
+            navigation.navigate('Carrinho')
+        } catch (error) {
+            alert(error)
+        }
+    }
+
+
     return (
         <ScrollView horizontal={true}>
             <View style={styleBody.container_card}>
-                <View style={styleBody.card}>
-                    <Image
-                        source={require('../../../imgs/caderno.png')}
-                    />
-                    <View style={styleBody.card_info}>
-                        <Text>
-                            Caderno Inteligente
-                        </Text>
-                        <Text>
-                            Breve descrição do produto
-                        </Text>
-                        <TouchableOpacity style={styleBody.card_button} onPress={() => console.log('Botão pressionado')}>
-                            <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
-                            <MaterialCommunityIcons name="cart" size={24} color="white" />
-                        </TouchableOpacity>
-                    </View>
+                <View >
+                    {categoriasProdutos.map((item) => {
+                        return (
+                            <View key={item.id} value={item.id} style={styleBody.card}>
+                                {/* <Image value={item.id}>  {item.file}</Image> */}
+                                <View style={styleBody.card_info} value={item.id}>
+                                    <Text> {item.nome}</Text>
+                                    <Text>{item.descricao}</Text>
+                                    <TouchableOpacity style={styleBody.card_button} onPress={() => console.log('Botão pressionado')}>
+                                        <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
+                                        {/* <MaterialCommunityIcons name="cart" size={24} color="white" /> */}
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        )
+                    })}
                 </View>
-                <View style={styleBody.card}>
-                    <Image
-                        source={require('../../../imgs/caneta.png')}
-                    />
-                    <View style={styleBody.card_info}>
-                        <Text>
-                            Caneta Mágica
-                        </Text>
-                        <Text>
-                            Breve descrição do produto
-                        </Text>
-                        <TouchableOpacity style={styleBody.card_button} onPress={() => console.log('Botão pressionado')}>
-                            <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
-                            <MaterialCommunityIcons name="cart" size={24} color="white" />
-                        </TouchableOpacity>
-                    </View>
-                </View>
-                <View style={styleBody.card}>
-                    <Image
-                        source={require('../../../imgs/caderno.png')}
-                    />
-                    <View style={styleBody.card_info}>
-                        <Text>
-                            Caderno Inteligente
-                        </Text>
-                        <Text>
-                            Breve descrição do produto
-                        </Text>
-                        <TouchableOpacity style={styleBody.card_button} onPress={() => console.log('Botão pressionado')}>
-                            <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
-                            <MaterialCommunityIcons name="cart" size={24} color="white" />
-                        </TouchableOpacity>
-                    </View>
-                </View>
-                <View style={styleBody.card}>
-                    <Image
-                        source={require('../../../imgs/caneta.png')}
-                    />
-                    <View style={styleBody.card_info}>
-                        <Text>
-                            Caneta Mágica
-                        </Text>
-                        <Text>
-                            Breve descrição do produto
-                        </Text>
-                        <TouchableOpacity style={styleBody.card_button} onPress={() => console.log('Botão pressionado')}>
-                            <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
-                            <MaterialCommunityIcons name="cart" size={24} color="white" />
-                        </TouchableOpacity>
-                    </View>
+
+            </View>
+        </ScrollView>
+    )
+}
+function CardDestaque() {
+    const navigation = useNavigation()
+
+    const [categoriasProdutosDestaque, setCategoriasProdutosDestaque] = useState([''])
+
+    useEffect(() => {
+        try {
+            async function lerCategoriasProdutosDestaque() {
+                const resposta = await apiLocal.get(`/ListarProdutosCategoria/6b51f1c9-7765-4ea2-91b0-2ff3a0f5becb`)
+                setCategoriasProdutosDestaque(resposta.data)
+            }
+            lerCategoriasProdutosDestaque()
+        } catch (error) {
+            alert(error)
+        }
+    }, [categoriasProdutosDestaque])
+
+
+    async function handleRealizarPedido() {
+        try {
+            const iId = await AsyncStorage.getItem('id')
+            const id = JSON.parse(iId)
+            const id_cliente = (id)
+
+            await apiLocal.post('/CriarPedidos', {
+                id_cliente
+            })
+
+
+            navigation.navigate('Carrinho')
+        } catch (error) {
+            alert(error)
+        }
+    }
+
+
+    return (
+        <ScrollView horizontal={true}>
+            <View style={styleBody.container_card}>
+
+                <View >
+                    {categoriasProdutosDestaque.map((item) => {
+                        return (
+                            <View key={item.id} value={item.id} style={styleBody.card}>
+                                {/* <Image value={item.id}>  {item.file}</Image> */}
+                                <View style={styleBody.card_info} value={item.id}>
+                                    <Text> {item.nome}</Text>
+                                    <Text>{item.descricao}</Text>
+                                    <TouchableOpacity style={styleBody.card_button} onPress={() => console.log('Botão pressionado')}>
+                                        <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
+                                        {/* <MaterialCommunityIcons name="cart" size={24} color="white" /> */}
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        )
+                    })}
                 </View>
             </View>
         </ScrollView>
     )
 }
 
+
+
 export default function Home() {
+
     return (
         <SafeAreaView>
             <ScrollView>
