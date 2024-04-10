@@ -11,9 +11,12 @@ export default function AuthContext({ children }) {
 
     async function handleLogar(email, password) {
         try {
-           await apiLocal.post('/LoginClientes', {
+            const resposta = await apiLocal.post('/LoginClientes', {
                 email, password
             })
+
+            await AsyncStorage.setItem('id', JSON.stringify(resposta.data.id))
+
             setToken(true)
         } catch (error) {
             alert(error)

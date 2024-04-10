@@ -8,6 +8,7 @@ import { CriarClientesController } from './controllers/Clientes/CriarClientesCon
 import { CriarProdutosController } from './controllers/Produtos/CriarProdutosController'
 import { CriarCategoriasController } from './controllers/Categorias/CriarCategoriasController'
 import { CriarItensController } from './controllers/Itens/CriarItensController'
+import { PedidosController } from './controllers/Pedidos/PedidoController'
 
 //Login 
 import { LoginControler } from './controllers/Login/LoginController'
@@ -31,7 +32,7 @@ router.post('/CriarClientes', new CriarClientesController().handle)
 router.post('/CriarProdutos', upload.single('file'), new CriarProdutosController().handle)
 router.post('/CriarCategorias', new CriarCategoriasController().handle)
 router.post('/CriarItens', new CriarItensController().handle)
-
+router.post('/CriarPedidos', new PedidosController().criarPedidos)
 //Login
 router.post('/LoginClientes', new LoginControler().handle)
 
@@ -45,5 +46,5 @@ router.delete('/ApagarClientes/:id', new DeletarClientesController().handle)
 
 //Listar
 router.get('/ListarCategorias', new ListarCategoriasController().handle)
-router.get('/ListarProdutosCategoria/:id', new ListarProdutosCategoriaController().handle)
+router.get('/ListarProdutosCategoria/:id', new PedidosController().listarProdutosCategoria)
 export { router }

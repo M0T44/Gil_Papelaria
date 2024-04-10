@@ -4,7 +4,8 @@ import {
     ScrollView,
     StatusBar,
     View,
-    Text
+    Text,
+    TouchableOpacity
 } from 'react-native'
 
 export default function Carrinho() {
@@ -13,9 +14,10 @@ export default function Carrinho() {
             <ScrollView>
                 <StatusBar backgroundColor="white" barStyle="dark-content" />
                 <View>
-                    <Text>
-                        Carrinho
-                    </Text>
+                    <Text>Carrinho </Text>
+                    <TouchableOpacity>
+                        <Text>Realizar Pedido</Text>
+                    </TouchableOpacity>
                 </View>
             </ScrollView>
         </SafeAreaView>
