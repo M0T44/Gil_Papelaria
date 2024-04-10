@@ -59,13 +59,14 @@ function Carousel({ data }) {
 function Categorias() {
 
     const navigation = useNavigation()
-    const [categorias, setCategorias] = useState([ ''])
+    const [categorias, setCategorias] = useState([''])
 
     useEffect(() => {
         try {
             async function lerCategorias() {
                 const resposta = await apiLocal.get('/ListarCategorias')
                 setCategorias(resposta.data)
+                // alert(resposta.id)
             }
             lerCategorias()
         } catch (error) {
@@ -76,9 +77,9 @@ function Categorias() {
 
     function handleCategoriaProduto() {
         alert(categorias)
-            // navigation.navigate('Produtos', {
-            //     categoriaId: categorias.id
-            // })
+        // navigation.navigate('Produtos', {
+        //     categoriaId: categorias.id
+        // })
     }
 
     return (
@@ -89,7 +90,7 @@ function Categorias() {
                         <TouchableOpacity
                             style={styleBody.button_categorias} onPress={handleCategoriaProduto}>
 
-                            <Text style={styleBody.buttonText_categorias} value={item.id}>{item.nome}</Text>
+                            <Text style={styleBody.buttonText_categorias} key={item.id} value={item.id}>{item.nome}</Text>
                         </TouchableOpacity>
                     )
                 })}

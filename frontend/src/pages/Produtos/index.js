@@ -34,29 +34,16 @@ export default function Produtos({ route }) {
 
 
     return (
-        <ScrollView>
-            <View >
-                {categoriasProdutos.map((item) => {
-                    return (
-                        <Text key={item.id} > {item.nome}</Text>
-                        // <View key={item.id} style={styleBody.card}>
-                        //     {/* <Image value={item.id}>  {item.banner}</Image> */}
-                        //     <View style={styleBody.card_info} value={item.id}>
-                        //         <Text> {item.nome}</Text>
-                        //         <Text>{item.descricao}</Text>
-                        //         <TouchableOpacity style={styleBody.card_button} onPress={() => console.log('Botão pressionado')}>
-                        //             <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
-                        //             {/* <MaterialCommunityIcons name="cart" size={24} color="white" /> */}
-                        //         </TouchableOpacity>
-                        //     </View>
-                        // </View>
-
-                    )
-                })}
-            </View>
+        <SafeAreaView>
+            <ScrollView>
+                <StatusBar backgroundColor="white" barStyle="dark-content" />
+                <View >
+                    <Text>Caderno</Text>
+                </View>
 
 
-        </ScrollView >
+            </ScrollView >
+        </SafeAreaView>
     )
 }
 
