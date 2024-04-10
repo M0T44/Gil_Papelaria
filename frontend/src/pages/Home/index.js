@@ -107,7 +107,7 @@ function Card() {
     useEffect(() => {
         try {
             async function lerCategoriasProdutos() {
-                const resposta = await apiLocal.get(`/ListarProdutosCategoria/a677c825-f97b-43c1-9252-ceebce1f059a`)
+                const resposta = await apiLocal.get(`/ListarProdutosCategoria/385184bd-27e6-421f-b5d9-02f1e261029f`)
                 setCategoriasProdutos(resposta.data)
             }
             lerCategoriasProdutos()
@@ -137,27 +137,25 @@ function Card() {
     return (
         <ScrollView horizontal={true}>
             <View style={styleBody.container_card}>
-                <View >
-                    {categoriasProdutos.map((item) => {
-                        return (
-                            <View key={item.id} value={item.id} style={styleBody.card}>
-                                <Image
-                                    style={styleBody.imagem}
-                                    source={{ uri: `http://10.152.46.16:3334/files/${item.banner}` }}
-                                />
-                                <View style={styleBody.card_info} value={item.id}>
-                                    <Text> {item.nome}</Text>
-                                    <Text>{item.descricao}</Text>
-                                    <TouchableOpacity style={styleBody.card_button} onPress={() => console.log('Botão pressionado')}>
-                                        <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
-                                        {/* <MaterialCommunityIcons name="cart" size={24} color="white" /> */}
-                                    </TouchableOpacity>
-                                </View>
+                {categoriasProdutos.map((item) => {
+                    return (
+                        <View key={item.id} value={item.id} style={styleBody.card}>
+                            <Image
+                                style={styleBody.imagem}
+                                source={{ uri: `http://10.152.46.17:3334/files/${item.banner}` }}
+                            />
+                            <View style={styleBody.card_info} value={item.id}>
+                                <Text> {item.nome}</Text>
+                                <Text>{item.descricao}</Text>
+                                <Text>{item.preco}</Text>
+                                <TouchableOpacity style={styleBody.card_button} onPress={() => console.log('Botão pressionado')}>
+                                    <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
+                                    {/* <MaterialCommunityIcons name="cart" size={24} color="white" /> */}
+                                </TouchableOpacity>
                             </View>
-                        )
-                    })}
-                </View>
-
+                        </View>
+                    )
+                })}
             </View>
         </ScrollView>
     )
@@ -170,7 +168,7 @@ function CardDestaque() {
     useEffect(() => {
         try {
             async function lerCategoriasProdutosDestaque() {
-                const resposta = await apiLocal.get(`/ListarProdutosCategoria/afff16be-3dab-4c30-9fb5-2a8cdb957498`)
+                const resposta = await apiLocal.get(`/ListarProdutosCategoria/6b51f1c9-7765-4ea2-91b0-2ff3a0f5becb`)
                 setCategoriasProdutosDestaque(resposta.data)
             }
             lerCategoriasProdutosDestaque()
@@ -201,27 +199,25 @@ function CardDestaque() {
     return (
         <ScrollView horizontal={true}>
             <View style={styleBody.container_card}>
-
-                <View >
-                    {categoriasProdutosDestaque.map((item) => {
-                        return (
-                            <View key={item.id} value={item.id} style={styleBody.card}>
-                                <Image
-                                    style={styleBody.imagem}
-                                    source={{ uri: `http://10.152.46.16:3334/files/${item.banner}` }}
-                                />
-                                <View style={styleBody.card_info} value={item.id}>
-                                    <Text> {item.nome}</Text>
-                                    <Text>{item.descricao}</Text>
-                                    <TouchableOpacity style={styleBody.card_button} onPress={() => console.log('Botão pressionado')}>
-                                        <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
-                                        {/* <MaterialCommunityIcons name="cart" size={24} color="white" /> */}
-                                    </TouchableOpacity>
-                                </View>
+                {categoriasProdutosDestaque.map((item) => {
+                    return (
+                        <View key={item.id} value={item.id} style={styleBody.card}>
+                            <Image
+                                style={styleBody.imagem}
+                                source={{ uri: `http://10.152.46.17:3334/files/${item.banner}` }}
+                            />
+                            <View style={styleBody.card_info} value={item.id}>
+                                <Text> {item.nome}</Text>
+                                <Text>{item.descricao}</Text>
+                                <Text>{item.preco}</Text>
+                                <TouchableOpacity style={styleBody.card_button} onPress={() => console.log('Botão pressionado')}>
+                                    <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
+                                    {/* <MaterialCommunityIcons name="cart" size={24} color="white" /> */}
+                                </TouchableOpacity>
                             </View>
-                        )
-                    })}
-                </View>
+                        </View>
+                    )
+                })}
             </View>
         </ScrollView>
     )
@@ -274,7 +270,7 @@ const styleBody = StyleSheet.create({
 
     // Começo Categoria
     container_categorias: {
-        display: 'flex',
+        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         marginLeft: 26,
@@ -304,6 +300,8 @@ const styleBody = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
+        marginLeft: 18,
+        paddingVertical: 8,
     },
     card: {
         borderWidth: 2,           // Largura da borda
