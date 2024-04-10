@@ -59,7 +59,8 @@ function Carousel({ data }) {
 function Categorias() {
 
     const navigation = useNavigation()
-    const [categorias, setCategorias] = useState([''])
+    const [categorias, setCategorias] = useState([ ''])
+
     useEffect(() => {
         try {
             async function lerCategorias() {
@@ -74,9 +75,10 @@ function Categorias() {
 
 
     function handleCategoriaProduto() {
-        navigation.navigate('Produtos', {
-            categoriaId: categorias.id
-        })
+        alert(categorias)
+            // navigation.navigate('Produtos', {
+            //     categoriaId: categorias.id
+            // })
     }
 
     return (
@@ -95,7 +97,6 @@ function Categorias() {
         </ScrollView>
     )
 }
-
 
 function Card() {
     return (

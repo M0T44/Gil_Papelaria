@@ -61,10 +61,6 @@ export default function Login() {
                             <Text style={style.buttonEnviarText}>Cadastrar-se</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => navigation.navigate('Home')} style={style.buttonCriar}>
-                            <Text style={style.buttonEnviarText}>Voltar</Text>
-                        </TouchableOpacity>
-
                     </View>
 
                 </View>
