@@ -119,43 +119,31 @@ function Card() {
     }, [categoriasProdutos])
 
 
-    // useEffect(() => {
-    //     try {
-
-    //         async function lerPedidos() {
-    //             const iId = await AsyncStorage.getItem('id')
-    //             const id_cliente = JSON.parse(iId)
-
-    //             const resposta = await apiLocal.get(`/ListarPedidos/${id_cliente}`)
-    //             console.log(resposta.data)
-
-    //         }
-    //         lerPedidos()
-    //     } catch (error) {
-    //         alert(error)
-    //     }
-    // }, [pedido])
-
-
-    // console.log(pedido.dados)
-
-
     async function realizarPedido(item) {
         try {
             const iId = await AsyncStorage.getItem('id')
             const id = JSON.parse(iId)
             const id_cliente = (id)
 
-            await handleRealizarPedido( id_pedido, id_produto, quantidade, valor)
+            await handleRealizarPedido(id_cliente)
 
-            const iPd = await AsyncStorage.getItem('id_pedido')
-            const id_pedido = JSON.parse(iPd)
-            const quantidade = item.quantidade
-            const valor = item.preco
-            const id_produto = item.id
+
+            // const iPd = await AsyncStorage.getItem('id_pedido')
+            // const iPedido = JSON.parse(iPd)
+            // const id_pedido = (iPedido)
+    
+            // const quantidade = item.quantidade
+            // const valor = item.preco
+            // const id_produto = item.id
+    
+            // const resposta = await apiLocal.post('/CriarItensPedido', {
+            //     quantidade, valor, id_pedido, id_produto
+            // })
+    
+            // console.log(resposta.data)
 
         } catch (error) {
-            alert(error)
+            console.log(error)
         }
     }
 
@@ -174,7 +162,7 @@ function Card() {
                                 <Text> {item.nome}</Text>
                                 <Text>{item.descricao}</Text>
                                 <Text>{item.preco}</Text>
-                                <TouchableOpacity style={styleBody.card_button} onPress={() => realizarPedido(item)}>
+                                <TouchableOpacity style={styleBody.card_button} onPress={() => realizarPedido(item)} >
                                     <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
                                     {/* <MaterialCommunityIcons name="cart" size={24} color="white" /> */}
                                 </TouchableOpacity>

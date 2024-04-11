@@ -30,23 +30,17 @@ export default function AuthContext({ children }) {
         setToken(false)
     }
 
-    async function handleRealizarPedido(id_pedido, id_produto, quantidade, valor) {
+    async function handleRealizarPedido(id_cliente) {
         try {
-
-            const response = await apiLocal.post('/CriarItensPedido', {
-                id_pedido, id_produto, quantidade, valor
+            const resposta = await apiLocal.post('/CriarPedidos', {
+                id_cliente
             })
 
-            console.log(response)
-            // const resposta = await apiLocal.post('/CriarPedidos', {
-            //     id_cliente
-            // })
-
-            // await AsyncStorage.setItem('id_pedido', JSON.stringify(resposta.data.id))
+            await AsyncStorage.setItem('id_pedido', JSON.stringify(resposta.data.id))
 
             navigation.navigate('Carrinho')
         } catch (error) {
-            console.log(error)
+            alert(error)
         }
     }
 
