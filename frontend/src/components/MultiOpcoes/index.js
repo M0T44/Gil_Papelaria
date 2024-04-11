@@ -10,8 +10,10 @@ import { useNavigation } from '@react-navigation/native';
 import { FloatingAction } from "react-native-floating-action";
 
 export default function MultiOpcoes() {
-   
+
     const navegacao = useNavigation()
+    const { handleClearAsync } = useContext(Context)
+
     const actions = [
         {
             text: "Home",
@@ -36,7 +38,7 @@ export default function MultiOpcoes() {
             name: "bt_room",
             position: 4,
             color: '#00A4AD',
-            path: 'Sair'
+            onPress: () => handleSair()
         },
         {
             text: "Cadastro",
@@ -48,6 +50,15 @@ export default function MultiOpcoes() {
         }
     ]
 
+    const handleSair = async () => {
+        await sairClear();
+    }
+
+    const sairClear = async () => {
+        await handleClearAsync();
+        navegacao.navigate('Login');
+    }
+
     return (
         <View style={styleMultiOpcoes.container}>
             <FloatingAction
@@ -57,9 +68,8 @@ export default function MultiOpcoes() {
                 actions={actions}
                 onPressItem={(name, index) => {
                     const action = actions.find(action => action.name === name);
-                    navegacao.navigate(action.path);
-
-
+                    if (action.onPress) action.onPress();
+                    else navegacao.navigate(action.path);
                 }}
             />
         </View>
