@@ -8,6 +8,10 @@ interface ListarProduto {
     id: string
 
 }
+interface ListarPedido {
+    id: string
+}
+
 
 interface CriarItensPedido {
     id_pedido: string
@@ -33,6 +37,20 @@ class PedidosServices {
         const resposta = await prismaClient.produto.findMany({
             where: {
                 categoriaId: id
+            },
+            include: {
+                categorias: true
+            }
+        })
+        return resposta
+    }
+    async listarPedido({ id }: ListarPedido) {
+        const resposta = await prismaClient.pedido.findMany({
+            where: {
+                id_cliente: id
+            },
+            include: {
+                cadastro: true
             }
         })
         return resposta
@@ -83,7 +101,7 @@ class PedidosServices {
                 valor: true
             },
             where: {
-                id_pedido:id
+                id_pedido: id
             }
         })
         return resposta._sum.valor

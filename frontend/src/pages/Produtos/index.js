@@ -34,19 +34,14 @@ export default function Produtos({ route }) {
 
     return (
         <SafeAreaView>
-
             <ScrollView>
                 <StatusBar backgroundColor="white" barStyle="dark-content" />
                 <View style={styleProdutos.container}>
-                    <View >
-                        <Text style={styleProdutos.text_categoria}>Cadernos</Text>
-                    </View>
 
                     <View>
                         {categoriasProdutos.map((item) => {
                             return (
                                 <View key={item.id} value={item.id} style={styleProdutos.card}>
-                                    {/* <Image value={item.id}>  {item.file}</Image> */}
                                     <Image
                                         style={styleProdutos.imagem}
                                         source={{ uri: `http://10.152.46.16:3334/files/${item.banner}` }}
@@ -105,7 +100,7 @@ const styleProdutos = StyleSheet.create({
     imagem: {
         width: '100%',
         height: '50%',
-    },  
+    },
     card_info: {
         marginTop: 16,
         width: 220,

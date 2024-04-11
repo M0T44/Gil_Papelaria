@@ -21,6 +21,15 @@ class PedidosController {
         return res.json(resposta)
     }
 
+    async listarPedido(req: Request, res: Response) {
+        const { id } = req.params
+        const listarPedido = new PedidosServices()
+        const resposta = await listarPedido.listarPedido({
+            id
+        })
+        return res.json(resposta)
+    }
+
     async criarItensPedido(req: Request, res: Response) {
         const { id_pedido, id_produto, quantidade, valor } = req.body
         const criarItensPedido = new PedidosServices()
@@ -40,7 +49,7 @@ class PedidosController {
     }
 
     async somarItensPedido(req: Request, res: Response) {
-        const {id} = req.params 
+        const { id } = req.params
         const somarItensPedido = new PedidosServices()
         const resposta = await somarItensPedido.somarItensPedidos({
             id

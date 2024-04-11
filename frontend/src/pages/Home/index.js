@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useParams } from 'react'
+import React, { useState, useEffect, useParams, useContext } from 'react'
 import apiLocal from '../../API/apiLocal/apiLocal'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import Swiper from 'react-native-swiper';
@@ -17,6 +17,7 @@ import {
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import Header from '../../components/header';
+import { Context } from '../Contexts/contexto';
 
 function Body() {
     const data = [
@@ -102,7 +103,8 @@ function Card() {
     const navigation = useNavigation()
 
     const [categoriasProdutos, setCategoriasProdutos] = useState([''])
-
+    const [pedido, setPedido] = useState([''])
+    const { handleRealizarPedido } = useContext(Context)
 
     useEffect(() => {
         try {
@@ -116,18 +118,42 @@ function Card() {
         }
     }, [categoriasProdutos])
 
-    async function handleRealizarPedido() {
+
+    // useEffect(() => {
+    //     try {
+
+    //         async function lerPedidos() {
+    //             const iId = await AsyncStorage.getItem('id')
+    //             const id_cliente = JSON.parse(iId)
+
+    //             const resposta = await apiLocal.get(`/ListarPedidos/${id_cliente}`)
+    //             console.log(resposta.data)
+
+    //         }
+    //         lerPedidos()
+    //     } catch (error) {
+    //         alert(error)
+    //     }
+    // }, [pedido])
+
+
+    // console.log(pedido.dados)
+
+
+    async function realizarPedido(item) {
         try {
             const iId = await AsyncStorage.getItem('id')
             const id = JSON.parse(iId)
             const id_cliente = (id)
 
-            await apiLocal.post('/CriarPedidos', {
-                id_cliente
-            })
+            await handleRealizarPedido( id_pedido, id_produto, quantidade, valor)
 
+            const iPd = await AsyncStorage.getItem('id_pedido')
+            const id_pedido = JSON.parse(iPd)
+            const quantidade = item.quantidade
+            const valor = item.preco
+            const id_produto = item.id
 
-            navigation.navigate('Carrinho')
         } catch (error) {
             alert(error)
         }
@@ -148,7 +174,7 @@ function Card() {
                                 <Text> {item.nome}</Text>
                                 <Text>{item.descricao}</Text>
                                 <Text>{item.preco}</Text>
-                                <TouchableOpacity style={styleBody.card_button} onPress={() => console.log('Botão pressionado')}>
+                                <TouchableOpacity style={styleBody.card_button} onPress={() => realizarPedido(item)}>
                                     <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
                                     {/* <MaterialCommunityIcons name="cart" size={24} color="white" /> */}
                                 </TouchableOpacity>
@@ -160,6 +186,7 @@ function Card() {
         </ScrollView>
     )
 }
+
 function CardDestaque() {
     const navigation = useNavigation()
 

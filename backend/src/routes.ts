@@ -25,13 +25,13 @@ import { ListarCategoriasController } from './controllers/Categorias/ListarCateg
 import { ListarProdutosCategoriaController } from './controllers/Categorias/ListarProdutosCategoriaController'
 
 const router = Router()
- const upload = multer(uploadConfig.upload('./tmp'))
+const upload = multer(uploadConfig.upload('./tmp'))
 
 //Criar
 router.post('/CriarClientes', new CriarClientesController().handle)
 router.post('/CriarProdutos', upload.single('file'), new CriarProdutosController().handle)
 router.post('/CriarCategorias', new CriarCategoriasController().handle)
-router.post('/CriarItens', new CriarItensController().handle)
+router.post('/CriarItensPedido', new PedidosController().criarItensPedido)
 router.post('/CriarPedidos', new PedidosController().criarPedidos)
 //Login
 router.post('/LoginClientes', new LoginControler().handle)
@@ -46,5 +46,6 @@ router.delete('/ApagarClientes/:id', new DeletarClientesController().handle)
 
 //Listar
 router.get('/ListarCategorias', new ListarCategoriasController().handle)
+router.get('/ListarPedidos/:id', new PedidosController().listarPedido)
 router.get('/ListarProdutosCategoria/:id', new PedidosController().listarProdutosCategoria)
 export { router }

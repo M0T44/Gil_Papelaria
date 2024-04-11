@@ -90,6 +90,7 @@ model ItemPedido {
 
   pedidos    Pedido  @relation(fields: [id_pedido], references: [id])
   id_pedido  String
+  
   produtos   Produto @relation(fields: [id_produto], references: [id])
   id_produto String
 
