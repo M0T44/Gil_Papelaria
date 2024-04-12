@@ -109,7 +109,7 @@ function Card() {
     useEffect(() => {
         try {
             async function lerCategoriasProdutos() {
-                const resposta = await apiLocal.get(`/ListarProdutosCategoria/385184bd-27e6-421f-b5d9-02f1e261029f`)
+                const resposta = await apiLocal.get(`/ListarProdutosCategoria/989721bf-2708-43e1-9a08-a509c06393e4`)
                 setCategoriasProdutos(resposta.data)
             }
             lerCategoriasProdutos()
@@ -134,24 +134,24 @@ function Card() {
         realizarPedido()
     }, [])
 
-    async function handleCriarItens(item) {
+    async function handleCriarItens() {
         try {
-            const iPd = await AsyncStorage.getItem('id_pedido')
-            const iPedido = JSON.parse(iPd)
-            const id_pedido = (iPedido)
+            // const iPd = await AsyncStorage.getItem('id_pedido')
+            // const iPedido = JSON.parse(iPd)
+            // const id_pedido = (iPedido)
 
-            const id_produto = item.id
-            const quantidade = Number(item.quantidade)
+            // const id_produto = item.id
+            // const quantidade = Number(item.quantidade)
 
 
-            await apiLocal.post('/CriarItensPedido', {
-                quantidade, id_pedido, id_produto
-            })
+            // await apiLocal.post('/CriarItensPedido', {
+            //     quantidade, id_pedido, id_produto
+            // })
 
-            console.log('Valores a serem enviados para a API:');
-            console.log('id_pedido:', id_pedido);
-            console.log('id_produto:', id_produto);
-            console.log('quantidade:', quantidade);
+            // console.log('Valores a serem enviados para a API:');
+            // console.log('id_pedido:', id_pedido);
+            // console.log('id_produto:', id_produto);
+            // console.log('quantidade:', quantidade);
 
             navigation.navigate('Carrinho')
         } catch (error) {
@@ -231,7 +231,7 @@ function CardDestaque() {
     useEffect(() => {
         try {
             async function lerCategoriasProdutosDestaque() {
-                const resposta = await apiLocal.get(`/ListarProdutosCategoria/6b51f1c9-7765-4ea2-91b0-2ff3a0f5becb`)
+                const resposta = await apiLocal.get(`/ListarProdutosCategoria/0e55ea36-738e-4a3b-b208-4e31774e865b`)
                 setCategoriasProdutosDestaque(resposta.data)
             }
             lerCategoriasProdutosDestaque()

@@ -35,18 +35,7 @@ export default function AuthContext({ children }) {
             await AsyncStorage.setItem('id_pedido', JSON.stringify(resposta.data.id))
         }
     }
-
-    // async function criarItens(quantidade, valor, id_pedido, id_produto) {
-
-    //     const resposta = await apiLocal.post('/CriarItensPedido', {
-    //         quantidade, valor, id_pedido, id_produto
-    //     })
-
-    //     console.log(resposta.data)
-    //     navigation.navigate('Carrinho')
-
-    // }
-
+    
     async function handleClearAsync() {
         await AsyncStorage.clear()
         setToken(false)
