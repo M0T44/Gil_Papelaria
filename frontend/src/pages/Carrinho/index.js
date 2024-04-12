@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import apiLocal from '../../API/apiLocal/apiLocal'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import {
+    StyleSheet,
     SafeAreaView,
     ScrollView,
     StatusBar,
@@ -35,20 +36,56 @@ export default function Carrinho() {
         <SafeAreaView>
             <ScrollView>
                 <StatusBar backgroundColor="white" barStyle="dark-content" />
-                <View>
-                    <Text>Carrinho </Text>
-                </View>
+                <View style={style.container}>
+                    <View>
+                        <Text>Carrinho </Text>
+                    </View>
 
-                {lerItens.map((busca) => {
-                    return (
-                        <View key={busca.id} value={busca.id}>
+                    {lerItens.map((busca) => {
+                        return (
+                            <View key={busca.id} value={busca.id} style={style.itensCarrinho}>
+                                <Text>{busca.id}</Text>
+                                <Text >{busca.cadastro?.nome}</Text>
+                            </View>
+                        )
+                    })}
 
-                            <Text>{busca.id}</Text>
-                            <Text >{busca.cadastro?.quantidade}</Text>
+                    <View>
+                        <Text>Total do pedido:</Text>
+                    </View>
+
+                    <View style={style.containerBotoes}>
+                        <View>
+                            <TouchableOpacity>
+                                <Text>Finalizar Compra</Text>
+                            </TouchableOpacity>
                         </View>
-                    )
-                })}
+                        <View>
+                            <TouchableOpacity>
+                                <Text>Cancelar</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
             </ScrollView>
         </SafeAreaView>
     )
 }
+
+const style = StyleSheet.create({
+    container: {
+        height: 950
+    },
+
+    itensCarrinho: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
+
+    containerBotoes: {
+        flex: 1,
+        justifyContent: 'space-between',
+        flexDirection: 'row'
+    }
+})
