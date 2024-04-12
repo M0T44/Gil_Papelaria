@@ -31,13 +31,12 @@ class PedidosController {
     }
 
     async criarItensPedido(req: Request, res: Response) {
-        const { id_pedido, id_produto, quantidade, valor } = req.body
+        const { id_pedido, id_produto, quantidade } = req.body
         const criarItensPedidoController = new PedidosServices()
         const resposta = await criarItensPedidoController.criarItensPedido({
             id_pedido,
             id_produto,
-            quantidade,
-            valor
+            quantidade
         })
         return res.json(resposta)
     }
@@ -51,14 +50,14 @@ class PedidosController {
         return res.json(resposta)
     }
 
-    async somarItensPedido(req: Request, res: Response) {
-        const { id } = req.params
-        const somarItensPedido = new PedidosServices()
-        const resposta = await somarItensPedido.somarItensPedidos({
-            id
-        })
-        return res.json(resposta)
-    }
+    // async somarItensPedido(req: Request, res: Response) {
+    //     const { id } = req.params
+    //     const somarItensPedido = new PedidosServices()
+    //     const resposta = await somarItensPedido.somarItensPedidos({
+    //         id
+    //     })
+    //     return res.json(resposta)
+    // }
 }
 
 export { PedidosController }

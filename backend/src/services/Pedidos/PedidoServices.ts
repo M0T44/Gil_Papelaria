@@ -17,7 +17,6 @@ interface CriarItensPedido {
     id_pedido: string
     id_produto: string
     quantidade: number
-    valor: number
 }
 
 class PedidosServices {
@@ -57,7 +56,7 @@ class PedidosServices {
         return resposta
     }
 
-    async criarItensPedido({ id_pedido, id_produto, quantidade, valor }: CriarItensPedido) {
+    async criarItensPedido({ id_pedido, id_produto, quantidade }: CriarItensPedido) {
         const itemExiste = await prismaClient.itemPedido.findFirst({
             where: {
                 AND: [
@@ -77,8 +76,7 @@ class PedidosServices {
             data: {
                 id_pedido: id_pedido,
                 id_produto: id_produto,
-                quantidade: quantidade,
-                valor: valor
+                quantidade: quantidade
             },
             include: {
                 produtos: true
@@ -96,17 +94,17 @@ class PedidosServices {
         return { dados: 'Item Deletado' }
     }
 
-    async somarItensPedidos({ id }: ListarProduto) {
-        const resposta = await prismaClient.itemPedido.aggregate({
-            _sum: {
-                valor: true
-            },
-            where: {
-                id_pedido: id
-            }
-        })
-        return resposta._sum.valor
-    }
+    // async somarItensPedidos({ id }: ListarProduto) {
+    //     const resposta = await prismaClient.itemPedido.aggregate({
+    //         _sum: {
+    //             valor: true
+    //         },
+    //         where: {
+    //             id_pedido: id
+    //         }
+    //     })
+    //     return resposta._sum.valor
+    // }
 }
 
 export { PedidosServices }

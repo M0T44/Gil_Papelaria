@@ -86,7 +86,6 @@ model Pedido {
 model ItemPedido {
   id         String  @id @default(uuid())
   quantidade Int
-  valor      Decimal @db.Decimal(9, 2)
 
   pedidos    Pedido  @relation(fields: [id_pedido], references: [id])
   id_pedido  String
