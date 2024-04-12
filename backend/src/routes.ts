@@ -43,7 +43,6 @@
 
 // //Deletar
 // router.delete('/ApagarClientes/:id', new DeletarClientesController().handle)
-
 // //Listar
 // router.get('/ListarCategorias', new ListarCategoriasController().handle)
 // router.get('/ListarPedidos/:id', new PedidosController().listarPedido)
@@ -64,8 +63,10 @@ import { AlterarItensController } from './controllers/Itens/AlterarItensControll
 import { DeletarClientesController } from './controllers/Clientes/DeletarClientesController';
 import { ListarCategoriasController } from './controllers/Categorias/ListarCategoriasController';
 import { ListarProdutosCategoriaController } from './controllers/Categorias/ListarProdutosCategoriaController';
-const router = Router();
-const upload = multer(uploadConfig.upload('./tmp'));
+import { ListarProdutosController } from './controllers/Produtos/ListarProdutosController'
+
+const router = Router()
+const upload = multer(uploadConfig.upload('./tmp'))
 
 router.post('/CriarClientes', new CriarClientesController().handle);
 router.post('/CriarProdutos', upload.single('file'), new CriarProdutosController().handle);
@@ -77,7 +78,12 @@ router.put('/AlterarClientes', new AlterarClienteController().handle);
 // router.put('/AlterarPedido', new CriarItensController().handle);
 router.put('/AlterarItem', new AlterarItensController().handle);
 router.delete('/ApagarClientes/:id', new DeletarClientesController().handle);
-router.get('/ListarCategorias', new ListarCategoriasController().handle);
-router.get('/ListarPedidos/:id', new PedidosController().listarPedido);
-router.get('/ListarProdutosCategoria/:id', new PedidosController().listarProdutosCategoria);
-export { router };
+
+//Listar
+router.get('/ListarCategorias', new ListarCategoriasController().handle)
+router.get('/ListarPedidos/:id', new PedidosController().listarPedido)
+router.get('/ListarProdutosCategoria/:id', new PedidosController().listarProdutosCategoria)
+
+router.get('/ListarProdutos', new ListarProdutosController().handle)
+
+export { router }
