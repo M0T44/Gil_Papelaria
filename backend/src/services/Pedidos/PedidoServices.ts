@@ -20,6 +20,7 @@ interface CriarItensPedido {
     valor: number
 }
 
+
 class PedidosServices {
     async criarPedido({ id_cliente }: IdCliente) {
         const resposta = await prismaClient.pedido.create({
@@ -57,21 +58,24 @@ class PedidosServices {
     }
 
     async criarItensPedido({ id_pedido, id_produto, quantidade, valor }: CriarItensPedido) {
-        const itemExiste = await prismaClient.itemPedido.findFirst({
+        const itemExite = await prismaClient.itemPedido.findFirst({
             where: {
                 AND: [
                     {
-                        id_produto: id_produto
+                        id_pedido: id_pedido
+
                     },
                     {
-                        id_pedido: id_pedido
+                        id_produto: id_produto
                     }
                 ]
             }
         })
-        if (itemExiste) {
+
+        if (itemExite) {
             throw new Error('Item Já Adicionado')
         }
+
         const resposta = await prismaClient.itemPedido.create({
             data: {
                 id_pedido: id_pedido,
@@ -84,6 +88,7 @@ class PedidosServices {
             }
         })
         return resposta
+        // console.log(resposta)
     }
 
     async apagarItemPedido({ id }: ListarProduto) {

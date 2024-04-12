@@ -104,12 +104,12 @@ function Card() {
 
     const [categoriasProdutos, setCategoriasProdutos] = useState([''])
     const [pedido, setPedido] = useState([''])
-    const { handleRealizarPedido } = useContext(Context)
+    const { handleRealizarPedido, criarItens } = useContext(Context)
 
     useEffect(() => {
         try {
             async function lerCategoriasProdutos() {
-                const resposta = await apiLocal.get(`/ListarProdutosCategoria/4a7628f8-55ae-4862-81d6-d4558cb7777a`)
+                const resposta = await apiLocal.get(`/ListarProdutosCategoria/385184bd-27e6-421f-b5d9-02f1e261029f`)
                 setCategoriasProdutos(resposta.data)
             }
             lerCategoriasProdutos()
@@ -120,7 +120,6 @@ function Card() {
 
 
     useEffect(() => {
-
         async function realizarPedido() {
             try {
                 const iId = await AsyncStorage.getItem('id')
@@ -135,30 +134,28 @@ function Card() {
         realizarPedido()
     }, [])
 
-    async function criarItens(item) {
+    async function handleCriarItens(item) {
         try {
             const iPd = await AsyncStorage.getItem('id_pedido')
             const iPedido = JSON.parse(iPd)
             const id_pedido = (iPedido)
 
-            const quantidade = item.quantidade
-            const valor = item.preco
+            const valor = Number(item.preco)
             const id_produto = item.id
+            const quantidade = Number(item.quantidade)
+
 
             const resposta = await apiLocal.post('/CriarItensPedido', {
                 quantidade, valor, id_pedido, id_produto
             })
 
-            console.log(resposta.data)
-            navigation.navigate('Carrinho')
+            console.log(resposta)
 
         } catch (error) {
             console.log(error)
 
         }
     }
-
-
 
     return (
         <ScrollView horizontal={true}>
@@ -174,9 +171,9 @@ function Card() {
                                 <Text> {item.nome}</Text>
                                 <Text>{item.descricao}</Text>
                                 <Text>{item.preco}</Text>
-                                <TouchableOpacity style={styleBody.card_button} onPress={() => criarItens(item)} >
+                                <TouchableOpacity style={styleBody.card_button} onPress={() => handleCriarItens(item)} >
                                     <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
-                                    {/* <MaterialCommunityIcons name="cart" size={24} color="white" /> */}
+                                    <MaterialCommunityIcons name="cart" size={24} color="white" />
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -195,7 +192,7 @@ function CardDestaque() {
     useEffect(() => {
         try {
             async function lerCategoriasProdutosDestaque() {
-                const resposta = await apiLocal.get(`/ListarProdutosCategoria/b7486cdf-845f-43aa-832f-b3d08b99496`)
+                const resposta = await apiLocal.get(`/ListarProdutosCategoria/6b51f1c9-7765-4ea2-91b0-2ff3a0f5becb`)
                 setCategoriasProdutosDestaque(resposta.data)
             }
             lerCategoriasProdutosDestaque()
@@ -203,25 +200,6 @@ function CardDestaque() {
             alert(error)
         }
     }, [categoriasProdutosDestaque])
-
-
-    async function handleRealizarPedido() {
-        try {
-            const iId = await AsyncStorage.getItem('id')
-            const id = JSON.parse(iId)
-            const id_cliente = (id)
-
-            await apiLocal.post('/CriarPedidos', {
-                id_cliente
-            })
-
-
-            navigation.navigate('Carrinho')
-        } catch (error) {
-            alert(error)
-        }
-    }
-
 
     return (
         <ScrollView horizontal={true}>
@@ -239,7 +217,7 @@ function CardDestaque() {
                                 <Text>{item.preco}</Text>
                                 <TouchableOpacity style={styleBody.card_button} onPress={() => console.log('Botão pressionado')}>
                                     <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
-                                    {/* <MaterialCommunityIcons name="cart" size={24} color="white" /> */}
+                                    <MaterialCommunityIcons name="cart" size={24} color="white" />
                                 </TouchableOpacity>
                             </View>
                         </View>
