@@ -3,7 +3,7 @@ import prismaClient from '../../prisma'
 
 interface CriarItens {
     quantidade: number
-    valor: Decimal
+    valor: number
     id_pedido: string
     id_produto: string
 }

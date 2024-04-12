@@ -15,9 +15,7 @@ export default function Carrinho() {
                 <StatusBar backgroundColor="white" barStyle="dark-content" />
                 <View>
                     <Text>Carrinho </Text>
-                    <TouchableOpacity>
-                        <Text>Realizar Pedido</Text>
-                    </TouchableOpacity>
+                   
                 </View>
             </ScrollView>
         </SafeAreaView>

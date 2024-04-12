@@ -68,7 +68,9 @@ export default function Cadastre_se() {
                 email,
                 password
             })
+
             alert('Cadastrado com Sucesso')
+            navigation.navigate('Login')
         } catch (error) {
            
         }

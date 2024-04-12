@@ -109,7 +109,7 @@ function Card() {
     useEffect(() => {
         try {
             async function lerCategoriasProdutos() {
-                const resposta = await apiLocal.get(`/ListarProdutosCategoria/385184bd-27e6-421f-b5d9-02f1e261029f`)
+                const resposta = await apiLocal.get(`/ListarProdutosCategoria/4a7628f8-55ae-4862-81d6-d4558cb7777a`)
                 setCategoriasProdutos(resposta.data)
             }
             lerCategoriasProdutos()
@@ -119,33 +119,45 @@ function Card() {
     }, [categoriasProdutos])
 
 
-    async function realizarPedido(item) {
+    useEffect(() => {
+
+        async function realizarPedido() {
+            try {
+                const iId = await AsyncStorage.getItem('id')
+                const id = JSON.parse(iId)
+                const id_cliente = (id)
+
+                await handleRealizarPedido(id_cliente)
+            } catch (error) {
+                console.log("error")
+            }
+        }
+        realizarPedido()
+    }, [])
+
+    async function criarItens(item) {
         try {
-            const iId = await AsyncStorage.getItem('id')
-            const id = JSON.parse(iId)
-            const id_cliente = (id)
+            const iPd = await AsyncStorage.getItem('id_pedido')
+            const iPedido = JSON.parse(iPd)
+            const id_pedido = (iPedido)
 
-            await handleRealizarPedido(id_cliente)
+            const quantidade = item.quantidade
+            const valor = item.preco
+            const id_produto = item.id
 
+            const resposta = await apiLocal.post('/CriarItensPedido', {
+                quantidade, valor, id_pedido, id_produto
+            })
 
-            // const iPd = await AsyncStorage.getItem('id_pedido')
-            // const iPedido = JSON.parse(iPd)
-            // const id_pedido = (iPedido)
-    
-            // const quantidade = item.quantidade
-            // const valor = item.preco
-            // const id_produto = item.id
-    
-            // const resposta = await apiLocal.post('/CriarItensPedido', {
-            //     quantidade, valor, id_pedido, id_produto
-            // })
-    
-            // console.log(resposta.data)
+            console.log(resposta.data)
+            navigation.navigate('Carrinho')
 
         } catch (error) {
             console.log(error)
+
         }
     }
+
 
 
     return (
@@ -162,7 +174,7 @@ function Card() {
                                 <Text> {item.nome}</Text>
                                 <Text>{item.descricao}</Text>
                                 <Text>{item.preco}</Text>
-                                <TouchableOpacity style={styleBody.card_button} onPress={() => realizarPedido(item)} >
+                                <TouchableOpacity style={styleBody.card_button} onPress={() => criarItens(item)} >
                                     <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
                                     {/* <MaterialCommunityIcons name="cart" size={24} color="white" /> */}
                                 </TouchableOpacity>
@@ -183,7 +195,7 @@ function CardDestaque() {
     useEffect(() => {
         try {
             async function lerCategoriasProdutosDestaque() {
-                const resposta = await apiLocal.get(`/ListarProdutosCategoria/6b51f1c9-7765-4ea2-91b0-2ff3a0f5becb`)
+                const resposta = await apiLocal.get(`/ListarProdutosCategoria/b7486cdf-845f-43aa-832f-b3d08b99496`)
                 setCategoriasProdutosDestaque(resposta.data)
             }
             lerCategoriasProdutosDestaque()
