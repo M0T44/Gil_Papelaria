@@ -24,6 +24,8 @@ import { DeletarClientesController } from './controllers/Clientes/DeletarCliente
 import { ListarCategoriasController } from './controllers/Categorias/ListarCategoriasController'
 import { ListarProdutosCategoriaController } from './controllers/Categorias/ListarProdutosCategoriaController'
 
+import { ListarProdutosController } from './controllers/Produtos/ListarProdutosController'
+
 const router = Router()
 const upload = multer(uploadConfig.upload('./tmp'))
 
@@ -48,4 +50,7 @@ router.delete('/ApagarClientes/:id', new DeletarClientesController().handle)
 router.get('/ListarCategorias', new ListarCategoriasController().handle)
 router.get('/ListarPedidos/:id', new PedidosController().listarPedido)
 router.get('/ListarProdutosCategoria/:id', new PedidosController().listarProdutosCategoria)
+
+router.get('/ListarProdutos', new ListarProdutosController().handle)
+
 export { router }
