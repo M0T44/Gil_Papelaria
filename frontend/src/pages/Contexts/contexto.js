@@ -35,14 +35,41 @@ export default function AuthContext({ children }) {
             await AsyncStorage.setItem('id_pedido', JSON.stringify(resposta.data.id))
         }
     }
-    
+
+    async function handleCriarItens(id_pedido,
+        id_produto,
+        quantidade) {
+        try {
+            const prodExt = categoriasProdutos.filter((item) => item.id)
+
+            const iPd = await AsyncStorage.getItem('id_pedido')
+            const iPedido = JSON.parse(iPd)
+            const id_pedido = (iPedido)
+
+            const id_produto = prodExt
+            const quantidade = Number(quantidade)
+
+            const resposta = await apiLocal.post('/CriarItensPedido', {
+                id_pedido,
+                id_produto,
+                quantidade
+            })
+
+
+            console.log(resposta.data)
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     async function handleClearAsync() {
         await AsyncStorage.clear()
         setToken(false)
     }
 
     return (
-        <Context.Provider value={{ autenticado, handleLogar, handleClearAsync, handleRealizarPedido }}>
+        <Context.Provider value={{ autenticado, handleLogar, handleClearAsync, handleRealizarPedido, handleCriarItens }}>
             {children}
         </Context.Provider>
     )
