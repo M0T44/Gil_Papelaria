@@ -140,20 +140,19 @@ function Card() {
             const iPedido = JSON.parse(iPd)
             const id_pedido = (iPedido)
 
-            const valor = item.preco
             const id_produto = item.id
             const quantidade = Number(item.quantidade)
 
 
             await apiLocal.post('/CriarItensPedido', {
-                quantidade, valor, id_pedido, id_produto
+                quantidade, id_pedido, id_produto
             })
 
             console.log('Valores a serem enviados para a API:');
             console.log('id_pedido:', id_pedido);
             console.log('id_produto:', id_produto);
             console.log('quantidade:', quantidade);
-            console.log('valor:', valor);
+
             navigation.navigate('Carrinho')
         } catch (error) {
             console.log(error)
