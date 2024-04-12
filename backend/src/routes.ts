@@ -72,7 +72,7 @@ const upload = multer(uploadConfig.upload('./tmp'))
 router.post('/CriarClientes', new CriarClientesController().handle);
 router.post('/CriarProdutos', upload.single('file'), new CriarProdutosController().handle);
 router.post('/CriarCategorias', new CriarCategoriasController().handle);
-router.post('/CriarItensPedido', new CriarItensController().handle);
+router.post('/CriarItensPedido', new PedidosController().criarItensPedido);
 // router.post('/CriarItensPedido', new PedidosController().criarItensPedido)
 router.post('/CriarPedidos', new PedidosController().criarPedidos);
 router.post('/LoginClientes', new LoginControler().handle);

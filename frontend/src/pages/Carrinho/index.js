@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import apiLocal from '../../API/apiLocal/apiLocal'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import {
     SafeAreaView,
     ScrollView,
@@ -16,14 +17,14 @@ export default function Carrinho() {
     useEffect(() => {
         async function lerCriarItens() {
             try {
-                const iPd = await AsyncStorage.getItem('id_pedido')
-                const iPedido = JSON.parse(iPd)
-                const id_pedido = (iPedido)
+                const iId = await AsyncStorage.getItem('id')
+                const id_cliente = JSON.parse(iId)
+                const id = (id_cliente)
 
-                const resposta = await apiLocal.get(`/ListarPedidos/${id_pedido}`)
+
+                const resposta = await apiLocal.get(`/ListarPedidos/${id}`)
 
                 setLerItens(resposta.data)
-                console.log(resposta)
             } catch (error) {
                 console.log(error)
             }
@@ -38,9 +39,13 @@ export default function Carrinho() {
                     <Text>Carrinho </Text>
                 </View>
 
-                {lerItens.map((item) => {
+                {lerItens.map((busca) => {
                     return (
-                        <Text key={item.id} value={item.id} >{item.cadastro.nome}</Text>
+                        <View key={busca.id} value={busca.id}>
+
+                            <Text>{busca.id}</Text>
+                            <Text >{busca.cadastro?.quantidade}</Text>
+                        </View>
                     )
                 })}
             </ScrollView>
