@@ -36,16 +36,16 @@ export default function AuthContext({ children }) {
         }
     }
 
-    async function criarItens(quantidade, valor, id_pedido, id_produto) {
+    // async function criarItens(quantidade, valor, id_pedido, id_produto) {
 
-        const resposta = await apiLocal.post('/CriarItensPedido', {
-            quantidade, valor, id_pedido, id_produto
-        })
-        
-        console.log(resposta.data)
-        navigation.navigate('Carrinho')
+    //     const resposta = await apiLocal.post('/CriarItensPedido', {
+    //         quantidade, valor, id_pedido, id_produto
+    //     })
 
-    }
+    //     console.log(resposta.data)
+    //     navigation.navigate('Carrinho')
+
+    // }
 
     async function handleClearAsync() {
         await AsyncStorage.clear()
@@ -53,7 +53,7 @@ export default function AuthContext({ children }) {
     }
 
     return (
-        <Context.Provider value={{ autenticado, handleLogar, handleClearAsync, handleRealizarPedido, criarItens }}>
+        <Context.Provider value={{ autenticado, handleLogar, handleClearAsync, handleRealizarPedido }}>
             {children}
         </Context.Provider>
     )

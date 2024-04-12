@@ -104,7 +104,7 @@ function Card() {
 
     const [categoriasProdutos, setCategoriasProdutos] = useState([''])
     const [pedido, setPedido] = useState([''])
-    const { handleRealizarPedido, criarItens } = useContext(Context)
+    const { handleRealizarPedido } = useContext(Context)
 
     useEffect(() => {
         try {
@@ -140,22 +140,62 @@ function Card() {
             const iPedido = JSON.parse(iPd)
             const id_pedido = (iPedido)
 
-            const valor = Number(item.preco)
+            const valor = item.preco
             const id_produto = item.id
             const quantidade = Number(item.quantidade)
 
 
-            const resposta = await apiLocal.post('/CriarItensPedido', {
+            await apiLocal.post('/CriarItensPedido', {
                 quantidade, valor, id_pedido, id_produto
             })
 
-            console.log(resposta)
-
+            console.log('Valores a serem enviados para a API:');
+            console.log('id_pedido:', id_pedido);
+            console.log('id_produto:', id_produto);
+            console.log('quantidade:', quantidade);
+            console.log('valor:', valor);
+            navigation.navigate('Carrinho')
         } catch (error) {
             console.log(error)
 
         }
     }
+
+    // async function handleCriarItens(item) {
+    //     try {
+    //         const prodExt = categoriasProdutos.filter((item) => item.id)
+    //         const valor = Number(prodExt.map((item) => item.preco) * item.quantidade)
+    //         const iPd = await AsyncStorage.getItem('id_pedido')
+    //         const iPedido = JSON.parse(iPd)
+    //         const id_pedido = (iPedido)
+    //         const id_produto = prodExt
+    //         const quantidade = Number(quantidade)
+
+    //         const resposta = await apiLocal.post('/CriarItensPedido', {
+    //             id_pedido,
+    //             id_produto,
+    //             quantidade,
+    //             valor
+    //         })
+
+    //         // console.log('Valores a serem enviados para a API:');
+    //         // console.log('id_pedido:', id_pedido);
+    //         // console.log('id_produto:', id_produto);
+    //         // console.log('quantidade:', quantidade);
+    //         // console.log('valor:', valor);
+    //         console.log(dados)
+
+    //         let dados = {
+    //             id: resposta.data.id,
+    //             produto: resposta.data.produtos.nome,
+    //             quantidade: resposta.data.quantidade,
+    //             valor: Number(resposta.data.valor)
+    //         }
+    //         // setItensPedido(oldArray => [...oldArray, dados])
+    //     } catch (err) {
+    //         console.log(err)
+    //     }
+    // }
 
     return (
         <ScrollView horizontal={true}>
