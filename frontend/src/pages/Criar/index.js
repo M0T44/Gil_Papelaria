@@ -44,7 +44,6 @@ export default function Criar() {
                 {lerItens.map((busca) => {
                     return (
                         <View key={busca.id} value={busca.id}>
-
                             <Text>{busca.id}</Text>
                             <Text >{busca.cadastro?.quantidade}</Text>
                         </View>

@@ -3,15 +3,12 @@ import { CriarItensServices } from '../../services/Itens/CriarItensServices'
 
 class CriarItensController {
     async handle(req: Request, res: Response) {
-       const { quantidade, id_pedido, id_produto } = req.body
-
-       const criarItensServices = new CriarItensServices()
-       const resposta = await criarItensServices.execute({
-        quantidade,
-        id_pedido,
-        id_produto
-       })
-       return res.json(resposta)
+        const { id_pedido, id_produto, valor, quantidade } = req.body
+        const criarItens = new CriarItensServices()
+        const response = await criarItens.execute({
+            id_pedido, id_produto, quantidade, valor
+        })
+        return res.json(response)
     }
 }
 

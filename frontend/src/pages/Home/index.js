@@ -109,7 +109,7 @@ function Card() {
     useEffect(() => {
         try {
             async function lerCategoriasProdutos() {
-                const resposta = await apiLocal.get(`/ListarProdutosCategoria/989721bf-2708-43e1-9a08-a509c06393e4`)
+                const resposta = await apiLocal.get(`/ListarProdutosCategoria/99574e76-50e6-4045-9d3f-3e3ea327f1a1`)
                 setCategoriasProdutos(resposta.data)
             }
             lerCategoriasProdutos()
@@ -159,21 +159,23 @@ function Card() {
     //     }
     // }
 
-    async function handleCriarItens() {
+    async function handleCriarItens(id) {
         try {
-            const prodExt = categoriasProdutos.filter((item) => item.id)
-
             const iPd = await AsyncStorage.getItem('id_pedido')
             const iPedido = JSON.parse(iPd)
             const id_pedido = (iPedido)
 
-            const id_produto = prodExt
-            const quantidade = Number(quantidade)
+            const prodExt = categoriasProdutos.filter((item) => item.id === id)
+            const id_produto = id
+            const valor = Number(prodExt.map((item) => item.preco))
+            const quantidade = Number(prodExt.map((item) => item.quantidade))
 
-            const resposta = await apiLocal.post('/CriarItensPedido', {
+
+            const resposta = await apiLocal.post('/CriarItens', {
                 id_pedido,
                 id_produto,
-                quantidade
+                quantidade,
+                valor
             })
 
 
@@ -181,9 +183,13 @@ function Card() {
 
             let dados = {
                 id: resposta.data.id,
-                produto: resposta.data.produtos.nome,
-                quantidade: resposta.data.quantidade
+                produto: resposta.data.produto?.nome,
+                quantidade: resposta.data.quantidade,
+                valor: Number(resposta.data.valor)
             }
+
+            navigation.navigate('Criar')
+
             // setItensPedido(oldArray => [...oldArray, dados])
         } catch (err) {
             console.log(err)
@@ -204,7 +210,8 @@ function Card() {
                                 <Text> {item.nome}</Text>
                                 <Text>{item.descricao}</Text>
                                 <Text>{item.preco}</Text>
-                                <TouchableOpacity style={styleBody.card_button} onPress={handleCriarItens} >
+                                <Text>{item.quantidade}</Text>
+                                <TouchableOpacity style={styleBody.card_button} onPress={() => handleCriarItens(item.id)} >
                                     <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
                                     <MaterialCommunityIcons name="cart" size={24} color="white" />
                                 </TouchableOpacity>
@@ -225,7 +232,7 @@ function CardDestaque() {
     useEffect(() => {
         try {
             async function lerCategoriasProdutosDestaque() {
-                const resposta = await apiLocal.get(`/ListarProdutosCategoria/0e55ea36-738e-4a3b-b208-4e31774e865b`)
+                const resposta = await apiLocal.get(`/ListarProdutosCategoria/4881232a-4162-4203-b445-5b3aaf815d06`)
                 setCategoriasProdutosDestaque(resposta.data)
             }
             lerCategoriasProdutosDestaque()
@@ -260,8 +267,6 @@ function CardDestaque() {
         </ScrollView>
     )
 }
-
-
 
 export default function Home() {
 
