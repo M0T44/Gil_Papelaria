@@ -134,30 +134,6 @@ function Card() {
         realizarPedido()
     }, [])
 
-    // async function handleCriarItens(item) {
-    //     try {
-    //         const iPd = await AsyncStorage.getItem('id_pedido')
-    //         const iPedido = JSON.parse(iPd)
-    //         const id_pedido = (iPedido)
-
-    //         const id_produto = item.id
-    //         const quantidade = item.quantidade
-
-
-    //         await apiLocal.post('/CriarItensPedido', {
-    //             quantidade, id_pedido, id_produto
-    //         })
-
-    //         console.log('id_pedido:', id_pedido);
-    //         console.log('id_produto:', id_produto);
-    //         console.log('quantidade:', quantidade);
-
-    //         navigation.navigate('Criar')
-    //     } catch (error) {
-    //         console.log(error)
-
-    //     }
-    // }
 
     async function handleCriarItens(id) {
         try {
@@ -188,7 +164,7 @@ function Card() {
                 valor: Number(resposta.data.valor)
             }
 
-            navigation.navigate('Criar')
+            navigation.navigate('Carrinho')
 
             // setItensPedido(oldArray => [...oldArray, dados])
         } catch (err) {
@@ -204,7 +180,7 @@ function Card() {
                         <View key={item.id} value={item.id} style={styleBody.card}>
                             <Image
                                 style={styleBody.imagem}
-                                source={{ uri: `http://10.152.46.17:3334/files/${item.banner}` }}
+                                source={{ uri: `http://192.168.1.8:3334/files/${item.banner}` }}
                             />
                             <View style={styleBody.card_info} value={item.id}>
                                 <Text> {item.nome}</Text>
