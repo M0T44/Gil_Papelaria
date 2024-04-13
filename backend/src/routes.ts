@@ -46,7 +46,10 @@ router.put('/AlterarItem', new AlterarItensController().handle)
 
 //Deletar
 router.delete('/ApagarClientes/:id', new DeletarClientesController().handle)
+router.delete('/ApagarPedido/:id', new PedidosController().apagarPedido)
+router.delete('/ApagarItem/:id', new PedidosController().apagarItemPedido)
 
+// vestidinho verde aventaç colorido
 //Listar
 router.get('/ListarCategorias', new ListarCategoriasController().handle)
 router.get('/ListarPedidos/:id', new PedidosController().listarPedido)

@@ -36,7 +36,7 @@ class CriarItensServices {
             }
         })
 
-        console.log(resposta)
+       return resposta
 
     }
 }

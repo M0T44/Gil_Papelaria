@@ -33,6 +33,37 @@ export default function Criar() {
         lerCriarItens()
     }, [lerItens])
 
+    async function handleApagarPedido() {
+        try {
+
+            const iPd = await AsyncStorage.getItem('id_pedido')
+            const iPedido = JSON.parse(iPd)
+            const id = (iPedido)
+
+            const resposta = await apiLocal.delete(`/ApagarPedido/${id}`)
+            console.log(resposta.data)
+
+            console.log(id)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async function handleApagarItem() {
+        try {
+
+            const iItem = await AsyncStorage.getItem('id_item')
+            const item = JSON.parse(iItem)
+            const id = (item)
+
+            const resposta = await apiLocal.delete(`/ApagarItem/${id}`)
+            console.log(resposta.data)
+            console.log(id)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
 
     return (
         <SafeAreaView>
@@ -63,6 +94,9 @@ export default function Criar() {
                                     <View style={style.card_info} value={busca.produtos?.id}>
                                         <Text> {busca.produtos?.nome}</Text>
                                         <Text>{busca.produtos?.preco}</Text>
+                                        <TouchableOpacity style={style.card_button} onPress={handleApagarItem}>
+                                            <Text style={style.buttonText}>Deletar</Text>
+                                        </TouchableOpacity>
                                     </View>
                                 </View>
                             </View>
@@ -75,7 +109,7 @@ export default function Criar() {
 
                     <View style={style.containerBotoes}>
                         <View>
-                            <TouchableOpacity style={style.card_button}>
+                            <TouchableOpacity style={style.card_button} onPress={handleApagarPedido}>
                                 <Text style={style.buttonText}>Cancelar</Text>
                             </TouchableOpacity>
                         </View>

@@ -8,6 +8,7 @@ interface ListarProduto {
     id: string
 
 }
+
 interface ListarPedido {
     id: string
 }
@@ -43,6 +44,7 @@ class PedidosServices {
         })
         return resposta
     }
+    
     async listarPedido({ id }: ListarPedido) {
         const resposta = await prismaClient.pedido.findMany({
             where: {
@@ -94,6 +96,15 @@ class PedidosServices {
         return { dados: 'Item Deletado' }
     }
 
+    async apagarPedido({ id }: ListarPedido) {
+        await prismaClient.pedido.delete({
+            where: {
+                id: id
+            }
+        })
+        return { dados: 'Pedido Deletado' }
+    }
+
     // async somarItensPedidos({ id }: ListarProduto) {
     //     const resposta = await prismaClient.itemPedido.aggregate({
     //         _sum: {
@@ -105,6 +116,8 @@ class PedidosServices {
     //     })
     //     return resposta._sum.valor
     // }
+
+
 }
 
 export { PedidosServices }

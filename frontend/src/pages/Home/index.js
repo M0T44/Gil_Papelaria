@@ -154,19 +154,15 @@ function Card() {
                 valor
             })
 
+            await AsyncStorage.setItem('id_item', JSON.stringify(resposta.data.id))
 
-            console.log(dados)
-
-            let dados = {
-                id: resposta.data.id,
-                produto: resposta.data.produto?.nome,
-                quantidade: resposta.data.quantidade,
-                valor: Number(resposta.data.valor)
-            }
+            // let dados = {
+            //     id: resposta.data.id
+            // }
+            // console.log(dados)
 
             navigation.navigate('Carrinho')
 
-            // setItensPedido(oldArray => [...oldArray, dados])
         } catch (err) {
             console.log(err)
         }

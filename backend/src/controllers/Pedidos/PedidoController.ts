@@ -49,6 +49,15 @@ class PedidosController {
         })
         return res.json(resposta)
     }
+    
+    async apagarPedido(req: Request, res: Response) {
+        const { id } = req.params
+        const apagarPedido = new PedidosServices()
+        const resposta = await apagarPedido.apagarPedido({
+            id
+        })
+        return res.json(resposta)
+    }
 
     // async somarItensPedido(req: Request, res: Response) {
     //     const { id } = req.params
