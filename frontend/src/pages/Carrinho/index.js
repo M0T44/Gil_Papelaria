@@ -83,7 +83,7 @@ export default function Carrinho() {
                             //             <Text>{busca.produtos?.preco}</Text>
                             //         </View>
                             //     </View>
-                            <View>
+                            <View key={busca.id} value={busca.id}>
                                 <View>
                                     <Text> Nº Pedido: {busca.pedidos?.n_pedido}</Text>
                                 </View>
