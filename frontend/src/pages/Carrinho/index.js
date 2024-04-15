@@ -279,7 +279,7 @@ const style = StyleSheet.create({
 
     buttonDeletar: {
         flexDirection: 'row',
-        backgroundColor: '#FF8616',
+        backgroundColor: 'red',
         padding: 12,
         borderRadius: 12,
         marginTop: 12
