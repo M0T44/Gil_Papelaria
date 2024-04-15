@@ -70,7 +70,7 @@ model Pedido {
   valor_total Decimal? @db.Decimal(9, 2)
   status      String   @default("Aguardando")
   draft       Boolean  @default(true)
-  
+  aceito      Boolean  @default(false)
 
  cadastro Cadastro @relation(fields: [id_cliente], references: [id])
   id_cliente String

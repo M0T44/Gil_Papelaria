@@ -49,7 +49,7 @@ class PedidosController {
         })
         return res.json(resposta)
     }
-    
+
     async apagarPedido(req: Request, res: Response) {
         const { id } = req.params
         const apagarPedido = new PedidosServices()
@@ -59,14 +59,23 @@ class PedidosController {
         return res.json(resposta)
     }
 
-    // async somarItensPedido(req: Request, res: Response) {
-    //     const { id } = req.params
-    //     const somarItensPedido = new PedidosServices()
-    //     const resposta = await somarItensPedido.somarItensPedidos({
-    //         id
-    //     })
-    //     return res.json(resposta)
-    // }
+    async finalizarPedido(req: Request, res: Response) {
+        const { id, draft, aceito } = req.body
+        const finalizarPedidosController = new PedidosServices()
+        const resposta = await finalizarPedidosController.finalizarPedido({
+            id, draft, aceito
+        })
+        return res.json(resposta)
+    }
+
+    async somarItensPedido(req: Request, res: Response) {
+        const { id } = req.params
+        const somarItensPedido = new PedidosServices()
+        const resposta = await somarItensPedido.somarItensPedidos({
+            id
+        })
+        return res.json(resposta)
+    }
 }
 
 export { PedidosController }

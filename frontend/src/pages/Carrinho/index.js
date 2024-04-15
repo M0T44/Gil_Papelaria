@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigation } from '@react-navigation/native'
 import apiLocal from '../../API/apiLocal/apiLocal'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import {
@@ -13,8 +14,27 @@ import {
 } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-export default function Carrinho() {
 
+function Body() {
+    return (
+        <SafeAreaView style={style.container}>
+            <ScrollView>
+                <View>
+                    <View style={style.containerText}>
+                        <Text style={style.textTitulo}>
+                            Carrinho
+                        </Text>
+                    </View>
+                    <Produtos />
+                    <Botoes />
+                </View>
+
+            </ScrollView >
+        </SafeAreaView>
+    )
+}
+
+function Produtos() {
     const [lerItens, setLerItens] = useState([''])
 
     useEffect(() => {
@@ -34,23 +54,6 @@ export default function Carrinho() {
         lerCriarItens()
     }, [lerItens])
 
-    //nao ta pegando apagar pedido
-    async function handleApagarPedido() {
-        try {
-
-            const iPd = await AsyncStorage.getItem('id_pedido')
-            const iPedido = JSON.parse(iPd)
-            const id = (iPedido)
-
-            const resposta = await apiLocal.delete(`/ApagarPedido/${id}`)
-            console.log(resposta.data)
-
-            console.log(id)
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
     async function handleApagarItem() {
         try {
 
@@ -60,100 +63,22 @@ export default function Carrinho() {
 
             const resposta = await apiLocal.delete(`/ApagarItem/${id}`)
             console.log(resposta.data)
-            console.log(id)
         } catch (error) {
             console.log(error)
         }
     }
 
-    // return (
-    //     <SafeAreaView>
-    //         <ScrollView>
-    //             <StatusBar backgroundColor="white" barStyle="dark-content" />
-    //             <View style={style.container}>
-
-    //                 <Text>Carrinho </Text>
-
-    // <View>
-    //     {lerItens.map((busca) => {
-    //         return (
-    //             <View key={busca.id} value={busca.id}>
-    //                 {/* <View>
-    //                 <Text> Nº Pedido: {busca.pedidos?.n_pedido}</Text>
-    //             </View> */}
-
-    //                 <Image
-    //                     style={style.imagem}
-    //                     source={{ uri: `http://192.168.0.72:3334/files/${busca.produtos?.banner}` }}
-    //                 />
-
-    //                 <View>
-    //                     <Text>{busca.produtos?.nome}</Text>
-    //                     <Text>{busca.produtos?.descricao}</Text>
-    //                 </View>
-
-    //                 <Text>{busca.produtos?.preco}</Text>
-
-    //                 <TouchableOpacity onPress={handleApagarItem}>
-    //                     <Text>Deletar item</Text>
-    //                 </TouchableOpacity>
-
-    //             </View>
-    //         )
-    //     })}
-    // </View>
-
-    //                 <Text>Total do pedido: </Text>
-
-    //                 <View>
-    //                     <TouchableOpacity onPress={handleApagarPedido}>
-    //                         <Text>Cancelar</Text>
-    //                     </TouchableOpacity>
-    //                     <View>
-    //                         <TouchableOpacity>
-    //                             <Text>Finalizar Compra</Text>
-    //                         </TouchableOpacity>
-    //                     </View>
-    //                 </View>
-
-    //             </View>
-    //         </ScrollView>
-    //     </SafeAreaView>
-    // )
-
     return (
         <SafeAreaView style={style.container}>
             <ScrollView>
-                <StatusBar backgroundColor="white" barStyle="dark-content" />
                 <View>
-
-                    <View style={style.containerText}>
-                        <Text style={style.textTitulo}>
-                            Carrinho
-                        </Text>
-                    </View>
-
-                    {/* <View style={style.containerProduto}>
-                        <View style={style.cardProduto}>
-
-                            <Text>Imagem</Text>
-
-                            <Text>Produto</Text>
-
-                            <Text>Preço</Text>
-
-                            <Text>Remover</Text>
-
-                        </View>
-                    </View> */}
-
                     <View style={style.containerProduto}>
                         {lerItens.map((busca) => {
                             return (
                                 <View key={busca.id} value={busca.id} style={style.cardProduto}>
                                     {/* <View>
-                                    <Text> Nº Pedido: {busca.pedidos?.n_pedido}</Text>
-                                </View> */}
+                                        <Text> Nº Pedido: {busca.pedidos?.n_pedido}</Text>
+                                    </View> */}
 
                                     <Image
                                         style={style.imagem}
@@ -181,22 +106,88 @@ export default function Carrinho() {
                         })}
                     </View>
 
+                </View>
+            </ScrollView>
+        </SafeAreaView>
+    )
+
+}
+
+function Botoes() {
+    const navigation = useNavigation()
+    const [itensPedido, setItensPedido] = useState([''])
+    const [valorTotal, setValorTotal] = useState('')
+
+    useEffect(() => {
+        try {
+            async function somarItensPedido() {
+                const iPd = await AsyncStorage.getItem('id_pedido')
+                const iPedido = JSON.parse(iPd)
+                const id = (iPedido)
+
+                const resposta = await apiLocal.get(`/SomarItensPedido/${id}`)
+                setValorTotal(resposta.data)
+            }
+            somarItensPedido()
+        } catch (err) {
+            console.log(err)
+        }
+    }, [itensPedido])
+
+    async function handleFinalizarPedidos() {
+        try {
+            const iPd = await AsyncStorage.getItem('id_pedido')
+            const iPedido = JSON.parse(iPd)
+            const id = (iPedido)
+            const draft = false
+            const aceito = true
+
+            const resposta = await apiLocal.put('/FinalizarPedidos', {
+                id,
+                draft,
+                aceito
+            })
+            console.log(resposta.data)
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async function handleApagarPedido() {
+        try {
+
+            const iPd = await AsyncStorage.getItem('id_pedido')
+            const iPedido = JSON.parse(iPd)
+            const id = (iPedido)
+
+             await apiLocal.delete(`/ApagarPedido/${id}`)
+           
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+    return (
+        <SafeAreaView style={style.container}>
+            <ScrollView>
+                <View>
                     <View style={style.containerComprando}>
-                        <TouchableOpacity style={style.botaoComprando} onPress={handleApagarPedido}>
+                        <TouchableOpacity style={style.botaoComprando} onPress={() => navigation.navigate('Home')}>
                             <Text style={style.textComprando}>
                                 Continuar Comprando
                             </Text>
                         </TouchableOpacity>
                     </View>
 
-                    <View style={style.containerValor}>
-                        <Text>
-                            Valor total do pedido:
-                        </Text>
-                        <Text>
-                            **Valor**
-                        </Text>
-                    </View>
+
+                    {valorTotal !== null && (
+                        <View style={style.containerValor} >
+                            <Text>Valor Total: </Text>
+                            <Text>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(`${valorTotal}`)} </Text>
+                        </View>
+                    )}
 
                     <View style={style.containerBotoes}>
                         <TouchableOpacity style={style.botaoCancelar} onPress={handleApagarPedido}>
@@ -205,7 +196,7 @@ export default function Carrinho() {
                             </Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={style.botaoComprar}>
+                        <TouchableOpacity style={style.botaoComprar} onPress={handleFinalizarPedidos}>
                             <Text style={style.textBotoes}>
                                 Finalizar
                             </Text>
@@ -215,10 +206,23 @@ export default function Carrinho() {
             </ScrollView>
         </SafeAreaView>
     )
+
 }
 
-const style = StyleSheet.create({
+export default function Carrinho() {
+    return (
+        <SafeAreaView>
+            <ScrollView>
+                <StatusBar backgroundColor="white" barStyle="dark-content" />
+                <Body />
+            </ScrollView>
+        </SafeAreaView>
+    )
 
+}
+
+
+const style = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff'
@@ -234,7 +238,7 @@ const style = StyleSheet.create({
     },
 
     containerProduto: {
-        height: 600,
+        height: 500,
     },
 
     cardProduto: {
@@ -261,7 +265,7 @@ const style = StyleSheet.create({
 
     containerComprando: {
         alignItems: 'center',
-        paddingVertical: 24
+        paddingVertical: 15
     },
 
     botaoComprando: {
@@ -289,13 +293,12 @@ const style = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-around',
-        paddingVertical: 24
     },
 
     containerBotoes: {
         flexDirection: 'row',
         justifyContent: 'space-around',
-        paddingVertical: 24,
+        paddingVertical: 15,
     },
 
     botaoCancelar: {

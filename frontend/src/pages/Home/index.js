@@ -17,7 +17,6 @@ import {
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import Header from '../../components/header';
-import MultiOpcoes from '../../components/MultiOpcoes'
 import { Context } from '../Contexts/contexto';
 
 function Body() {
@@ -104,13 +103,12 @@ function Card() {
     const navigation = useNavigation()
 
     const [categoriasProdutos, setCategoriasProdutos] = useState([''])
-    const [pedido, setPedido] = useState([''])
     const { handleRealizarPedido } = useContext(Context)
 
     useEffect(() => {
         try {
             async function lerCategoriasProdutos() {
-                const resposta = await apiLocal.get(`/ListarProdutosCategoria/0e0263b5-0ba2-4cd7-89dd-79836f32256a`)
+                const resposta = await apiLocal.get(`/ListarProdutosCategoria/c5d9940f-79ab-4b7b-9c25-17e9a67d531f`)
                 setCategoriasProdutos(resposta.data)
             }
             lerCategoriasProdutos()
@@ -196,11 +194,12 @@ function CardDestaque() {
     const navigation = useNavigation()
 
     const [categoriasProdutosDestaque, setCategoriasProdutosDestaque] = useState([''])
+    const { handleRealizarPedido } = useContext(Context)
 
     useEffect(() => {
         try {
             async function lerCategoriasProdutosDestaque() {
-                const resposta = await apiLocal.get(`/ListarProdutosCategoria/a08b4949-c7f3-496b-8091-3ebd5cd1da32`)
+                const resposta = await apiLocal.get(`/ListarProdutosCategoria/9bd6a940-a628-4de3-be75-0602adc6f3a8`)
                 setCategoriasProdutosDestaque(resposta.data)
             }
             lerCategoriasProdutosDestaque()
@@ -208,6 +207,50 @@ function CardDestaque() {
             alert(error)
         }
     }, [categoriasProdutosDestaque])
+
+    useEffect(() => {
+        async function realizarPedido() {
+            try {
+                const iId = await AsyncStorage.getItem('id')
+                const id = JSON.parse(iId)
+                const id_cliente = (id)
+
+                await handleRealizarPedido(id_cliente)
+            } catch (error) {
+                console.log("error")
+            }
+        }
+        realizarPedido()
+    }, [])
+
+
+    async function handleCriarItens(id) {
+        try {
+            const iPd = await AsyncStorage.getItem('id_pedido')
+            const iPedido = JSON.parse(iPd)
+            const id_pedido = (iPedido)
+
+            const prodExt = categoriasProdutosDestaque.filter((item) => item.id === id)
+            const id_produto = id
+            const valor = Number(prodExt.map((item) => item.preco))
+            const quantidade = Number(prodExt.map((item) => item.quantidade))
+
+
+            const resposta = await apiLocal.post('/CriarItens', {
+                id_pedido,
+                id_produto,
+                quantidade,
+                valor
+            })
+
+            await AsyncStorage.setItem('id_item', JSON.stringify(resposta.data.id))
+
+            navigation.navigate('Carrinho')
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
     return (
         <ScrollView horizontal={true}>
@@ -223,7 +266,8 @@ function CardDestaque() {
                                 <Text> {item.nome}</Text>
                                 <Text>{item.descricao}</Text>
                                 <Text>{item.preco}</Text>
-                                <TouchableOpacity style={styleBody.card_button} onPress={() => console.log('Botão pressionado')}>
+                                <Text>{item.quantidade}</Text>
+                                <TouchableOpacity style={styleBody.card_button} onPress={() => handleCriarItens(item.id)} >
                                     <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
                                     <MaterialCommunityIcons name="cart" size={24} color="white" />
                                 </TouchableOpacity>

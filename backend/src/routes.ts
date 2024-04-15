@@ -43,6 +43,7 @@ router.post('/LoginClientes', new LoginControler().handle)
 router.put('/AlterarClientes', new AlterarClienteController().handle)
 router.put('/AlterarPedido', new CriarItensController().handle)
 router.put('/AlterarItem', new AlterarItensController().handle)
+router.put('/FinalizarPedidos', new PedidosController().finalizarPedido)
 
 //Deletar
 router.delete('/ApagarClientes/:id', new DeletarClientesController().handle)
@@ -56,5 +57,6 @@ router.get('/ListarPedidos/:id', new PedidosController().listarPedido)
 router.get('/ListarItens/:id', new ListarItemUnicoController().handle)
 router.get('/ListarProdutosCategoria/:id', new PedidosController().listarProdutosCategoria)
 router.get('/ListarProdutos', new ListarProdutosController().handle)
+router.get('/SomarItensPedido/:id', new PedidosController().somarItensPedido)
 
 export { router }

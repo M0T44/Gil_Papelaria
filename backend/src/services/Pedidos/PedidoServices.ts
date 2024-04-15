@@ -13,11 +13,16 @@ interface ListarPedido {
     id: string
 }
 
-
 interface CriarItensPedido {
     id_pedido: string
     id_produto: string
     quantidade: number
+}
+
+interface FinalizarPedidos {
+    id: string
+    draft: boolean
+    aceito: boolean
 }
 
 class PedidosServices {
@@ -44,7 +49,7 @@ class PedidosServices {
         })
         return resposta
     }
-    
+
     async listarPedido({ id }: ListarPedido) {
         const resposta = await prismaClient.pedido.findMany({
             where: {
@@ -105,17 +110,29 @@ class PedidosServices {
         return { dados: 'Pedido Deletado' }
     }
 
-    // async somarItensPedidos({ id }: ListarProduto) {
-    //     const resposta = await prismaClient.itemPedido.aggregate({
-    //         _sum: {
-    //             valor: true
-    //         },
-    //         where: {
-    //             id_pedido: id
-    //         }
-    //     })
-    //     return resposta._sum.valor
-    // }
+    async finalizarPedido({ id, draft, aceito }: FinalizarPedidos) {
+        await prismaClient.pedido.update({
+            where: {
+                id: id
+            },
+            data: {
+                draft: draft,
+                aceito: aceito
+            }
+        })
+    }
+
+    async somarItensPedidos({ id }: ListarProduto) {
+        const resposta = await prismaClient.itemPedido.aggregate({
+            _sum: {
+                valor: true
+            },
+            where: {
+                id_pedido: id
+            }
+        })
+        return resposta._sum.valor
+    }
 
 
 }
