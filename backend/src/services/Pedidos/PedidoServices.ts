@@ -25,6 +25,10 @@ interface FinalizarPedidos {
     aceito: boolean
 }
 
+interface ApagarPedido {
+    id_pedido: string
+}
+
 class PedidosServices {
     async criarPedido({ id_cliente }: IdCliente) {
         const resposta = await prismaClient.pedido.create({
@@ -101,10 +105,10 @@ class PedidosServices {
         return { dados: 'Item Deletado' }
     }
 
-    async apagarPedido({ id }: ListarPedido) {
+    async apagarPedido({ id_pedido }: ApagarPedido) {
         await prismaClient.pedido.delete({
             where: {
-                id: id
+                id: id_pedido
             }
         })
         return { dados: 'Pedido Deletado' }

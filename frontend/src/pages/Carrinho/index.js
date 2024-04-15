@@ -25,7 +25,7 @@ function Body() {
                             Carrinho
                         </Text>
                     </View>
-                    <Produtos />
+                    {/* <Produtos /> */}
                     <Botoes />
                 </View>
 
@@ -34,84 +34,18 @@ function Body() {
     )
 }
 
-function Produtos() {
-    const [lerItens, setLerItens] = useState([''])
+// function Produtos({ route }) {
 
-    useEffect(() => {
-        async function lerCriarItens() {
-            try {
-                const iPd = await AsyncStorage.getItem('id_pedido')
-                const iPedido = JSON.parse(iPd)
-                const id_pedido = (iPedido)
 
-                const resposta = await apiLocal.get(`/ListarItens/${id_pedido}`)
+//     return (
+//         <SafeAreaView style={style.container}>
+//             <ScrollView>
 
-                setLerItens(resposta.data)
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        lerCriarItens()
-    }, [lerItens])
+//             </ScrollView>
+//         </SafeAreaView>
+//     )
 
-    async function handleApagarItem() {
-        try {
-
-            const iItem = await AsyncStorage.getItem('id_item')
-            const item = JSON.parse(iItem)
-            const id = (item)
-
-            const resposta = await apiLocal.delete(`/ApagarItem/${id}`)
-            console.log(resposta.data)
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    return (
-        <SafeAreaView style={style.container}>
-            <ScrollView>
-                <View>
-                    <View style={style.containerProduto}>
-                        {lerItens.map((busca) => {
-                            return (
-                                <View key={busca.id} value={busca.id} style={style.cardProduto}>
-                                    {/* <View>
-                                        <Text> Nº Pedido: {busca.pedidos?.n_pedido}</Text>
-                                    </View> */}
-
-                                    <Image
-                                        style={style.imagem}
-                                        source={{ uri: `http://192.168.0.72:3334/files/${busca.produtos?.banner}` }}
-                                    />
-
-                                    <View>
-                                        <Text>{busca.produtos?.nome}</Text>
-                                        <Text style={style.textDescricao}>{busca.produtos?.descricao}</Text>
-                                    </View>
-
-                                    <View style={style.informacaoProduto}>
-
-                                        <Text>Valor: {busca.produtos?.preco}</Text>
-
-                                        <TouchableOpacity onPress={handleApagarItem} style={style.buttonDeletar}>
-                                            {/* <Text style={style.textBotoes}>Deletar item</Text> */}
-                                            <MaterialCommunityIcons name="delete" size={24} color="white" />
-                                        </TouchableOpacity>
-
-                                    </View>
-
-                                </View>
-                            )
-                        })}
-                    </View>
-
-                </View>
-            </ScrollView>
-        </SafeAreaView>
-    )
-
-}
+// }
 
 function Botoes() {
     const navigation = useNavigation()
@@ -127,6 +61,7 @@ function Botoes() {
 
                 const resposta = await apiLocal.get(`/SomarItensPedido/${id}`)
                 setValorTotal(resposta.data)
+
             }
             somarItensPedido()
         } catch (err) {
@@ -142,12 +77,12 @@ function Botoes() {
             const draft = false
             const aceito = true
 
-            const resposta = await apiLocal.put('/FinalizarPedidos', {
+            await apiLocal.put('/FinalizarPedidos', {
                 id,
                 draft,
                 aceito
             })
-            console.log(resposta.data)
+
 
         } catch (error) {
             console.log(error)
@@ -159,10 +94,14 @@ function Botoes() {
 
             const iPd = await AsyncStorage.getItem('id_pedido')
             const iPedido = JSON.parse(iPd)
-            const id = (iPedido)
+            const id_pedido = (iPedido)
 
-             await apiLocal.delete(`/ApagarPedido/${id}`)
-           
+            const resposta = await apiLocal.delete(`/ApagarPedido/${id_pedido}`)
+
+            console.log(resposta)
+
+            navigation.navigate('Home')
+
         } catch (error) {
             console.log(error)
         }
@@ -184,8 +123,7 @@ function Botoes() {
 
                     {valorTotal !== null && (
                         <View style={style.containerValor} >
-                            <Text>Valor Total: </Text>
-                            <Text>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(`${valorTotal}`)} </Text>
+                            <Text>Valor Total: {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(`${valorTotal}`)} </Text>
                         </View>
                     )}
 
@@ -209,11 +147,81 @@ function Botoes() {
 
 }
 
-export default function Carrinho() {
+export default function Carrinho({ route }) {
+
+    const { id } = route.params
+    const [lerItens, setLerItens] = useState([''])
+    const [pedido, setPedido] = useState([''])
+
+
+    useEffect(() => {
+        async function lerCriarItens() {
+            try {
+                const iPd = await AsyncStorage.getItem('id_pedido')
+                const iPedido = JSON.parse(iPd)
+                const id_pedido = (iPedido)
+
+                const resposta = await apiLocal.get(`/ListarItens/${id_pedido}`)
+
+                setLerItens(resposta.data)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        lerCriarItens()
+    }, [lerItens])
+
+    async function handleApagarItem() {
+        try {
+            const resposta = await apiLocal.delete(`/ApagarItem/${id}`)
+            let dados = {
+                id
+            }
+            console.log(dados)
+
+            setPedido(oldArray => [...oldArray, dados])
+        } catch (error) {
+            console.log(error)
+        }
+    }
     return (
         <SafeAreaView>
             <ScrollView>
                 <StatusBar backgroundColor="white" barStyle="dark-content" />
+                <View>
+                    <View style={style.containerProduto}>
+                        {lerItens.map((busca) => {
+                            return (
+                                <View key={busca.id} value={busca.id} style={style.cardProduto}>
+                                    {/* <View>
+                                        <Text> Nº Pedido: {busca.pedidos?.n_pedido}</Text>
+                                    </View> */}
+
+                                    <Image
+                                        style={style.imagem}
+                                        source={{ uri: `http://10.152.46.17:3334/files/${busca.produtos?.banner}` }}
+                                    />
+
+                                    <View>
+                                        <Text>{busca.produtos?.nome}</Text>
+                                        <Text style={style.textDescricao}>{busca.produtos?.descricao}</Text>
+                                    </View>
+
+                                    <View style={style.informacaoProduto}>
+
+                                        <Text>Valor: {busca.produtos?.preco}</Text>
+
+                                        <TouchableOpacity onPress={handleApagarItem} style={style.buttonDeletar}>
+                                            {/* <Text style={style.textBotoes}>Deletar item</Text> */}
+                                            <MaterialCommunityIcons name="delete" size={24} color="red" />
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+                            )
+                        })}
+                    </View>
+
+                </View>
                 <Body />
             </ScrollView>
         </SafeAreaView>
@@ -283,7 +291,6 @@ const style = StyleSheet.create({
 
     buttonDeletar: {
         flexDirection: 'row',
-        backgroundColor: 'red',
         padding: 12,
         borderRadius: 12,
         marginTop: 12
@@ -293,6 +300,7 @@ const style = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-around',
+        color: 'red'
     },
 
     containerBotoes: {
