@@ -11,6 +11,7 @@ import {
     TouchableOpacity,
     Image
 } from 'react-native'
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function Carrinho() {
 
@@ -65,60 +66,150 @@ export default function Carrinho() {
         }
     }
 
+    // return (
+    //     <SafeAreaView>
+    //         <ScrollView>
+    //             <StatusBar backgroundColor="white" barStyle="dark-content" />
+    //             <View style={style.container}>
+
+    //                 <Text>Carrinho </Text>
+
+    // <View>
+    //     {lerItens.map((busca) => {
+    //         return (
+    //             <View key={busca.id} value={busca.id}>
+    //                 {/* <View>
+    //                 <Text> Nº Pedido: {busca.pedidos?.n_pedido}</Text>
+    //             </View> */}
+
+    //                 <Image
+    //                     style={style.imagem}
+    //                     source={{ uri: `http://192.168.0.72:3334/files/${busca.produtos?.banner}` }}
+    //                 />
+
+    //                 <View>
+    //                     <Text>{busca.produtos?.nome}</Text>
+    //                     <Text>{busca.produtos?.descricao}</Text>
+    //                 </View>
+
+    //                 <Text>{busca.produtos?.preco}</Text>
+
+    //                 <TouchableOpacity onPress={handleApagarItem}>
+    //                     <Text>Deletar item</Text>
+    //                 </TouchableOpacity>
+
+    //             </View>
+    //         )
+    //     })}
+    // </View>
+
+    //                 <Text>Total do pedido: </Text>
+
+    //                 <View>
+    //                     <TouchableOpacity onPress={handleApagarPedido}>
+    //                         <Text>Cancelar</Text>
+    //                     </TouchableOpacity>
+    //                     <View>
+    //                         <TouchableOpacity>
+    //                             <Text>Finalizar Compra</Text>
+    //                         </TouchableOpacity>
+    //                     </View>
+    //                 </View>
+
+    //             </View>
+    //         </ScrollView>
+    //     </SafeAreaView>
+    // )
 
     return (
-        <SafeAreaView>
+        <SafeAreaView style={style.container}>
             <ScrollView>
                 <StatusBar backgroundColor="white" barStyle="dark-content" />
-                <View style={style.container}>
-                    <View>
-                        <Text>Carrinho </Text>
+                <View>
+
+                    <View style={style.containerText}>
+                        <Text style={style.textTitulo}>
+                            Carrinho
+                        </Text>
                     </View>
 
-                    {lerItens.map((busca) => {
-                        return (
-                            //     <View key={busca.id} value={busca.id} style={style.itensCarrinho}>
-                            //         <View value={busca.produtos?.id}>
-                            //             <Text> {busca.produtos?.nome}</Text>
-                            //             <Text>{busca.produtos?.preco}</Text>
-                            //         </View>
-                            //     </View>
-                            <View key={busca.id} value={busca.id}>
-                                <View>
+                    {/* <View style={style.containerProduto}>
+                        <View style={style.cardProduto}>
+
+                            <Text>Imagem</Text>
+
+                            <Text>Produto</Text>
+
+                            <Text>Preço</Text>
+
+                            <Text>Remover</Text>
+
+                        </View>
+                    </View> */}
+
+                    <View style={style.containerProduto}>
+                        {lerItens.map((busca) => {
+                            return (
+                                <View key={busca.id} value={busca.id} style={style.cardProduto}>
+                                    {/* <View>
                                     <Text> Nº Pedido: {busca.pedidos?.n_pedido}</Text>
-                                </View>
-                                <View key={busca.id} value={busca.id} style={style.card}>
+                                </View> */}
+
                                     <Image
                                         style={style.imagem}
-                                        source={{ uri: `http://192.168.1.8:3334/files/${busca.produtos?.banner}` }}
+                                        source={{ uri: `http://192.168.0.72:3334/files/${busca.produtos?.banner}` }}
                                     />
-                                    <View style={style.card_info} value={busca.produtos?.id}>
-                                        <Text> {busca.produtos?.nome}</Text>
-                                        <Text>{busca.produtos?.preco}</Text>
-                                        <TouchableOpacity style={style.card_button} onPress={handleApagarItem}>
-                                            <Text style={style.buttonText}>Deletar item</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                </View>
-                            </View>
-                        )
-                    })}
 
-                    <View>
-                        <Text>Total do pedido:</Text>
+                                    <View>
+                                        <Text>{busca.produtos?.nome}</Text>
+                                        <Text style={style.textDescricao}>{busca.produtos?.descricao}</Text>
+                                    </View>
+
+                                    <View style={style.informacaoProduto}>
+
+                                        <Text>Valor: {busca.produtos?.preco}</Text>
+
+                                        <TouchableOpacity onPress={handleApagarItem} style={style.buttonDeletar}>
+                                            {/* <Text style={style.textBotoes}>Deletar item</Text> */}
+                                            <MaterialCommunityIcons name="delete" size={24} color="white" />
+                                        </TouchableOpacity>
+
+                                    </View>
+
+                                </View>
+                            )
+                        })}
+                    </View>
+
+                    <View style={style.containerComprando}>
+                        <TouchableOpacity style={style.botaoComprando} onPress={handleApagarPedido}>
+                            <Text style={style.textComprando}>
+                                Continuar Comprando
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    <View style={style.containerValor}>
+                        <Text>
+                            Valor total do pedido:
+                        </Text>
+                        <Text>
+                            **Valor**
+                        </Text>
                     </View>
 
                     <View style={style.containerBotoes}>
-                        <View>
-                            <TouchableOpacity style={style.card_button} onPress={handleApagarPedido}>
-                                <Text style={style.buttonText}>Cancelar</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View>
-                            <TouchableOpacity style={style.card_button}>
-                                <Text style={style.buttonText}>Finalizar Compra</Text>
-                            </TouchableOpacity>
-                        </View>
+                        <TouchableOpacity style={style.botaoCancelar} onPress={handleApagarPedido}>
+                            <Text style={style.textBotoes}>
+                                Cancelar
+                            </Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={style.botaoComprar}>
+                            <Text style={style.textBotoes}>
+                                Finalizar
+                            </Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </ScrollView>
@@ -127,72 +218,105 @@ export default function Carrinho() {
 }
 
 const style = StyleSheet.create({
+
     container: {
         flex: 1,
-        alignItems: 'center',
-        backgroundColor: '#fff',
+        backgroundColor: '#fff'
     },
 
-    itensCarrinho: {
+    containerText: {
+        alignItems: 'center',
+        paddingVertical: 24,
+    },
+
+    textTitulo: {
+        fontSize: 26
+    },
+
+    containerProduto: {
+        height: 600,
+    },
+
+    cardProduto: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        paddingVertical: 8,
+    },
+
+    imagem: {
+        width: 75,
+        height: 75,
+        borderRadius: 8
+    },
+
+    textDescricao: {
+        fontSize: 10,
+        color: '#aaa'
+    },
+
+    informacaoProduto: {
+        alignItems: 'center'
+    },
+
+    containerComprando: {
+        alignItems: 'center',
+        paddingVertical: 24
+    },
+
+    botaoComprando: {
+        backgroundColor: '#bbb',
+        alignItems: 'center',
+        padding: 12,
+        borderRadius: 12,
+        width: 350,
+    },
+
+    textComprando: {
+        fontSize: 20,
+        color: '#fff'
+    },
+
+    buttonDeletar: {
+        flexDirection: 'row',
+        backgroundColor: '#FF8616',
+        padding: 12,
+        borderRadius: 12,
+        marginTop: 12
+    },
+
+    containerValor: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'space-around',
+        paddingVertical: 24
     },
 
     containerBotoes: {
-        flex: 1,
-        justifyContent: 'space-between',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        paddingVertical: 24,
     },
 
-    imagem: {
-        width: '100%',
-        height: '50%',
+    botaoCancelar: {
+        padding: 12,
+        color: '#fff',
+        backgroundColor: '#00A4AD',
+        width: 150,
+        alignItems: 'center',
+        borderRadius: 12
     },
 
-    container_card: {
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginLeft: 18,
-        paddingVertical: 8,
-    },
-    card: {
-        borderWidth: 2,           // Largura da borda
-        borderColor: '#BDB9B9',     // Cor da borda
-        borderRadius: 10,          // borda arredondada
-        padding: 15,              // espacamento 
-        margin: 6,
-        width: 250,
-        height: 325,
-        // marginVertical: 16,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center'
-    },
-    imagem: {
-        width: '100%',
-        height: '50%',
-    },
-    card_info: {
-        marginTop: 16,
-        width: 200,
-        height: 50,
-        alignItems: 'center'
-    },
-    card_button: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginTop: 16,
+    botaoComprar: {
+        padding: 12,
+        color: '#fff',
         backgroundColor: '#FF8616',
-        padding: 10,
-        borderRadius: 5,
+        width: 150,
+        alignItems: 'center',
+        borderRadius: 12
     },
-    buttonText: {
-        color: 'white',
-        fontSize: 16,
-        marginRight: 10
-    },
-    // Fim Card
+
+    textBotoes: {
+        color: '#fff'
+    }
 })

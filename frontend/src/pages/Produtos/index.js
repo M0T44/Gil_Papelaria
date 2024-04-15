@@ -44,7 +44,7 @@ export default function Produtos({ route }) {
                                 <View key={item.id} value={item.id} style={styleProdutos.card}>
                                     <Image
                                         style={styleProdutos.imagem}
-                                        source={{ uri: `http://10.152.46.16:3334/files/${item.banner}` }}
+                                        source={{ uri: `http://192.168.0.72:3334/files/${item.banner}` }}
                                     />
                                     <View style={styleProdutos.card_info} value={item.id}>
                                         <Text> {item.nome}</Text>

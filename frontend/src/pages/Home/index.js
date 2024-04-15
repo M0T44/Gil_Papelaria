@@ -98,7 +98,6 @@ function Categorias() {
     )
 }
 
-
 function Card() {
     const navigation = useNavigation()
 
@@ -109,7 +108,7 @@ function Card() {
     useEffect(() => {
         try {
             async function lerCategoriasProdutos() {
-                const resposta = await apiLocal.get(`/ListarProdutosCategoria/99574e76-50e6-4045-9d3f-3e3ea327f1a1`)
+                const resposta = await apiLocal.get(`/ListarProdutosCategoria/0e0263b5-0ba2-4cd7-89dd-79836f32256a`)
                 setCategoriasProdutos(resposta.data)
             }
             lerCategoriasProdutos()
@@ -156,11 +155,6 @@ function Card() {
 
             await AsyncStorage.setItem('id_item', JSON.stringify(resposta.data.id))
 
-            // let dados = {
-            //     id: resposta.data.id
-            // }
-            // console.log(dados)
-
             navigation.navigate('Carrinho')
 
         } catch (err) {
@@ -176,7 +170,7 @@ function Card() {
                         <View key={item.id} value={item.id} style={styleBody.card}>
                             <Image
                                 style={styleBody.imagem}
-                                source={{ uri: `http://192.168.1.8:3334/files/${item.banner}` }}
+                                source={{ uri: `http://192.168.0.72:3334/files/${item.banner}` }}
                             />
                             <View style={styleBody.card_info} value={item.id}>
                                 <Text> {item.nome}</Text>
@@ -204,7 +198,7 @@ function CardDestaque() {
     useEffect(() => {
         try {
             async function lerCategoriasProdutosDestaque() {
-                const resposta = await apiLocal.get(`/ListarProdutosCategoria/4881232a-4162-4203-b445-5b3aaf815d06`)
+                const resposta = await apiLocal.get(`/ListarProdutosCategoria/a08b4949-c7f3-496b-8091-3ebd5cd1da32`)
                 setCategoriasProdutosDestaque(resposta.data)
             }
             lerCategoriasProdutosDestaque()
@@ -221,7 +215,7 @@ function CardDestaque() {
                         <View key={item.id} value={item.id} style={styleBody.card}>
                             <Image
                                 style={styleBody.imagem}
-                                source={{ uri: `http://192.168.1.8:3334/files/${item.banner}` }}
+                                source={{ uri: `http://192.168.0.72:3334/files/${item.banner}` }}
                             />
                             <View style={styleBody.card_info} value={item.id}>
                                 <Text> {item.nome}</Text>
