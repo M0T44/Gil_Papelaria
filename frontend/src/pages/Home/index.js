@@ -17,6 +17,7 @@ import {
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import Header from '../../components/header';
+import MultiOpcoes from '../../components/MultiOpcoes'
 import { Context } from '../Contexts/contexto';
 
 function Body() {
@@ -39,6 +40,7 @@ function Body() {
                     <Text style={styleBody.text_maisVendidos}>Produtos em destaque</Text>
                     <CardDestaque />
                 </View>
+                {/* <MultiOpcoes /> */}
             </SafeAreaView>
         </ScrollView>
     )
@@ -320,10 +322,10 @@ const styleBody = StyleSheet.create({
         margin: 6,
         width: 250,
         height: 325,
-        // marginVertical: 16,
+        marginHorizontal: 16,
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     imagem: {
         width: '100%',

@@ -74,6 +74,7 @@ export default function MultiOpcoes() {
                 distanceToEdge={vertical = 15}
                 position='right'
                 actions={actions}
+                icon={() => <MaterialCommunityIcons name="trash-can" size={20} color="#FFF" />}
                 onPressItem={(name, index) => {
                     const action = actions.find(action => action.name === name);
                     if (action.onPress) action.onPress();
@@ -86,6 +87,6 @@ export default function MultiOpcoes() {
 
 const styleMultiOpcoes = StyleSheet.create({
     container: {
-        backgroundColor: 'red'
+        backgroundColor: 'red',
     }
 });
