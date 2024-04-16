@@ -61,9 +61,9 @@ function Botoes() {
 
             const iPd = await AsyncStorage.getItem('id_pedido')
             const iPedido = JSON.parse(iPd)
-            const id_pedido = (iPedido)
+            const id = (iPedido)
 
-            const resposta = await apiLocal.delete(`/ApagarPedido/${id_pedido}`)
+            const resposta = await apiLocal.delete(`/ApagarPedido/${id}`)
 
             console.log(resposta)
 
@@ -116,9 +116,9 @@ function Botoes() {
 
 export default function Carrinho({ route }) {
 
-    const { id } = route.params
+    const { idItem } = route.params
     const [lerItens, setLerItens] = useState([''])
-    // const [pedido, setPedido] = useState([''])
+    const [pedido, setPedido] = useState([''])
 
 
     useEffect(() => {
@@ -138,21 +138,42 @@ export default function Carrinho({ route }) {
         lerCriarItens()
     }, [lerItens])
 
+    // async function handleApagarItem() {
+    //     try {
+    //         const resposta = await apiLocal.delete(`/ApagarItemPedido/${idItem}`);
+    //         // setPedido(resposta)
+    //         let dados = {
+    //             idItem: idItem
+    //         }
+
+    //         setPedido(oldArray => [...oldArray, dados])
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
+
     async function handleApagarItem() {
         try {
-            const resposta = await apiLocal.delete(`/ApagarItem/${id}`)
+            const resposta = await apiLocal.delete(`/ApagarItemPedido/${idItem}`);
             console.log(resposta)
-            // let dados = {
-            console.log(id)
-            //     id
-            // }
-            // console.log(dados)
-
-            // setPedido(oldArray => [...oldArray, dados])
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
     }
+
+    // useEffect(() => {
+    //     async function handleApagarItem() {
+    //         try {
+    //             const id = idItem
+    //             const resposta = await apiLocal.delete(`/ApagarItemPedido/${id}`);
+    //             setPedido(resposta)
+    //         } catch (error) {
+    //             console.log(error);
+    //         }
+    //     }
+    //     handleApagarItem()
+    // }, [])
+
     return (
         <SafeAreaView >
             <ScrollView>
@@ -172,7 +193,7 @@ export default function Carrinho({ route }) {
                                     <View style={style.informacaoProdutoNome}>
                                         <Image
                                             style={style.imagem}
-                                            source={{ uri: `http://192.168.0.72:3334/files/${busca.produtos?.banner}` }}
+                                            source={{ uri: `http://192.168.1.8:3334/files/${busca.produtos?.banner}` }}
                                         />
 
                                         <View>
@@ -182,7 +203,7 @@ export default function Carrinho({ route }) {
                                     </View>
 
                                     <View style={style.informacaoProduto}>
-                                        <Text>Valor: {busca.produtos?.preco}</Text>
+                                        <Text> {busca.produtos?.preco}</Text>
 
                                         <TouchableOpacity onPress={handleApagarItem} style={style.buttonDeletar}>
                                             <MaterialCommunityIcons name="delete" size={24} color="red" />
@@ -192,6 +213,7 @@ export default function Carrinho({ route }) {
                                 </View>
                             )
                         })}
+
                     </View>
 
                     <Botoes />
