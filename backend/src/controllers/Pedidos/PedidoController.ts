@@ -51,10 +51,10 @@ class PedidosController {
     }
 
     async apagarPedido(req: Request, res: Response) {
-        const { id_pedido} = req.params
+        const { id} = req.params
         const apagarPedido = new PedidosServices()
         const resposta = await apagarPedido.apagarPedido({
-            id_pedido
+            id
         })
         return res.json(resposta)
     }

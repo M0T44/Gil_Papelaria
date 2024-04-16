@@ -48,7 +48,7 @@ router.put('/FinalizarPedidos', new PedidosController().finalizarPedido)
 //Deletar
 router.delete('/ApagarClientes/:id', new DeletarClientesController().handle)
 router.delete('/ApagarPedido/:id', new PedidosController().apagarPedido)
-router.delete('/ApagarItem/:id', new PedidosController().apagarItemPedido)
+router.delete('/ApagarItemPedido/:id', new PedidosController().apagarItemPedido)
 
 // vestidinho verde aventaç colorido
 //Listar

@@ -13,6 +13,9 @@ interface ListarPedido {
     id: string
 }
 
+interface ListarItem {
+    id: string
+}
 interface CriarItensPedido {
     id_pedido: string
     id_produto: string
@@ -26,7 +29,7 @@ interface FinalizarPedidos {
 }
 
 interface ApagarPedido {
-    id_pedido: string
+    id: string
 }
 
 class PedidosServices {
@@ -96,8 +99,8 @@ class PedidosServices {
         return resposta
     }
 
-    async apagarItemPedido({ id }: ListarProduto) {
-        await prismaClient.itemPedido.delete({
+    async apagarItemPedido({ id }: ListarItem) {
+        await prismaClient.itemPedido.deleteMany({
             where: {
                 id: id
             }
@@ -105,10 +108,10 @@ class PedidosServices {
         return { dados: 'Item Deletado' }
     }
 
-    async apagarPedido({ id_pedido }: ApagarPedido) {
-        await prismaClient.pedido.delete({
+    async apagarPedido({ id }: ApagarPedido) {
+        await prismaClient.pedido.deleteMany({
             where: {
-                id: id_pedido
+                id: id
             }
         })
         return { dados: 'Pedido Deletado' }
