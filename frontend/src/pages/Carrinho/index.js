@@ -118,7 +118,6 @@ export default function Carrinho({ route }) {
 
     const { idItem } = route.params
     const [lerItens, setLerItens] = useState([''])
-    const [pedido, setPedido] = useState([''])
 
 
     useEffect(() => {
@@ -138,20 +137,6 @@ export default function Carrinho({ route }) {
         lerCriarItens()
     }, [lerItens])
 
-    // async function handleApagarItem() {
-    //     try {
-    //         const resposta = await apiLocal.delete(`/ApagarItemPedido/${idItem}`);
-    //         // setPedido(resposta)
-    //         let dados = {
-    //             idItem: idItem
-    //         }
-
-    //         setPedido(oldArray => [...oldArray, dados])
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
-
     async function handleApagarItem() {
         try {
             const resposta = await apiLocal.delete(`/ApagarItemPedido/${idItem}`);
@@ -160,35 +145,6 @@ export default function Carrinho({ route }) {
             console.log(error);
         }
     }
-
-    // async function handleApagarItem() {
-    //     try {
-    //          await apiLocal.delete(`/ApagarItemPedido/${idItem}`);
-            
-    //         let dados = {
-    //             id: idItem
-    //         }
-            
-    //         setPedido(oldArray => [...oldArray, dados])
-
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
-
-    
-    // useEffect(() => {
-    //     async function handleApagarItem() {
-    //         try {
-    //             const id = idItem
-    //             const resposta = await apiLocal.delete(`/ApagarItemPedido/${id}`);
-    //             setPedido(resposta)
-    //         } catch (error) {
-    //             console.log(error);
-    //         }
-    //     }
-    //     handleApagarItem()
-    // }, [])
 
     return (
         <SafeAreaView >
