@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import apiLocal from '../../API/apiLocal/apiLocal';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useEffect, useState } from 'react'
+import { useNavigation } from '@react-navigation/native'
+import apiLocal from '../../API/apiLocal/apiLocal'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import {
     StyleSheet,
     SafeAreaView,
@@ -11,85 +11,81 @@ import {
     Text,
     TouchableOpacity,
     Image,
-} from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+} from 'react-native'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 export default function Carrinho() {
-    const [lerItens, setLerItens] = useState([]);
-    const [valorTotal, setValorTotal] = useState(0);
-    const navigation = useNavigation();
+    const [lerItens, setLerItens] = useState([])
+    const [valorTotal, setValorTotal] = useState(0)
+    const navigation = useNavigation()
 
     useEffect(() => {
         async function lerCriarItens() {
             try {
-                const iPd = await AsyncStorage.getItem('id_pedido');
-                const iPedido = JSON.parse(iPd);
-                const id_pedido = iPedido;
+                const iPd = await AsyncStorage.getItem('id_pedido')
+                const iPedido = JSON.parse(iPd)
+                const id_pedido = iPedido
 
-                const resposta = await apiLocal.get(`/ListarItens/${id_pedido}`);
+                const resposta = await apiLocal.get(`/ListarItens/${id_pedido}`)
 
-                setLerItens(resposta.data);
-                // Calcular o valor total do pedido
-                const total = resposta.data.reduce((acc, item) => acc + parseFloat(item.produtos.preco), 0);
-                setValorTotal(total);
+                setLerItens(resposta.data)
+                const total = resposta.data.reduce((acc, item) => acc + parseFloat(item.produtos.preco), 0)
+                setValorTotal(total)
             } catch (error) {
-                console.log(error);
+                console.log(error)
             }
         }
-        lerCriarItens();
-    }, [lerItens]);
+        lerCriarItens()
+    }, [lerItens])
 
-    const handleDeleteItem = async (itemId) => {
+    async function handleDeleteItem(itemId) {
         try {
-            // Fazer a solicitação de exclusão do item
-            await apiLocal.delete(`/ApagarItemPedido/${itemId}`);
-            // Atualizar a lista de itens após a exclusão
-            setLerItens((prevItems) => prevItems.filter((item) => item.id !== itemId));
-            // Recalcular o valor total após a exclusão
-            const total = lerItens.reduce((acc, item) => acc + parseFloat(item.produtos.preco), 0);
-            setValorTotal(total);
+            await apiLocal.delete(`/ApagarItemPedido/${itemId}`)
+            setLerItens((prevItems) => prevItems.filter((item) => item.id !== itemId))
+            const total = lerItens.reduce((acc, item) => acc + parseFloat(item.produtos.preco), 0)
+            setValorTotal(total)
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
-    };
+    }
 
-    const handleFinalizarPedido = async () => {
+
+    async function handleFinalizarPedido() {
         try {
-            const iPd = await AsyncStorage.getItem('id_pedido');
-            const iPedido = JSON.parse(iPd);
-            const id_pedido = iPedido;
-            const draft = false;
-            const aceito = true;
+            const iPd = await AsyncStorage.getItem('id_pedido')
+            const iPedido = JSON.parse(iPd)
+            const id_pedido = iPedido
+            const draft = false
+            const aceito = true
 
             await apiLocal.put('/FinalizarPedidos', {
                 id: id_pedido,
                 draft,
                 aceito,
-            });
-            // Navegar de volta para a página inicial após finalizar o pedido
-            navigation.navigate('Home');
+            })
+            navigation.navigate('Home')
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
-    };
+    }
 
-    const handleCancelarPedido = async () => {
+    async function handleCancelarPedido() {
         try {
-            const iPd = await AsyncStorage.getItem('id_pedido');
-            const iPedido = JSON.parse(iPd);
-            const id_pedido = iPedido;
 
-            // Limpar todos os itens do pedido
-            await apiLocal.delete(`/LimparItensPedido/${id_pedido}`);
+            const iPd = await AsyncStorage.getItem('id_pedido')
+            const iPedido = JSON.parse(iPd)
+            const id = (iPedido)
 
-            // Atualizar a lista de itens após a exclusão
-            setLerItens([]);
-            // Recalcular o valor total após a exclusão
-            setValorTotal(0);
+            await apiLocal.delete(`/ApagarPedido/${id}`)
+            setLerItens([])
+            setValorTotal(0)
+
+            navigation.navigate('Home')
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
-    };
+    }
+
 
     return (
         <SafeAreaView>
@@ -105,7 +101,7 @@ export default function Carrinho() {
                             <View key={item.id} style={styles.cardProduto}>
                                 <Image
                                     style={styles.imagem}
-                                    source={{ uri: `http://192.168.1.8:3334/files/${item.produtos?.banner}` }}
+                                    source={{ uri: `http://10.152.46.17:3334/files/${item.produtos?.banner}` }}
                                 />
 
                                 <View style={styles.informacaoProdutoNome}>
@@ -146,7 +142,7 @@ export default function Carrinho() {
                 </View>
             </ScrollView>
         </SafeAreaView>
-    );
+    )
 }
 
 const styles = StyleSheet.create({

@@ -109,7 +109,7 @@ function Card() {
     useEffect(() => {
         try {
             async function lerCategoriasProdutos() {
-                const resposta = await apiLocal.get(`/ListarProdutosCategoria/6c7972fc-fb10-43a1-99fa-505e3d2d1974`)
+                const resposta = await apiLocal.get(`/ListarProdutosCategoria/7cd82866-cbd5-4e64-98ef-d5237ff5dc36`)
                 setCategoriasProdutos(resposta.data)
             }
             lerCategoriasProdutos()
@@ -134,47 +134,6 @@ function Card() {
         realizarPedido()
     }, [])
 
-
-    // async function handleCriarItens(id) {
-    //     try {
-    //         const iPd = await AsyncStorage.getItem('id_pedido')
-    //         const iPedido = JSON.parse(iPd)
-    //         const id_pedido = (iPedido)
-
-    //         const prodExt = categoriasProdutos.filter((item) => item.id === id)
-    //         const id_produto = id
-    //         const valor = Number(prodExt.map((item) => item.preco))
-    //         const quantidade = Number(prodExt.map((item) => item.quantidade))
-
-
-    //         const resposta = await apiLocal.post('/CriarItens', {
-    //             id_pedido,
-    //             id_produto,
-    //             quantidade,
-    //             valor
-    //         })
-
-    //         // console.log(dados)
-
-    //         // let dados = {
-    //         //     id: resposta.data.dados.id
-    //         // }
-    //         // setItensPedido(oldArray => [...oldArray, dados])
-
-    //         // await AsyncStorage.setItem('id_item', JSON.stringify(resposta.data.id))
-
-    //         // navigation.navigate('Carrinho')
-    //         navigation.navigate('Carrinho', {
-    //             id: resposta.data.id
-    //         })
-
-
-
-    //     } catch (err) {
-    //         console.log(err)
-    //     }
-    // }
-
     async function handleCriarItens(id) {
         try {
             const iPd = await AsyncStorage.getItem('id_pedido')
@@ -196,7 +155,7 @@ function Card() {
             let dados = {
                 id: resposta.data.id
             }
-            
+
             setItensPedido(oldArray => [...oldArray, dados])
 
             navigation.navigate('Carrinho', {
@@ -215,7 +174,7 @@ function Card() {
                         <View key={item.id} value={item.id} style={styleBody.card}>
                             <Image
                                 style={styleBody.imagem}
-                                source={{ uri: `http://192.168.0.72:3334/files/${item.banner}` }}
+                                source={{ uri: `http://10.152.46.17:3334/files/${item.banner}` }}
                             />
                             <View style={styleBody.card_info} value={item.id}>
                                 <Text> {item.nome}</Text>
@@ -243,7 +202,7 @@ function CardDestaque() {
     useEffect(() => {
         try {
             async function lerCategoriasProdutosDestaque() {
-                const resposta = await apiLocal.get(`/ListarProdutosCategoria/9bd6a940-a628-4de3-be75-0602adc6f3a8`)
+                const resposta = await apiLocal.get(`/ListarProdutosCategoria/0ca2f74e-17bb-4de9-94de-20874f7585ee`)
                 setCategoriasProdutosDestaque(resposta.data)
             }
             lerCategoriasProdutosDestaque()
@@ -316,7 +275,7 @@ function CardDestaque() {
                         <View key={item.id} style={styleBody.card}>
                             <Image
                                 style={styleBody.imagem}
-                                source={{ uri: `http://192.168.0.72:3334/files/${item.banner}` }}
+                                source={{ uri: `http://10.152.46.17:3334/files/${item.banner}` }}
                             />
                             <View style={styleBody.card_info} value={item.id}>
                                 <Text> {item.nome}</Text>

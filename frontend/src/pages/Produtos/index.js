@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigation } from '@react-navigation/native'
 import apiLocal from '../../API/apiLocal/apiLocal'
 
 import {
@@ -15,9 +16,12 @@ import {
 
 export default function Produtos({ route }) {
 
+    const navigation = useNavigation()
+
     const [categoriasProdutos, setCategoriasProdutos] = useState([''])
     const { categoriaId } = route.params
-
+    const [itensPedido, setItensPedido] = useState([''])
+    const { handleRealizarPedido } = useContext(Context)
 
     useEffect(() => {
         try {
@@ -32,39 +36,80 @@ export default function Produtos({ route }) {
     }, [categoriasProdutos])
 
 
-    return (
-        <SafeAreaView>
-            <ScrollView>
-                <StatusBar backgroundColor="white" barStyle="dark-content" />
-                <View style={styleProdutos.container}>
 
-                    <View>
-                        {categoriasProdutos.map((item) => {
-                            return (
-                                <View key={item.id} value={item.id} style={styleProdutos.card}>
-                                    <Image
-                                        style={styleProdutos.imagem}
-                                        source={{ uri: `http://192.168.0.72:3334/files/${item.banner}` }}
-                                    />
-                                    <View style={styleProdutos.card_info} value={item.id}>
-                                        <Text> {item.nome}</Text>
-                                        <Text>{item.descricao}</Text>
-                                        <Text>R$ {item.preco}</Text>
-                                        <TouchableOpacity style={styleProdutos.card_button} onPress={() => console.log('Botão pressionado')}>
-                                            <Text style={styleProdutos.buttonText}>Add ao Carrinho</Text>
-                                            {/* <MaterialCommunityIcons name="cart" size={24} color="white" /> */}
-                                        </TouchableOpacity>
-                                    </View>
-                                </View>
-                            )
-                        })}
-                    </View>
-                </View>
-            </ScrollView >
-        </SafeAreaView>
+    useEffect(() => {
+        async function realizarPedido() {
+            try {
+                const iId = await AsyncStorage.getItem('id')
+                const id = JSON.parse(iId)
+                const id_cliente = (id)
+
+                await handleRealizarPedido(id_cliente)
+            } catch (error) {
+                console.log("error")
+            }
+        }
+        realizarPedido()
+    }, [])
+
+    async function handleCriarItens(id) {
+        try {
+            const iPd = await AsyncStorage.getItem('id_pedido')
+            const iPedido = JSON.parse(iPd)
+            const id_pedido = iPedido
+
+            const prodExt = categoriasProdutos.filter((item) => item.id === id)
+            const id_produto = id
+            const valor = Number(prodExt.map((item) => item.preco))
+            const quantidade = Number(prodExt.map((item) => item.quantidade))
+
+            const resposta = await apiLocal.post('/CriarItens', {
+                id_pedido,
+                id_produto,
+                quantidade,
+                valor
+            })
+
+            let dados = {
+                id: resposta.data.id
+            }
+
+            setItensPedido(oldArray => [...oldArray, dados])
+
+            navigation.navigate('Carrinho', {
+                idItem: resposta.data.id
+            })
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    return (
+        <ScrollView horizontal={true}>
+            <View style={styleBody.container_card}>
+                {categoriasProdutos.map((item) => {
+                    return (
+                        <View key={item.id} value={item.id} style={styleBody.card}>
+                            <Image
+                                style={styleBody.imagem}
+                                source={{ uri: `http://10.152.46.17:3334/files/${item.banner}` }}
+                            />
+                            <View style={styleBody.card_info} value={item.id}>
+                                <Text> {item.nome}</Text>
+                                <Text>{item.descricao}</Text>
+                                <Text>{item.preco}</Text>
+                                <TouchableOpacity style={styleBody.card_button} onPress={() => handleCriarItens(item.id)} >
+                                    <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
+                                    <MaterialCommunityIcons name="cart" size={24} color="white" />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    )
+                })}
+            </View>
+        </ScrollView>
     )
 }
-
 
 const styleProdutos = StyleSheet.create({
     container: {
