@@ -116,9 +116,8 @@ export default function Carrinho() {
                                 </View>
 
                                 <View style={styles.informacaoProduto}>
-                                    <Text>{item.produtos?.preco}</Text>
-                                    {/* Adicionar ícone da lixeira com função de exclusão */}
-                                    <TouchableOpacity onPress={() => handleDeleteItem(item.id)}>
+                                    <Text style={{ fontWeight: "bold" }}>{item.produtos?.preco}</Text>
+                                    <TouchableOpacity style={styles.lixeira} onPress={() => handleDeleteItem(item.id)}>
                                         <MaterialCommunityIcons name="delete" size={24} color="red" />
                                     </TouchableOpacity>
                                 </View>
@@ -126,16 +125,18 @@ export default function Carrinho() {
                         ))}
                     </View>
 
-                    {/* Exibir o valor total do pedido */}
-                    <View style={styles.containerValor}>
-                        <Text>Valor Total: {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valorTotal)}</Text>
+                    <View style={styles.containerComprando}>
+                        <TouchableOpacity style={styles.botaoComprando} onPress={() => navigation.navigate('Home')}>
+                            <Text>Continuar Comprando</Text>
+                        </TouchableOpacity>
                     </View>
 
-                    {/* Botões para continuar comprando, cancelar pedido e finalizar pedido */}
+                    <View style={styles.containerValor}>
+                        <Text>Valor Total:</Text>
+                        <Text style={{ fontWeight: "bold" }}>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valorTotal)}</Text>
+                    </View>
+
                     <View style={styles.containerBotoes}>
-                        <TouchableOpacity style={styles.botaoComprando} onPress={() => navigation.navigate('Home')}>
-                            <Text style={styles.textBotoes}>Continuar Comprando</Text>
-                        </TouchableOpacity>
 
                         <TouchableOpacity style={styles.botaoCancelar} onPress={handleCancelarPedido}>
                             <Text style={styles.textBotoes}>Cancelar Pedido</Text>
@@ -164,17 +165,14 @@ const styles = StyleSheet.create({
         fontSize: 26,
     },
     containerProduto: {
-        height: 700,
+        height: 500,
     },
     cardProduto: {
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         alignItems: 'center',
         marginVertical: 16,
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderRadius: 8,
-        padding: 8,
+        paddingHorizontal: 24
     },
     imagem: {
         width: 75,
@@ -186,16 +184,21 @@ const styles = StyleSheet.create({
         color: '#aaa',
     },
     informacaoProdutoNome: {
+        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        flex: 1,
+        marginLeft: 12
     },
     informacaoProduto: {
         alignItems: 'center',
     },
+    lixeira: {
+        marginTop: 16
+    },
     containerValor: {
+        flex: 1,
         flexDirection: 'row',
-        justifyContent: 'flex-end',
+        justifyContent: 'space-around',
         paddingHorizontal: 16,
         paddingVertical: 8,
     },
@@ -204,15 +207,37 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         paddingVertical: 15,
     },
+    containerComprando: {
+        flex: 1,
+        justifyContent: 'center',
+        flexDirection: 'row',
+        paddingVertical: 15,
+    },
     botaoComprando: {
         padding: 12,
         color: '#fff',
         backgroundColor: '#bbb',
-        width: 150,
+        width: 335,
         alignItems: 'center',
         borderRadius: 12,
     },
     botaoCancelar: {
-        backgroundColor: 'red'
+        padding: 12,
+        color: '#fff',
+        backgroundColor: '#FF8616',
+        width: 150,
+        alignItems: 'center',
+        borderRadius: 12,
     },
+    botaoFinalizar: {
+        padding: 12,
+        color: '#fff',
+        backgroundColor: '#00A4AD',
+        width: 150,
+        alignItems: 'center',
+        borderRadius: 12,
+    },
+    textBotoes: {
+        color: '#fff'
+    }
 })
