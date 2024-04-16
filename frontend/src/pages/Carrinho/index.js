@@ -226,7 +226,7 @@ const style = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         alignItems: 'center',
-        paddingVertical: 8,
+        marginVertical: 16
     },
 
     imagem: {

@@ -95,7 +95,8 @@ const styleProdutos = StyleSheet.create({
         height: 325,
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginVertical: 16
     },
     imagem: {
         width: '100%',
