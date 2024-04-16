@@ -104,7 +104,7 @@ function Card() {
 
     const [itensPedido, setItensPedido] = useState([''])
     const [categoriasProdutos, setCategoriasProdutos] = useState([''])
-    const { handleRealizarPedido } = useContext(Context)
+    const { handleRealizarPedido, handleClearAsync } = useContext(Context)
 
     useEffect(() => {
         try {
@@ -122,9 +122,19 @@ function Card() {
     useEffect(() => {
         async function realizarPedido() {
             try {
+
+                const iToken = await AsyncStorage.getItem('token')
+                const token = JSON.parse(iToken)
+
+                if (!token) {
+                    await handleClearAsync();
+                    navegacao.navigate('Login');
+                }
+
                 const iId = await AsyncStorage.getItem('id')
                 const id = JSON.parse(iId)
                 const id_cliente = (id)
+
 
                 await handleRealizarPedido(id_cliente)
             } catch (error) {

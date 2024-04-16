@@ -3,11 +3,11 @@ import { Context } from '../../pages/Contexts/contexto'
 import {
     StyleSheet,
     View,
-} from 'react-native';
+} from 'react-native'
 
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
-import { FloatingAction } from "react-native-floating-action";
+import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native'
+import { FloatingAction } from "react-native-floating-action"
 
 export default function MultiOpcoes() {
 
@@ -58,13 +58,13 @@ export default function MultiOpcoes() {
         }
     ]
 
-    const handleSair = async () => {
-        await sairClear();
+    async function handleSair() {
+        await sairClear()
     }
 
-    const sairClear = async () => {
-        await handleClearAsync();
-        navegacao.navigate('Login');
+    async function sairClear() {
+        await handleClearAsync()
+        navegacao.navigate('Login')
     }
 
     return (
@@ -76,9 +76,9 @@ export default function MultiOpcoes() {
                 actions={actions}
                 icon={() => <MaterialCommunityIcons name="trash-can" size={20} color="#FFF" />}
                 onPressItem={(name, index) => {
-                    const action = actions.find(action => action.name === name);
-                    if (action.onPress) action.onPress();
-                    else navegacao.navigate(action.path);
+                    const action = actions.find(action => action.name === name)
+                    if (action.onPress) action.onPress()
+                    else navegacao.navigate(action.path)
                 }}
             />
         </View>
@@ -89,4 +89,4 @@ const styleMultiOpcoes = StyleSheet.create({
     container: {
         backgroundColor: 'red',
     }
-});
+})

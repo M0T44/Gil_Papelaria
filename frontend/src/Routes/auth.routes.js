@@ -4,22 +4,29 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Carrinho from '../pages/Carrinho'
 import Home from '../pages/Home'
 import Produtos from '../pages/Produtos'
+import Criar from '../pages/Criar'
 
 const Stack = createNativeStackNavigator()
 
 export default function AuthRoutes() {
     return (
         <Stack.Navigator>
-            <Stack.Screen
+            <Stack.Screen                               //stack.screen = tela inicial 
                 name='Home'
                 component={Home}
+                options={{ headerShown: false }}        //hearderShown: false= tira o header fixo de cima
+            />
+
+            <Stack.Screen
+                name='Carrinho'
+                component={Carrinho}
                 options={{ headerShown: false }}
             />
 
-            <Stack.Screen                           //stack.screen = tela inicial 
-                name='Carrinho'
-                component={Carrinho}
-                options={{ headerShown: false }}   //hearderShown: false= tira o header fixo de cima
+            <Stack.Screen
+                name='Criar'
+                component={Criar}
+                options={{ headerShown: false }}
             />
 
             <Stack.Screen
