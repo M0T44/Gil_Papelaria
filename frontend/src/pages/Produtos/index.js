@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import apiLocal from '../../API/apiLocal/apiLocal'
-
+import { Context } from '../Contexts/contexto'
 import {
     StyleSheet,
     SafeAreaView,
     ScrollView,
-    StatusBar,
     View,
     Text,
     Image,
     TouchableOpacity,
-    TextInput,
 } from 'react-native'
+
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function Produtos({ route }) {
 
@@ -85,29 +85,33 @@ export default function Produtos({ route }) {
     }
 
     return (
-        <ScrollView horizontal={true}>
-            <View style={styleBody.container_card}>
-                {categoriasProdutos.map((item) => {
-                    return (
-                        <View key={item.id} value={item.id} style={styleBody.card}>
-                            <Image
-                                style={styleBody.imagem}
-                                source={{ uri: `http://10.152.46.17:3334/files/${item.banner}` }}
-                            />
-                            <View style={styleBody.card_info} value={item.id}>
-                                <Text> {item.nome}</Text>
-                                <Text>{item.descricao}</Text>
-                                <Text>{item.preco}</Text>
-                                <TouchableOpacity style={styleBody.card_button} onPress={() => handleCriarItens(item.id)} >
-                                    <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
-                                    <MaterialCommunityIcons name="cart" size={24} color="white" />
-                                </TouchableOpacity>
+        <SafeAreaView>
+
+
+            <ScrollView >
+                <View style={styleProdutos.container_card}>
+                    {categoriasProdutos.map((item) => {
+                        return (
+                            <View key={item.id} value={item.id} style={styleProdutos.card}>
+                                <Image
+                                    style={styleProdutos.imagem}
+                                    source={{ uri: `http://10.152.46.17:3334/files/${item.banner}` }}
+                                />
+                                <View style={styleProdutos.card_info} value={item.id}>
+                                    <Text> {item.nome}</Text>
+                                    <Text>{item.descricao}</Text>
+                                    <Text>{item.preco}</Text>
+                                    <TouchableOpacity style={styleProdutos.card_button} onPress={() => handleCriarItens(item.id)} >
+                                        <Text style={styleProdutos.buttonText}>Add ao Carrinho</Text>
+                                        <MaterialCommunityIcons name="cart" size={24} color="white" />
+                                    </TouchableOpacity>
+                                </View>
                             </View>
-                        </View>
-                    )
-                })}
-            </View>
-        </ScrollView>
+                        )
+                    })}
+                </View>
+            </ScrollView>
+        </SafeAreaView>
     )
 }
 

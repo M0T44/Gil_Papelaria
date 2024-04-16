@@ -23,7 +23,7 @@ function Body() {
     const data = [
         { id: '1', imagemCss: styleBody.imagemBanner, imageUrl: require('../../../imgs/banner1.png') },
         { id: '2', imagemCss: styleBody.imagemBanner2, imageUrl: require('../../../imgs/banner2.png') },
-        { id: '3', imagemCss: styleBody.imagemProdutos, imageUrl: require('../../../imgs/caneta.png') }
+        { id: '3', imagemCss: styleBody.imagemProdutos, imageUrl: require('../../../imgs/banner3.png') }
     ]
 
     return (
@@ -342,8 +342,8 @@ const styleBody = StyleSheet.create({
         height: 250,
     },
     imagemProdutos: {
-        width: 380,
-        height: 200
+        width: 420,
+        height: 220
     },
     // Fim Carroussel
 
