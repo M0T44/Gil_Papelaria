@@ -109,7 +109,7 @@ function Card() {
     useEffect(() => {
         try {
             async function lerCategoriasProdutos() {
-                const resposta = await apiLocal.get(`/ListarProdutosCategoria/c5d9940f-79ab-4b7b-9c25-17e9a67d531f`)
+                const resposta = await apiLocal.get(`/ListarProdutosCategoria/6c7972fc-fb10-43a1-99fa-505e3d2d1974`)
                 setCategoriasProdutos(resposta.data)
             }
             lerCategoriasProdutos()
@@ -183,7 +183,7 @@ function Card() {
                         <View key={item.id} value={item.id} style={styleBody.card}>
                             <Image
                                 style={styleBody.imagem}
-                                source={{ uri: `http://192.168.1.8:3334/files/${item.banner}` }}
+                                source={{ uri: `http://192.168.0.72:3334/files/${item.banner}` }}
                             />
                             <View style={styleBody.card_info} value={item.id}>
                                 <Text> {item.nome}</Text>
@@ -284,7 +284,7 @@ function CardDestaque() {
                         <View key={item.id} style={styleBody.card}>
                             <Image
                                 style={styleBody.imagem}
-                                source={{ uri: `http://192.168.1.8:3334/files/${item.banner}` }}
+                                source={{ uri: `http://192.168.0.72:3334/files/${item.banner}` }}
                             />
                             <View style={styleBody.card_info} value={item.id}>
                                 <Text> {item.nome}</Text>

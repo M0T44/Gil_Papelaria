@@ -157,7 +157,7 @@ export default function Carrinho({ route }) {
         <SafeAreaView >
             <ScrollView>
                 <StatusBar backgroundColor="white" barStyle="dark-content" />
-                <View style={style.container}F>
+                <View style={style.container} F>
                     <View style={style.containerText}>
                         <Text style={style.textTitulo}>
                             Carrinho
@@ -168,28 +168,27 @@ export default function Carrinho({ route }) {
                         {lerItens.map((busca) => {
                             return (
                                 <View key={busca.id} value={busca.id} style={style.cardProduto}>
-                                    {/* <View>
-                                        <Text> Nº Pedido: {busca.pedidos?.n_pedido}</Text>
-                                    </View> */}
 
-                                    <Image
-                                        style={style.imagem}
-                                        source={{ uri: `http://192.168.1.8:3334/files/${busca.produtos?.banner}` }}
-                                    />
+                                    <View style={style.informacaoProdutoNome}>
+                                        <Image
+                                            style={style.imagem}
+                                            source={{ uri: `http://192.168.0.72:3334/files/${busca.produtos?.banner}` }}
+                                        />
 
-                                    <View>
-                                        <Text>{busca.produtos?.nome}</Text>
-                                        <Text style={style.textDescricao}>{busca.produtos?.descricao}</Text>
+                                        <View>
+                                            <Text>{busca.produtos?.nome}</Text>
+                                            <Text style={style.textDescricao}>{busca.produtos?.descricao}</Text>
+                                        </View>
                                     </View>
 
                                     <View style={style.informacaoProduto}>
-
                                         <Text>Valor: {busca.produtos?.preco}</Text>
 
                                         <TouchableOpacity onPress={handleApagarItem} style={style.buttonDeletar}>
                                             <MaterialCommunityIcons name="delete" size={24} color="red" />
                                         </TouchableOpacity>
                                     </View>
+
                                 </View>
                             )
                         })}
@@ -220,12 +219,12 @@ const style = StyleSheet.create({
     },
 
     containerProduto: {
-        height: 500,
+        height: 700,
     },
 
     cardProduto: {
         flexDirection: 'row',
-        justifyContent: 'space-around',
+        justifyContent: 'space-evenly',
         alignItems: 'center',
         paddingVertical: 8,
     },
@@ -238,7 +237,12 @@ const style = StyleSheet.create({
 
     textDescricao: {
         fontSize: 10,
-        color: '#aaa'
+        color: '#aaa',
+    },
+
+    informacaoProdutoNome: {
+        flexDirection: 'row',
+        alignItems: 'center',
     },
 
     informacaoProduto: {
@@ -253,9 +257,9 @@ const style = StyleSheet.create({
     botaoComprando: {
         backgroundColor: '#bbb',
         alignItems: 'center',
-        padding: 12,
+        padding: 6,
         borderRadius: 12,
-        width: 350,
+        width: 300,
     },
 
     textComprando: {
@@ -265,7 +269,6 @@ const style = StyleSheet.create({
 
     buttonDeletar: {
         flexDirection: 'row',
-        padding: 12,
         borderRadius: 12,
         marginTop: 12
     },
