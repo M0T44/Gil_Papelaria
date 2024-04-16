@@ -389,14 +389,14 @@ const styleBody = StyleSheet.create({
         padding: 15,              // espacamento 
         margin: 6,
         width: 250,
-        height: 325,
+        height: 400,
         marginHorizontal: 16,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
     },
     imagem: {
-        width: '100%',
+        width: '50%',
         height: '50%',
     },
     card_info: {

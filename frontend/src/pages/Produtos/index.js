@@ -86,29 +86,31 @@ export default function Produtos({ route }) {
 
     return (
         <SafeAreaView>
-
-
             <ScrollView >
-                <View style={styleProdutos.container_card}>
-                    {categoriasProdutos.map((item) => {
-                        return (
-                            <View key={item.id} value={item.id} style={styleProdutos.card}>
-                                <Image
-                                    style={styleProdutos.imagem}
-                                    source={{ uri: `http://10.152.46.17:3334/files/${item.banner}` }}
-                                />
-                                <View style={styleProdutos.card_info} value={item.id}>
-                                    <Text> {item.nome}</Text>
-                                    <Text>{item.descricao}</Text>
-                                    <Text>{item.preco}</Text>
-                                    <TouchableOpacity style={styleProdutos.card_button} onPress={() => handleCriarItens(item.id)} >
-                                        <Text style={styleProdutos.buttonText}>Add ao Carrinho</Text>
-                                        <MaterialCommunityIcons name="cart" size={24} color="white" />
-                                    </TouchableOpacity>
+                <View style={styleProdutos.container}>
+
+
+                    <View style={styleProdutos.container_card}>
+                        {categoriasProdutos.map((item) => {
+                            return (
+                                <View key={item.id} value={item.id} style={styleProdutos.card}>
+                                    <Image
+                                        style={styleProdutos.imagem}
+                                        source={{ uri: `http://10.152.46.17:3334/files/${item.banner}` }}
+                                    />
+                                    <View style={styleProdutos.card_info} value={item.id}>
+                                        <Text> {item.nome}</Text>
+                                        <Text>{item.descricao}</Text>
+                                        <Text>{item.preco}</Text>
+                                        <TouchableOpacity style={styleProdutos.card_button} onPress={() => handleCriarItens(item.id)} >
+                                            <Text style={styleProdutos.buttonText}>Add ao Carrinho</Text>
+                                            <MaterialCommunityIcons name="cart" size={24} color="white" />
+                                        </TouchableOpacity>
+                                    </View>
                                 </View>
-                            </View>
-                        )
-                    })}
+                            )
+                        })}
+                    </View>
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -131,7 +133,6 @@ const styleProdutos = StyleSheet.create({
     // Começo Card
     container_card: {
         flex: 1,
-        flexDirection: 'row',
         alignItems: 'center',
     },
     card: {
@@ -141,7 +142,7 @@ const styleProdutos = StyleSheet.create({
         padding: 15,              // espacamento 
         margin: 6,
         width: 250,
-        height: 325,
+        height: 400,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',

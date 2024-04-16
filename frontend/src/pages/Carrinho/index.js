@@ -63,7 +63,7 @@ export default function Carrinho() {
                 draft,
                 aceito,
             })
-            alert('oi')
+           
             navigation.navigate('Home')
         } catch (error) {
             console.log(error)
@@ -85,11 +85,6 @@ export default function Carrinho() {
         } catch (error) {
             console.log(error)
         }
-    }
-
-    async function handleSair() {
-        await handleClearAsync();
-        navegacao.navigate('Login');
     }
 
     return (

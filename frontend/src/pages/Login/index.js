@@ -11,7 +11,6 @@ import {
     TextInput,
     TouchableOpacity
 } from 'react-native'
-import Toast from 'react-native-toast-message'
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -25,10 +24,7 @@ export default function Login() {
 
     async function IniLogin() {
         await handleLogar(email, password)
-        Toast.show({
-            type: 'success',
-            text1: 'Login Efetuado'
-        });
+       
     }
 
     return (
