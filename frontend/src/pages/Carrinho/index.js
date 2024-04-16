@@ -63,6 +63,7 @@ export default function Carrinho() {
                 draft,
                 aceito,
             })
+            alert('oi')
             navigation.navigate('Home')
         } catch (error) {
             console.log(error)

@@ -19,55 +19,55 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import { NavigationContainer } from '@react-navigation/native'
 import { useNavigation } from '@react-navigation/native';
 
-function ModalPesquisa() {
-    const [modalVisible, setModalVisible] = useState(false);
+// function ModalPesquisa() {
+//     const [modalVisible, setModalVisible] = useState(false);
 
-    return (
-        <View style={stylesModal.containerModal}>
-            <Modal
-                animationType="slide"
-                transparent={true}
-                visible={modalVisible}
-                onRequestClose={() => {
-                    Alert.alert('Modal has been closed.');
-                    setModalVisible(!modalVisible);
-                }}>
-                <View style={stylesModal.centeredView}>
-                    <View style={stylesModal.modalView}>
-                        <Pesquisa />
-                        <Pressable
-                            style={[stylesModal.button, stylesModal.buttonClose]}
-                            onPress={() => setModalVisible(!modalVisible)}>
-                            <Text style={stylesModal.textStyle}>Fechar Pesquisa</Text>
-                        </Pressable>
-                    </View>
-                </View>
-            </Modal>
-            <Pressable
-                onPress={() => setModalVisible(true)}>
-                <MaterialCommunityIcons
-                    style={styleBody.icon_pesquisa}
-                    name="magnify" size={24}
-                    color="white" />
-            </Pressable>
-        </View>
-    )
-}
+//     return (
+//         <View style={stylesModal.containerModal}>
+//             <Modal
+//                 animationType="slide"
+//                 transparent={true}
+//                 visible={modalVisible}
+//                 onRequestClose={() => {
+//                     Alert.alert('Modal has been closed.');
+//                     setModalVisible(!modalVisible);
+//                 }}>
+//                 <View style={stylesModal.centeredView}>
+//                     {/* <View style={stylesModal.modalView}>
+//                         <Pesquisa />
+//                         <Pressable
+//                             style={[stylesModal.button, stylesModal.buttonClose]}
+//                             onPress={() => setModalVisible(!modalVisible)}>
+//                             <Text style={stylesModal.textStyle}>Fechar Pesquisa</Text>
+//                         </Pressable>
+//                     </View> */}
+//                 </View>
+//             </Modal>
+//             <Pressable
+//                 onPress={() => setModalVisible(true)}>
+//                 <MaterialCommunityIcons
+//                     style={styleBody.icon_pesquisa}
+//                     name="magnify" size={24}
+//                     color="white" />
+//             </Pressable>
+//         </View>
+//     )
+// }
 
-function Pesquisa() {
-    return (
-        <View style={styleBody.container_pesquisa}>
-            <TextInput
-                placeholder='Pesquisar'
-                style={styleBody.input_pesquisa}
-            />
-            <MaterialCommunityIcons
-                style={styleBody.icon_pesquisa}
-                name="magnify" size={24}
-                color="white" />
-        </View>
-    )
-}
+// function Pesquisa() {
+//     return (
+//         <View style={styleBody.container_pesquisa}>
+//             <TextInput
+//                 placeholder='Pesquisar'
+//                 style={styleBody.input_pesquisa}
+//             />
+//             <MaterialCommunityIcons
+//                 style={styleBody.icon_pesquisa}
+//                 name="magnify" size={24}
+//                 color="white" />
+//         </View>
+//     )
+// }
 
 function Carrinho() {
     const navigation = useNavigation();
@@ -100,7 +100,7 @@ export default function Header() {
                     </View>
 
                     <View style={styleHeader.funcionalidades}>
-                        <ModalPesquisa />
+                        {/* <ModalPesquisa /> */}
 
                         <Carrinho />
                     </View>
