@@ -14,39 +14,6 @@ import {
 } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-
-function Body() {
-    return (
-        <SafeAreaView style={style.container}>
-            <ScrollView>
-                <View>
-                    <View style={style.containerText}>
-                        <Text style={style.textTitulo}>
-                            Carrinho
-                        </Text>
-                    </View>
-                    {/* <Produtos /> */}
-                    <Botoes />
-                </View>
-
-            </ScrollView >
-        </SafeAreaView>
-    )
-}
-
-// function Produtos({ route }) {
-
-
-//     return (
-//         <SafeAreaView style={style.container}>
-//             <ScrollView>
-
-//             </ScrollView>
-//         </SafeAreaView>
-//     )
-
-// }
-
 function Botoes() {
     const navigation = useNavigation()
     const [itensPedido, setItensPedido] = useState([''])
@@ -151,7 +118,7 @@ export default function Carrinho({ route }) {
 
     const { id } = route.params
     const [lerItens, setLerItens] = useState([''])
-    const [pedido, setPedido] = useState([''])
+    // const [pedido, setPedido] = useState([''])
 
 
     useEffect(() => {
@@ -174,21 +141,29 @@ export default function Carrinho({ route }) {
     async function handleApagarItem() {
         try {
             const resposta = await apiLocal.delete(`/ApagarItem/${id}`)
-            let dados = {
-                id
-            }
-            console.log(dados)
+            console.log(resposta)
+            // let dados = {
+            console.log(id)
+            //     id
+            // }
+            // console.log(dados)
 
-            setPedido(oldArray => [...oldArray, dados])
+            // setPedido(oldArray => [...oldArray, dados])
         } catch (error) {
             console.log(error)
         }
     }
     return (
-        <SafeAreaView>
+        <SafeAreaView >
             <ScrollView>
                 <StatusBar backgroundColor="white" barStyle="dark-content" />
-                <View>
+                <View style={style.container}F>
+                    <View style={style.containerText}>
+                        <Text style={style.textTitulo}>
+                            Carrinho
+                        </Text>
+                    </View>
+
                     <View style={style.containerProduto}>
                         {lerItens.map((busca) => {
                             return (
@@ -199,7 +174,7 @@ export default function Carrinho({ route }) {
 
                                     <Image
                                         style={style.imagem}
-                                        source={{ uri: `http://10.152.46.17:3334/files/${busca.produtos?.banner}` }}
+                                        source={{ uri: `http://192.168.1.8:3334/files/${busca.produtos?.banner}` }}
                                     />
 
                                     <View>
@@ -212,7 +187,6 @@ export default function Carrinho({ route }) {
                                         <Text>Valor: {busca.produtos?.preco}</Text>
 
                                         <TouchableOpacity onPress={handleApagarItem} style={style.buttonDeletar}>
-                                            {/* <Text style={style.textBotoes}>Deletar item</Text> */}
                                             <MaterialCommunityIcons name="delete" size={24} color="red" />
                                         </TouchableOpacity>
                                     </View>
@@ -221,8 +195,8 @@ export default function Carrinho({ route }) {
                         })}
                     </View>
 
+                    <Botoes />
                 </View>
-                <Body />
             </ScrollView>
         </SafeAreaView>
     )

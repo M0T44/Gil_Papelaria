@@ -109,7 +109,7 @@ function Card() {
     useEffect(() => {
         try {
             async function lerCategoriasProdutos() {
-                const resposta = await apiLocal.get(`/ListarProdutosCategoria/7cd82866-cbd5-4e64-98ef-d5237ff5dc36`)
+                const resposta = await apiLocal.get(`/ListarProdutosCategoria/c5d9940f-79ab-4b7b-9c25-17e9a67d531f`)
                 setCategoriasProdutos(resposta.data)
             }
             lerCategoriasProdutos()
@@ -157,10 +157,7 @@ function Card() {
             // console.log(dados)
 
             // let dados = {
-            //     id: resposta.data.id,
-            //     produto: resposta.data.produtos.nome,
-            //     quantidade: resposta.data.quantidade,
-            //     valor: Number(resposta.data.valor)
+            //     id: resposta.data.dados.id
             // }
             // setItensPedido(oldArray => [...oldArray, dados])
 
@@ -186,7 +183,7 @@ function Card() {
                         <View key={item.id} value={item.id} style={styleBody.card}>
                             <Image
                                 style={styleBody.imagem}
-                                source={{ uri: `http://10.152.46.17:3334/files/${item.banner}` }}
+                                source={{ uri: `http://192.168.1.8:3334/files/${item.banner}` }}
                             />
                             <View style={styleBody.card_info} value={item.id}>
                                 <Text> {item.nome}</Text>
@@ -214,7 +211,7 @@ function CardDestaque() {
     useEffect(() => {
         try {
             async function lerCategoriasProdutosDestaque() {
-                const resposta = await apiLocal.get(`/ListarProdutosCategoria/0ca2f74e-17bb-4de9-94de-20874f7585ee`)
+                const resposta = await apiLocal.get(`/ListarProdutosCategoria/9bd6a940-a628-4de3-be75-0602adc6f3a8`)
                 setCategoriasProdutosDestaque(resposta.data)
             }
             lerCategoriasProdutosDestaque()
@@ -258,9 +255,21 @@ function CardDestaque() {
                 valor
             })
 
-            await AsyncStorage.setItem('id_item', JSON.stringify(resposta.data.id))
+            console.log(resposta)
 
-            navigation.navigate('Carrinho')
+            let dados = {
+                id: resposta
+            }
+            // setItensPedido(oldArray => [...oldArray, dados])
+
+            // await AsyncStorage.setItem('id_item', JSON.stringify(resposta.data.id))
+
+            // navigation.navigate('Carrinho')
+            navigation.navigate('Carrinho', {
+                id: resposta.id
+            })
+
+
 
         } catch (err) {
             console.log(err)
@@ -275,7 +284,7 @@ function CardDestaque() {
                         <View key={item.id} style={styleBody.card}>
                             <Image
                                 style={styleBody.imagem}
-                                source={{ uri: `http://10.152.46.17:3334/files/${item.banner}` }}
+                                source={{ uri: `http://192.168.1.8:3334/files/${item.banner}` }}
                             />
                             <View style={styleBody.card_info} value={item.id}>
                                 <Text> {item.nome}</Text>
