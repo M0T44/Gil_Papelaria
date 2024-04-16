@@ -100,13 +100,26 @@ class PedidosServices {
     }
 
     async apagarItemPedido({ id }: ListarItem) {
-        await prismaClient.itemPedido.deleteMany({
-            where: {
-                id: id
-            }
-        })
-        return { dados: 'Item Deletado' }
+        try {
+            await prismaClient.itemPedido.deleteMany({
+                where: {
+                    id: id
+                }
+            });
+            return { dados: 'Item deletado' };
+        } catch (error) {
+            console.error('Erro ao deletar item de pedido:', error);
+            throw new Error('Erro ao deletar item de pedido');
+        }
     }
+    // async apagarItemPedido({ id }: ListarItem) {
+    //     await prismaClient.itemPedido.deleteMany({
+    //         where: {
+    //             id: id
+    //         }
+    //     })
+    //     return { dados: 'Item Deletado' }
+    // }
 
     async apagarPedido({ id }: ApagarPedido) {
         await prismaClient.pedido.deleteMany({

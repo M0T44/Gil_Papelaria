@@ -161,6 +161,22 @@ export default function Carrinho({ route }) {
         }
     }
 
+    // async function handleApagarItem() {
+    //     try {
+    //          await apiLocal.delete(`/ApagarItemPedido/${idItem}`);
+            
+    //         let dados = {
+    //             id: idItem
+    //         }
+            
+    //         setPedido(oldArray => [...oldArray, dados])
+
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
+
+    
     // useEffect(() => {
     //     async function handleApagarItem() {
     //         try {
