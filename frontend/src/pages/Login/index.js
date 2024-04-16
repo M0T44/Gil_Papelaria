@@ -26,6 +26,7 @@ export default function Login() {
     async function IniLogin() {
         await handleLogar(email, password)
     }
+    
     return (
         <SafeAreaView style={style.container}>
             <ScrollView>
