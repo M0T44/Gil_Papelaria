@@ -16,7 +16,7 @@ export default function AuthContext({ children }) {
             const resposta = await apiLocal.post('/LoginClientes', {
                 email, password
             })
-
+           
             await AsyncStorage.setItem('id', JSON.stringify(resposta.data.id))
             await AsyncStorage.setItem('token', JSON.stringify(resposta.data.token))
 

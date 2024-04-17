@@ -52,6 +52,9 @@ export default function Carrinho() {
 
     async function handleFinalizarPedido() {
         try {
+
+            
+            await AsyncStorage.removeItem('id_pedido');
             const iPd = await AsyncStorage.getItem('id_pedido')
             const iPedido = JSON.parse(iPd)
             const id_pedido = iPedido
@@ -63,7 +66,7 @@ export default function Carrinho() {
                 draft,
                 aceito,
             })
-            alert('oi')
+
             navigation.navigate('Home')
         } catch (error) {
             console.log(error)
@@ -72,6 +75,8 @@ export default function Carrinho() {
 
     async function handleCancelarPedido() {
         try {
+
+            await AsyncStorage.removeItem('id_pedido');
 
             const iPd = await AsyncStorage.getItem('id_pedido')
             const iPedido = JSON.parse(iPd)
@@ -86,12 +91,7 @@ export default function Carrinho() {
             console.log(error)
         }
     }
-
-    async function handleSair() {
-        await handleClearAsync();
-        navegacao.navigate('Login');
-    }
-
+    
     return (
         <SafeAreaView>
             <ScrollView>
