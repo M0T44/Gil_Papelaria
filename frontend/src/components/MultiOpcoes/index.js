@@ -47,14 +47,6 @@ export default function MultiOpcoes() {
             position: 2,
             color: '#00A4AD',
             path: 'Cadastro'
-        },
-        {
-            text: "Criar",
-            icon: <MaterialCommunityIcons name="account-plus" size={20} color="#FFF" />,
-            name: "bt_video",
-            position: 2,
-            color: '#00A4AD',
-            path: 'Criar'
         }
     ]
 
