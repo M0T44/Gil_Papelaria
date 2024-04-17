@@ -22,6 +22,7 @@ export default function AuthRoutes() {
                 options={{ headerShown: false }}
             />
 
+
             <Stack.Screen
                 name='Produtos'
                 component={Produtos}

@@ -16,7 +16,6 @@ import {
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import Toast from 'react-native-toast-message'
 import Header from '../../components/header';
 import { Context } from '../Contexts/contexto';
 
@@ -115,7 +114,7 @@ function Card() {
             }
             lerCategoriasProdutos()
         } catch (error) {
-            console.log(error)
+            alert(error)
         }
     }, [categoriasProdutos])
 
@@ -124,6 +123,14 @@ function Card() {
         async function realizarPedido() {
             try {
 
+                const iToken = await AsyncStorage.getItem('token')
+                const token = JSON.parse(iToken)
+
+                if (!token) {
+                    await handleClearAsync();
+                    navegacao.navigate('Login');
+                }
+
                 const iId = await AsyncStorage.getItem('id')
                 const id = JSON.parse(iId)
                 const id_cliente = (id)
@@ -131,7 +138,7 @@ function Card() {
 
                 await handleRealizarPedido(id_cliente)
             } catch (error) {
-                console.log(error)
+                console.log("error")
             }
         }
         realizarPedido()
@@ -161,10 +168,6 @@ function Card() {
 
             setItensPedido(oldArray => [...oldArray, dados])
 
-            Toast.show({
-                type: 'success',
-                text1: 'Item Adicionado ao Carrinho'
-            })
             navigation.navigate('Carrinho', {
                 idItem: resposta.data.id
             })
@@ -238,12 +241,13 @@ function CardDestaque() {
         try {
             const iPd = await AsyncStorage.getItem('id_pedido')
             const iPedido = JSON.parse(iPd)
-            const id_pedido = iPedido
+            const id_pedido = (iPedido)
 
             const prodExt = categoriasProdutosDestaque.filter((item) => item.id === id)
             const id_produto = id
             const valor = Number(prodExt.map((item) => item.preco))
             const quantidade = Number(prodExt.map((item) => item.quantidade))
+
 
             const resposta = await apiLocal.post('/CriarItens', {
                 id_pedido,
@@ -252,21 +256,22 @@ function CardDestaque() {
                 valor
             })
 
+            console.log(resposta)
+
             let dados = {
-                id: resposta.data.id
+                id: resposta
             }
+            // setItensPedido(oldArray => [...oldArray, dados])
 
-            setItensPedido(oldArray => [...oldArray, dados])
+            // await AsyncStorage.setItem('id_item', JSON.stringify(resposta.data.id))
 
-            Toast.show({
-                type: 'success',
-                text1: 'Item Adicionado ao Carrinho'
-            })
-
-            
+            // navigation.navigate('Carrinho')
             navigation.navigate('Carrinho', {
-                idItem: resposta.data.id
+                id: resposta.id
             })
+
+
+
         } catch (err) {
             console.log(err)
         }

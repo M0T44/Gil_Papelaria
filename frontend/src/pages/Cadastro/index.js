@@ -14,7 +14,7 @@ import apiViaCep from '../../API/viaCep/apiViaCep'
 import apiLocal from '../../API/apiLocal/apiLocal'
 
 import { useNavigation } from '@react-navigation/native';
-import Toast from 'react-native-toast-message'
+
 export default function Cadastre_se() {
 
     const navigation = useNavigation();
@@ -36,10 +36,7 @@ export default function Cadastre_se() {
 
     async function handleBuscaCep() {
         if (cep.length > 8 || cep.length < 8) {
-            Toast.show({
-                type: 'error',
-                text1: 'CEP Inválido'
-            });
+            alert('Cep inválido')
         } else {
             const response = await apiViaCep.get(`/${cep}/json/`);
             setBuscaCep(response.data)
@@ -58,7 +55,7 @@ export default function Cadastre_se() {
 
     async function newCadastro() {
         try {
-            await apiLocal.post('/CriarClientes', {
+           await apiLocal.post('/CriarClientes', {
                 nome,
                 telefone,
                 cpf_cnpj,
@@ -72,18 +69,11 @@ export default function Cadastre_se() {
                 password
             })
 
-            Toast.show({
-                type: 'success',
-                text1: 'Cadastrado com Sucesso'
-            });
+            alert('Cadastrado com Sucesso')
             navigation.navigate('Login')
         } catch (error) {
-            Toast.show({
-                type: 'error',
-                text1: error
-            });
-       }
-
+           
+        }
     }
 
     return (

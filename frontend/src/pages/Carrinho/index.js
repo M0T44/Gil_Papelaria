@@ -13,7 +13,6 @@ import {
     Image,
 } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-import Toast from 'react-native-toast-message'
 
 export default function Carrinho() {
     const [lerItens, setLerItens] = useState([])
@@ -44,26 +43,15 @@ export default function Carrinho() {
             await apiLocal.delete(`/ApagarItemPedido/${itemId}`)
             setLerItens((prevItems) => prevItems.filter((item) => item.id !== itemId))
             const total = lerItens.reduce((acc, item) => acc + parseFloat(item.produtos.preco), 0)
-
             setValorTotal(total)
-            Toast.show({
-                type: 'success',
-                text1: 'Item Removido'
-            });
         } catch (error) {
-            Toast.show({
-                type: 'error',
-                text1: error
-            });
+            console.log(error)
         }
     }
 
 
     async function handleFinalizarPedido() {
         try {
-
-
-            await AsyncStorage.removeItem('id_pedido');
             const iPd = await AsyncStorage.getItem('id_pedido')
             const iPedido = JSON.parse(iPd)
             const id_pedido = iPedido
@@ -75,24 +63,15 @@ export default function Carrinho() {
                 draft,
                 aceito,
             })
-            Toast.show({
-                type: 'success',
-                text1: 'Pedido Finalizado'
-            });
+            alert('oi')
             navigation.navigate('Home')
         } catch (error) {
-            Toast.show({
-                type: 'error',
-                text1: error
-            });
+            console.log(error)
         }
     }
 
     async function handleCancelarPedido() {
         try {
-
-            await AsyncStorage.removeItem('id_pedido');
-
             const iPd = await AsyncStorage.getItem('id_pedido')
             const iPedido = JSON.parse(iPd)
             const id = (iPedido)
@@ -101,17 +80,15 @@ export default function Carrinho() {
             setLerItens([])
             setValorTotal(0)
 
-            Toast.show({
-                type: 'warning',
-                text1: 'Pedido Cancelado'
-            });
             navigation.navigate('Home')
         } catch (error) {
-            Toast.show({
-                type: 'error',
-                text1: error
-            });
+            console.log(error)
         }
+    }
+
+    async function handleSair() {
+        await handleClearAsync();
+        navegacao.navigate('Login');
     }
 
     return (
