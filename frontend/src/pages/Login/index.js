@@ -24,7 +24,10 @@ export default function Login() {
 
     async function IniLogin() {
         await handleLogar(email, password)
+<<<<<<< HEAD
        
+=======
+>>>>>>> 676ed17dec7a27d5264dd52ddc8aff644a0bad47
     }
 
     return (
