@@ -99,9 +99,9 @@ export default function Produtos({ route }) {
                                         source={{ uri: `http://10.152.46.17:3334/files/${item.banner}` }}
                                     />
                                     <View style={styleProdutos.card_info} value={item.id}>
-                                        <Text> {item.nome}</Text>
+                                        <Text style={{ fontWeight: "bold", fontSize: 18, }}> {item.nome}</Text>
                                         <Text>{item.descricao}</Text>
-                                        <Text>{item.preco}</Text>
+                                        <Text style={{ fontWeight: "bold", fontSize: 15, }}>R${item.preco}</Text>
                                         <TouchableOpacity style={styleProdutos.card_button} onPress={() => handleCriarItens(item.id)} >
                                             <Text style={styleProdutos.buttonText}>Add ao Carrinho</Text>
                                             <MaterialCommunityIcons name="cart" size={24} color="white" />
@@ -113,7 +113,7 @@ export default function Produtos({ route }) {
                     </View>
                 </View>
             </ScrollView>
-        </SafeAreaView>
+        </SafeAreaView >
     )
 }
 
@@ -149,7 +149,7 @@ const styleProdutos = StyleSheet.create({
         marginVertical: 16
     },
     imagem: {
-        width: '100%',
+        width: '60%',
         height: '50%',
     },
     card_info: {

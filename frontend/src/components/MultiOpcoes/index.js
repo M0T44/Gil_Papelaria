@@ -24,14 +24,14 @@ export default function MultiOpcoes() {
             path: 'Home'
 
         },
-        {
-            text: "Login",
-            icon: <MaterialCommunityIcons name="login" size={20} color="#FFF" />,
-            name: "bt_language",
-            position: 3,
-            color: '#00A4AD',
-            path: 'Login'
-        },
+        // {
+        //     text: "Login",
+        //     icon: <MaterialCommunityIcons name="login" size={20} color="#FFF" />,
+        //     name: "bt_language",
+        //     position: 3,
+        //     color: '#00A4AD',
+        //     path: 'Login'
+        // },
         {
             text: "Sair",
             icon: <MaterialCommunityIcons name="logout" size={20} color="#FFF" />,
@@ -40,14 +40,14 @@ export default function MultiOpcoes() {
             color: '#00A4AD',
             onPress: () => handleSair()
         },
-        {
-            text: "Cadastro",
-            icon: <MaterialCommunityIcons name="account-plus" size={20} color="#FFF" />,
-            name: "bt_videocam",
-            position: 2,
-            color: '#00A4AD',
-            path: 'Cadastro'
-        },
+        // {
+        //     text: "Cadastro",
+        //     icon: <MaterialCommunityIcons name="account-plus" size={20} color="#FFF" />,
+        //     name: "bt_videocam",
+        //     position: 2,
+        //     color: '#00A4AD',
+        //     path: 'Cadastro'
+        // },
     ]
 
     async function handleSair() {

@@ -187,9 +187,9 @@ function Card() {
                                 source={{ uri: `http://10.152.46.17:3334/files/${item.banner}` }}
                             />
                             <View style={styleBody.card_info} value={item.id}>
-                                <Text> {item.nome}</Text>
+                                <Text style={{ fontWeight: "bold", fontSize: 18, }}> {item.nome}</Text>
                                 <Text>{item.descricao}</Text>
-                                <Text>{item.preco}</Text>
+                                <Text style={{ fontWeight: "bold", fontSize: 15, }}>R${item.preco}</Text>
                                 <TouchableOpacity style={styleBody.card_button} onPress={() => handleCriarItens(item.id)} >
                                     <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
                                     <MaterialCommunityIcons name="cart" size={24} color="white" />
@@ -236,18 +236,16 @@ function CardDestaque() {
         realizarPedido()
     }, [])
 
-
     async function handleCriarItens(id) {
         try {
             const iPd = await AsyncStorage.getItem('id_pedido')
             const iPedido = JSON.parse(iPd)
-            const id_pedido = (iPedido)
+            const id_pedido = iPedido
 
             const prodExt = categoriasProdutosDestaque.filter((item) => item.id === id)
             const id_produto = id
             const valor = Number(prodExt.map((item) => item.preco))
             const quantidade = Number(prodExt.map((item) => item.quantidade))
-
 
             const resposta = await apiLocal.post('/CriarItens', {
                 id_pedido,
@@ -256,22 +254,15 @@ function CardDestaque() {
                 valor
             })
 
-            console.log(resposta)
-
             let dados = {
-                id: resposta
+                id: resposta.data.id
             }
-            // setItensPedido(oldArray => [...oldArray, dados])
 
-            // await AsyncStorage.setItem('id_item', JSON.stringify(resposta.data.id))
+            setItensPedido(oldArray => [...oldArray, dados])
 
-            // navigation.navigate('Carrinho')
             navigation.navigate('Carrinho', {
-                id: resposta.id
+                idItem: resposta.data.id
             })
-
-
-
         } catch (err) {
             console.log(err)
         }
@@ -288,9 +279,9 @@ function CardDestaque() {
                                 source={{ uri: `http://10.152.46.17:3334/files/${item.banner}` }}
                             />
                             <View style={styleBody.card_info} value={item.id}>
-                                <Text> {item.nome}</Text>
+                                <Text style={{ fontWeight: "bold", fontSize: 18, }}> {item.nome}</Text>
                                 <Text>{item.descricao}</Text>
-                                <Text>{item.preco}</Text>
+                                <Text style={{ fontWeight: "bold", fontSize: 15, }}>R${item.preco}</Text>
                                 <TouchableOpacity style={styleBody.card_button} onPress={() => handleCriarItens(item.id)} >
                                     <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
                                     <MaterialCommunityIcons name="cart" size={24} color="white" />
@@ -389,14 +380,15 @@ const styleBody = StyleSheet.create({
         padding: 15,              // espacamento 
         margin: 6,
         width: 250,
-        height: 400,
+        height: 420,
         marginHorizontal: 16,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
     },
+
     imagem: {
-        width: '50%',
+        width: '60%',
         height: '50%',
     },
     card_info: {

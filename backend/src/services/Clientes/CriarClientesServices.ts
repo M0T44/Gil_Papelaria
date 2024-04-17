@@ -1,4 +1,5 @@
 import prismaClient from '../../prisma'
+import { hash } from 'bcryptjs'
 
 interface CriarClientes {
     nome: string
@@ -32,7 +33,8 @@ class CriarClientesServices {
             throw new Error('CPF/CNPJ e ou Email Ja Cadastrados')
         }
 
-        const clientes = await prismaClient.cadastro.create({
+        const passwordCrypt = await hash(password, 8)
+        await prismaClient.cadastro.create({
             data: {
                 nome: nome,
                 telefone: telefone,
@@ -44,7 +46,7 @@ class CriarClientesServices {
                 rua: rua,
                 estado: estado,
                 email: email,
-                senha: password
+                senha: passwordCrypt
             }
             ,
             select: {

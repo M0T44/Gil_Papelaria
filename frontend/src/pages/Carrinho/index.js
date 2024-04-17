@@ -76,14 +76,11 @@ export default function Carrinho() {
             const iPedido = JSON.parse(iPd)
             const id = iPedido
 
-            // Apagar o token do AsyncStorage
-            await AsyncStorage.removeItem('id_pedido')
-
             await apiLocal.delete(`/ApagarPedido/${id}`)
             setLerItens([])
             setValorTotal(0)
 
-            // navigation.navigate('Home')
+            navigation.navigate('Home')
         } catch (error) {
             console.log(error)
         }

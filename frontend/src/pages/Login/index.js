@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import { Context } from '../Contexts/contexto';
-
+ 
 import {
     SafeAreaView,
     StyleSheet,
@@ -11,35 +11,31 @@ import {
     TextInput,
     TouchableOpacity
 } from 'react-native'
-
+ 
 import { useNavigation } from '@react-navigation/native';
-
+ 
 export default function Login() {
-
+ 
     const navigation = useNavigation()
     const { handleLogar } = useContext(Context)
-
+ 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
+ 
     async function IniLogin() {
         await handleLogar(email, password)
-<<<<<<< HEAD
-       
-=======
->>>>>>> 676ed17dec7a27d5264dd52ddc8aff644a0bad47
     }
-
+ 
     return (
         <SafeAreaView style={style.container}>
             <ScrollView>
                 <StatusBar backgroundColor="white" barStyle="dark-content" />
-
+ 
                 <View>
                     <Text style={style.textTitulo}>
                         Login
                     </Text>
-
+ 
                     <View style={style.form}>
                         <TextInput
                             style={style.input}
@@ -47,7 +43,7 @@ export default function Login() {
                             value={email}
                             onChangeText={setEmail}
                         />
-
+ 
                         <TextInput
                             style={style.input}
                             placeholder='Digite sua Senha'
@@ -55,24 +51,24 @@ export default function Login() {
                             value={password}
                             onChangeText={setPassword}
                         />
-
+ 
                         <TouchableOpacity onPress={IniLogin} style={style.buttonEnviar}>
                             <Text style={style.buttonEnviarText}>Enviar</Text>
                         </TouchableOpacity>
-
+ 
                         <Text style={style.text}>Já tem cadastro ?</Text>
                         <TouchableOpacity onPress={() => navigation.navigate('Cadastro')} style={style.buttonCriar}>
                             <Text style={style.buttonEnviarText}>Cadastrar-se</Text>
                         </TouchableOpacity>
-
+ 
                     </View>
-
+ 
                 </View>
             </ScrollView>
         </SafeAreaView>
     )
 }
-
+ 
 const style = StyleSheet.create({
     container: {
         flex: 1,
@@ -80,25 +76,25 @@ const style = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#fff',
     },
-
+ 
     textTitulo: {
         fontSize: 36,
         textAlign: 'center',
         marginBottom: 12,
         marginTop: 12
     },
-
+ 
     text: {
         fontSize: 22,
         marginBottom: 12
     },
-
+ 
     form: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
     },
-
+ 
     input: {
         width: 350,
         height: 40,
