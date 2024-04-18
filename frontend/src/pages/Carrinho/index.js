@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import apiLocal from '../../API/apiLocal/apiLocal'
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -14,10 +14,16 @@ import {
 } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
+import { Context } from '../Contexts/contexto';
+
 export default function Carrinho() {
+
     const [lerItens, setLerItens] = useState([])
     const [valorTotal, setValorTotal] = useState(0)
     const navigation = useNavigation()
+    const [token, setToken] = useState(false)
+    
+    const {handleClearToken} = useContext(Context)
 
     useEffect(() => {
         async function lerCriarItens() {
@@ -63,7 +69,7 @@ export default function Carrinho() {
                 draft,
                 aceito,
             })
-           
+
             navigation.navigate('Home')
         } catch (error) {
             console.log(error)
@@ -79,12 +85,19 @@ export default function Carrinho() {
             await apiLocal.delete(`/ApagarPedido/${id}`)
             setLerItens([])
             setValorTotal(0)
-
-            navigation.navigate('Home')
+            setToken(false)
+            navegacao.navigate('Login')
+            
         } catch (error) {
             console.log(error)
         }
     }
+
+ 
+        async function handleToken() {
+            await handleClearToken()
+            navegacao.navigate('Login')
+        }
 
     return (
         <SafeAreaView>
