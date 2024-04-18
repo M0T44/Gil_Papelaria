@@ -85,8 +85,7 @@ export default function Carrinho() {
             await apiLocal.delete(`/ApagarPedido/${id}`)
             setLerItens([])
             setValorTotal(0)
-            setToken(false)
-            navegacao.navigate('Login')
+            handleToken()
             
         } catch (error) {
             console.log(error)
@@ -96,7 +95,8 @@ export default function Carrinho() {
  
         async function handleToken() {
             await handleClearToken()
-            navegacao.navigate('Login')
+            setToken(false)
+            navigation.navigate('Login')
         }
 
     return (
