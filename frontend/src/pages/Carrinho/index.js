@@ -14,7 +14,7 @@ import {
 } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
-import { Context } from '../Contexts/contexto';
+import { Context } from '../Contexts/contexto'
 
 export default function Carrinho() {
 
@@ -22,8 +22,8 @@ export default function Carrinho() {
     const [valorTotal, setValorTotal] = useState(0)
     const navigation = useNavigation()
     const [token, setToken] = useState(false)
-    
-    const {handleClearToken} = useContext(Context)
+
+    const { handleClearToken } = useContext(Context)
 
     useEffect(() => {
         async function lerCriarItens() {
@@ -86,18 +86,35 @@ export default function Carrinho() {
             setLerItens([])
             setValorTotal(0)
             handleToken()
-            
+
         } catch (error) {
             console.log(error)
         }
     }
 
- 
-        async function handleToken() {
-            await handleClearToken()
-            setToken(false)
+
+    async function handleToken() {
+        try {
+            const tokenStored = await AsyncStorage.getItem('token') 
+
+            if (!tokenStored) { 
+                await AsyncStorage.clear()
+                setToken(false)
+            }
             navigation.navigate('Login')
+        } catch (error) {
+            console.log(error)
         }
+    }
+    // async function handleToken() {
+    //     try {
+    //         await handleClearToken() 
+    //         setToken(false) 
+    //         navigation.navigate('Login') 
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
 
     return (
         <SafeAreaView>
