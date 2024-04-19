@@ -188,7 +188,7 @@ function Card() {
                             />
                             <View style={styleBody.card_info} value={item.id}>
                                 <Text style={{ fontWeight: "bold", fontSize: 18, }}> {item.nome}</Text>
-                                <Text>{item.descricao}</Text>
+                                <Text style={styleBody.descricao}>{item.descricao}</Text>
                                 <Text style={{ fontWeight: "bold", fontSize: 15, }}>R${item.preco}</Text>
                                 <TouchableOpacity style={styleBody.card_button} onPress={() => handleCriarItens(item.id)} >
                                     <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
@@ -280,7 +280,7 @@ function CardDestaque() {
                             />
                             <View style={styleBody.card_info} value={item.id}>
                                 <Text style={{ fontWeight: "bold", fontSize: 18, }}> {item.nome}</Text>
-                                <Text>{item.descricao}</Text>
+                                <Text style={styleBody.descricao}>{item.descricao}</Text>
                                 <Text style={{ fontWeight: "bold", fontSize: 15, }}>R${item.preco}</Text>
                                 <TouchableOpacity style={styleBody.card_button} onPress={() => handleCriarItens(item.id)} >
                                     <Text style={styleBody.buttonText}>Add ao Carrinho</Text>
@@ -380,7 +380,7 @@ const styleBody = StyleSheet.create({
         padding: 15,              // espacamento 
         margin: 6,
         width: 250,
-        height: 420,
+        height: 390,
         marginHorizontal: 16,
         display: 'flex',
         flexDirection: 'column',
@@ -410,6 +410,9 @@ const styleBody = StyleSheet.create({
         color: 'white',
         fontSize: 16,
         marginRight: 10
+    },
+    descricao: {
+        textAlign: 'center'
     },
     // Fim Card
 

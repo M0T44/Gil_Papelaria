@@ -85,7 +85,7 @@ export default function Carrinho() {
             await apiLocal.delete(`/ApagarPedido/${id}`)
             setLerItens([])
             setValorTotal(0)
-            handleToken()
+            setToken(false)
 
         } catch (error) {
             console.log(error)
@@ -93,28 +93,28 @@ export default function Carrinho() {
     }
 
 
-    async function handleToken() {
-        try {
-            const tokenStored = await AsyncStorage.getItem('token') 
-
-            if (!tokenStored) { 
-                await AsyncStorage.clear()
-                setToken(false)
-            }
-            navigation.navigate('Login')
-        } catch (error) {
-            console.log(error)
-        }
-    }
     // async function handleToken() {
     //     try {
-    //         await handleClearToken() 
-    //         setToken(false) 
-    //         navigation.navigate('Login') 
+    //         const tokenStored = await AsyncStorage.getItem('token') 
+
+    //         if (!tokenStored) { 
+    //             await AsyncStorage.clear()
+    //             setToken(false)
+    //         }
+    //         navigation.navigate('Login')
     //     } catch (error) {
     //         console.log(error)
     //     }
     // }
+    // // async function handleToken() {
+    // //     try {
+    // //         await handleClearToken() 
+    // //         setToken(false) 
+    // //         navigation.navigate('Login') 
+    // //     } catch (error) {
+    // //         console.log(error)
+    // //     }
+    // // }
 
     return (
         <SafeAreaView>

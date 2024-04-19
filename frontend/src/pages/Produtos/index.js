@@ -100,7 +100,7 @@ export default function Produtos({ route }) {
                                     />
                                     <View style={styleProdutos.card_info} value={item.id}>
                                         <Text style={{ fontWeight: "bold", fontSize: 18, }}> {item.nome}</Text>
-                                        <Text>{item.descricao}</Text>
+                                        <Text style={styleProdutos.descricao}>{item.descricao}</Text>
                                         <Text style={{ fontWeight: "bold", fontSize: 15, }}>R${item.preco}</Text>
                                         <TouchableOpacity style={styleProdutos.card_button} onPress={() => handleCriarItens(item.id)} >
                                             <Text style={styleProdutos.buttonText}>Add ao Carrinho</Text>
@@ -142,7 +142,7 @@ const styleProdutos = StyleSheet.create({
         padding: 15,              // espacamento 
         margin: 6,
         width: 250,
-        height: 400,
+        height: 390,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -172,5 +172,8 @@ const styleProdutos = StyleSheet.create({
         fontSize: 16,
         marginRight: 10
     },
+    descricao:{
+        textAlign:'center'
+    }
     // Fim Card
 })
